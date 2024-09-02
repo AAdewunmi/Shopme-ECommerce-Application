@@ -21,6 +21,17 @@ public class Role {
 	@Column(length = 150, nullable = false)
 	private String description;
 	
+	public Role(String name) {
+		super();
+		this.name = name;
+	}
+
+	public Role(String name, String description) {
+		super();
+		this.name = name;
+		this.description = description;
+	}
+
 	public Integer getId() {
 		return id;
 	}
