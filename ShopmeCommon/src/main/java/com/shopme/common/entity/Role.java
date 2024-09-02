@@ -21,6 +21,10 @@ public class Role {
 	@Column(length = 150, nullable = false)
 	private String description;
 	
+	public Role() {
+		super();
+	}
+
 	public Role(String name) {
 		super();
 		this.name = name;
