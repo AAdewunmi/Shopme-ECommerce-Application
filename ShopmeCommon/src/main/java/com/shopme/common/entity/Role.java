@@ -25,6 +25,11 @@ public class Role {
 		super();
 	}
 
+	public Role(Integer id) {
+		super();
+		this.id = id;
+	}
+
 	public Role(String name) {
 		super();
 		this.name = name;
