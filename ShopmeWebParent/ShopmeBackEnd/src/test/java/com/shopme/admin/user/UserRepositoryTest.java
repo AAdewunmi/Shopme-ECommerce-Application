@@ -22,9 +22,28 @@ public class UserRepositoryTest {
 	@Autowired
 	private UserRepository repo;
 	
+	@Autowired
+	private TestEntityManager entityManager;
+	
 	@Test
 	public void testCreateUser() {
-		
+		Role roleAdminRole = entityManager.find(Role.class, 1);
+		User userName = new User("a@a.com", "aa2024", "Abel", "Dudu");
+		userName.addRole(roleAdminRole);
+		repo.save(userName);
+		User savedUser = repo.save(userName);
+		assertThat(savedUser.getId()).isGreaterThan(0);
+	}
+	
+	@Test
+	public void testCreateNewUserWithTwoRoles() {
+		User userRavi = new User("ravi@gmail.com", "ravi2020", "Ravi", "Kumar");
+		Role roleEditor = new Role(3);
+		Role roleAssistant = new Role(5);
+		userRavi.addRole(roleEditor);
+		userRavi.addRole(roleAssistant);
+		User savedUser = repo.save(userRavi);
+		assertThat(savedUser.getId()).isGreaterThan(0);
 	}
 	
 
