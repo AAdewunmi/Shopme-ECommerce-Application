@@ -52,5 +52,12 @@ public class UserRepositoryTest {
 		listUsers.forEach(user -> System.out.println(user));
 	}
 	
-
+	@Test
+	public void testGetUserById() {
+		User userNam = repo.findById(1).get();
+		System.out.println(userNam);
+		assertThat(userNam).isNotNull();
+	}
+	
+	
 }
