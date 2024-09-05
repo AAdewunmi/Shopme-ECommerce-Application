@@ -1,5 +1,9 @@
 package com.shopme.admin.user;
 
-public interface UserRepository {
+import org.springframework.data.repository.CrudRepository;
 
+import com.shopme.common.entity.User;
+
+public interface UserRepository extends CrudRepository<User, Integer>{
+	
 }
