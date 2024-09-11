@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.shopme.common.entity.Role;
 import com.shopme.common.entity.User;
 
 @Controller
@@ -25,8 +26,10 @@ public class UserController {
 	
 	@GetMapping("/users/new")
 	public String newUser(Model model) {
+		List<Role> listRoles = service.listRoles();
 		User user = new User();
 		model.addAttribute("user", user);
+		model.addAttribute("listRoles", listRoles);
 		return "user_form";
 	}
 	
