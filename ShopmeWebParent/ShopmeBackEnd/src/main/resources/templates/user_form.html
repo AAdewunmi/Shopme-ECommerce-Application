@@ -96,7 +96,7 @@
 				
 				<div class="text-center">
 					<input type="submit" value="Save" class="btn btn-primary m-3"/>
-					<input type="button" value="Cancel" class="btn btn-secondary"/>
+					<input type="button" value="Cancel" class="btn btn-secondary" id="buttonCancel"/>
 				</div>
 			</div>
 		</form>
@@ -104,5 +104,13 @@
 			<p>Shopme Control Panel - Copyright &copy; Shopme</p>
 		</div>
 	</div>
+	
 </body>
+<script type="text/javascript">
+	$(document).ready(function () {
+		$("#buttonCancel").on("click", function() {
+			window.location = "[[@{/users}]]";
+		});
+	});
+	</script>
 </html>
