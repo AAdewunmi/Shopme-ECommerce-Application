@@ -28,6 +28,7 @@ public class UserController {
 	public String newUser(Model model) {
 		List<Role> listRoles = service.listRoles();
 		User user = new User();
+		user.setEnabled(true);
 		model.addAttribute("user", user);
 		model.addAttribute("listRoles", listRoles);
 		return "user_form";
@@ -36,6 +37,7 @@ public class UserController {
 	@PostMapping("/users/save")
 	public String saveUser(User user) {
 		System.out.println(user + "message, The user has been saved successfully.");
+		service.save(user);
 		return "redirect:/users";
 	}
 
