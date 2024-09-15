@@ -2,11 +2,17 @@ package com.shopme.admin.user;
 
 import java.util.List;
 
+import java.util.List;
+import java.util.NoSuchElementException;
+
+//import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+//import com.shopme.admin.paging.PagingAndSortingHelper;
 import com.shopme.common.entity.Role;
 import com.shopme.common.entity.User;
 
@@ -23,17 +29,30 @@ public class UserService {
 	private PasswordEncoder passwordEncoder;
 	
 	public List<User> listAll(){
-		//return (List<User>) userRepo.findAll();
 		return (List<User>) userRepo.findAll(Sort.by("firstName").ascending());
 	}
 	
 	public List<Role> listRoles(){
 		return (List<Role>) roleRepo.findAll();
 	}
-
-	public void save(User user) {
-		encodePassword(user);
-		userRepo.save(user);
+	
+	public User save(User user) {
+		boolean isUpdatingUser = (user.getId() != null);
+		
+		if (isUpdatingUser) {
+			User existingUser = userRepo.findById(user.getId()).get();
+			
+			if (user.getPassword().isEmpty()) {
+				user.setPassword(existingUser.getPassword());
+			} else {
+				encodePassword(user);
+			}
+			
+		} else {		
+			encodePassword(user);
+		}
+		
+		return userRepo.save(user);
 	}
 	
 	private void encodePassword(User user) {
