@@ -3,6 +3,7 @@ package com.shopme.admin.user;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,8 @@ public class UserService {
 	private PasswordEncoder passwordEncoder;
 	
 	public List<User> listAll(){
-		return (List<User>) userRepo.findAll();
+		//return (List<User>) userRepo.findAll();
+		return (List<User>) userRepo.findAll(Sort.by("firstName").ascending());
 	}
 	
 	public List<Role> listRoles(){
