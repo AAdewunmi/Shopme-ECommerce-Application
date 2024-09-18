@@ -62,7 +62,7 @@ public class UserService {
 		return userByEmail == null;
 	}
 
-	public User get(Integer id) {
+	public User get(Integer id) throws UserNotFoundException {
 		try {
 			return userRepo.findById(id).get();
 		} catch (NoSuchElementException e) {
