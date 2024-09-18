@@ -6,6 +6,7 @@ import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -25,16 +26,11 @@ public class UserService {
 	private PasswordEncoder passwordEncoder;
 	
 	public List<User> listAll(){
-		return (List<User>) userRepo.findAll(Sort.by("firstName").ascending());
+		return (List<User>) userRepo.findAll();
 	}
 	
 	public List<Role> listRoles(){
 		return (List<Role>) roleRepo.findAll();
-	}
-	
-	private void save(User user) {
-		encodePassword(user);
-		userRepo.save(user);
 	}
 	
 	public User save(User user) {
@@ -61,21 +57,16 @@ public class UserService {
 		user.setPassword(encodePassword);
 	}
 	
-	public boolean isEmailUnique(Integer id, String email) {
+	public boolean isEmailUnique(String email) {
 		User userByEmail = userRepo.getUserByEmail(email);
-		
-		if (userByEmail == null) return true;
-		
-		boolean isCreatingNew = (id == null);
-		
-		if (isCreatingNew) {
-			if (userByEmail != null) return false;
-		} else {
-			if (userByEmail.getId() != id) {
-				return false;
-			}
+		return userByEmail == null;
+	}
+
+	public User get(Integer id) {
+		try {
+			return userRepo.findById(id).get();
+		} catch (NoSuchElementException e) {
+			throw new UserNotFoundException("Could not find user with ID " + id);
 		}
-		
-		return true;
 	}
 }
