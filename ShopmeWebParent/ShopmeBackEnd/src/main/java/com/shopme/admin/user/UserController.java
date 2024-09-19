@@ -45,9 +45,16 @@ public class UserController {
 	}
 	
 	@GetMapping("/users/edit/{id}")
-	public String editUser(@PathVariable(name = "id") Integer id) throws UserNotFoundException {
-		User user = service.get(id);
-		return "user_form";
+	public String editUser(@PathVariable(name = "id") Integer id, Model model,
+			RedirectAttributes redirectAttributes) throws UserNotFoundException {
+		try {
+			User user = service.get(id);
+			model.addAttribute("user", user);
+			return "user_form";
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("message", e.getMessage());
+			return "redirect:/users";
+		}
 	}
 
 }
