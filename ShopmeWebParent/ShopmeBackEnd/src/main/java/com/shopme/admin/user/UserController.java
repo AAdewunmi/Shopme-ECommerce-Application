@@ -45,7 +45,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/users/edit/{id}")
-	public String editUser(@PathVariable(name = "id") Integer id) {
+	public String editUser(@PathVariable(name = "id") Integer id) throws UserNotFoundException {
 		User user = service.get(id);
 		return "user_form";
 	}
