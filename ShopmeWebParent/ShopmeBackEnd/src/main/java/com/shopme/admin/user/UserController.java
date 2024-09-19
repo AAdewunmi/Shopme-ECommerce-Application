@@ -33,6 +33,7 @@ public class UserController {
 		user.setEnabled(true);
 		model.addAttribute("user", user);
 		model.addAttribute("listRoles", listRoles);
+		model.addAttribute("pageTitle", "Create New User");
 		return "user_form";
 	}
 	
@@ -49,7 +50,10 @@ public class UserController {
 			RedirectAttributes redirectAttributes) throws UserNotFoundException {
 		try {
 			User user = service.get(id);
+			List<Role> listRoles = service.listRoles();
 			model.addAttribute("user", user);
+			model.addAttribute("pageTitle", "Edit New User (ID: " + id + ")");
+			model.addAttribute("listRoles", listRoles);
 			return "user_form";
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("message", e.getMessage());
