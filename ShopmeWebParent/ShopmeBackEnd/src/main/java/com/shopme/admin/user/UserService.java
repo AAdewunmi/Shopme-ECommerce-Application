@@ -57,9 +57,23 @@ public class UserService {
 		user.setPassword(encodePassword);
 	}
 	
-	public boolean isEmailUnique(String email) {
+	
+	public boolean isEmailUnique(Integer id, String email) {
 		User userByEmail = userRepo.getUserByEmail(email);
-		return userByEmail == null;
+		
+		if (userByEmail == null) return true;
+		
+		boolean isCreatingNew = (id == null);
+		
+		if (isCreatingNew) {
+			if (userByEmail != null) return false;
+		} else {
+			if (userByEmail.getId() != id) {
+				return false;
+			}
+		}
+		
+		return true;
 	}
 
 	public User get(Integer id) throws UserNotFoundException {
