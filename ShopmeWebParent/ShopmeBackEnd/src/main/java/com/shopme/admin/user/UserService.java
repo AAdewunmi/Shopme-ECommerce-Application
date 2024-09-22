@@ -33,11 +33,11 @@ public class UserService {
 		return (List<Role>) roleRepo.findAll();
 	}
 	
-	public User save(User user) {
+	public void save(User user) {
 		boolean isUpdatingUser = (user.getId() != null);
 		
 		if (isUpdatingUser) {
-			User existingUser = (User) userRepo.findById(user.getId()).get();
+			User existingUser = userRepo.findById(user.getId()).get();
 			
 			if (user.getPassword().isEmpty()) {
 				user.setPassword(existingUser.getPassword());
@@ -49,7 +49,7 @@ public class UserService {
 			encodePassword(user);
 		}
 		
-		return userRepo.save(user);
+		userRepo.save(user);
 	}
 	
 	private void encodePassword(User user) {
