@@ -15,10 +15,12 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class WebSecurityConfig {
 	
-	/*
-	 * @Bean UserDetailsService userDetailsService() { return new
-	 * ShopmeUserDetailsService(); }
-	 */
+	
+  @Bean 
+  UserDetailsService userDetailsService() { 
+	  return new ShopmeUserDetailsService(); 
+  }
+	 
 	
 	@Bean
 	PasswordEncoder passwordEncoder() {

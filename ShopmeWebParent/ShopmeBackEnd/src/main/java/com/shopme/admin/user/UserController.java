@@ -46,7 +46,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/users/edit/{id}")
-	public String editUser(@PathVariable(name = "id") Integer id, Model model,
+	public String editUser(@PathVariable(name = "id")Integer id, Model model,
 			RedirectAttributes redirectAttributes) throws UserNotFoundException {
 		try {
 			User user = service.get(id);
