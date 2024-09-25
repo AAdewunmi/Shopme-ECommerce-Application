@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -35,19 +33,17 @@ public class UserService {
 	
 	public void save(User user) {
 		
-		/*
-		 * boolean isUpdatingUser = (user.getId() != null);
-		 * 
-		 * if (isUpdatingUser) { User existingUser =
-		 * userRepo.findById(user.getId()).get();
-		 * 
-		 * if (user.getPassword().isEmpty()) {
-		 * user.setPassword(existingUser.getPassword()); } else { encodePassword(user);
-		 * }
-		 * 
-		 * } else { encodePassword(user); }
-		 */
-	  encodePassword(user);
+	  boolean isUpdatingUser = (user.getId() != null);
+	  
+	  if (isUpdatingUser) { User existingUser =
+	  userRepo.findById(user.getId()).get();
+	  
+	  if (user.getPassword().isEmpty()) {
+	  user.setPassword(existingUser.getPassword()); } else { encodePassword(user);
+	  }
+	  
+	  } else { encodePassword(user); }
+	 
 	  userRepo.save(user);
 	}
 	
@@ -82,4 +78,14 @@ public class UserService {
 			throw new UserNotFoundException("Could not find user with ID " + id);
 		}
 	}
+	
+	public void delete(Integer id) throws UserNotFoundException {
+		Long countById = userRepo.countById(id);
+		if (countById == null || countById == 0) {
+			throw new UserNotFoundException("Could not find user with ID " + id);
+		}
+		userRepo.deleteById(id);
+	}
+	
+	
 }
