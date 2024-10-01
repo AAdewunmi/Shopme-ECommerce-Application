@@ -30,5 +30,22 @@ private static final Logger LOGGER = LoggerFactory.getLogger(FileUploadUtil.clas
 			throw new IOException("Could not save file: " + fileName, ex);
 		}
 	}
+	
+	public static void cleanDir(String dir) {
+		Path dirPath = Paths.get(dir);
+		try {
+			Files.list(dirPath).forEach(file -> {
+				if (!Files.isDirectory(file)) {
+					try {
+						Files.delete(file);
+					} catch (IOException ex) {
+						LOGGER.error("Could not delete file: " + file);
+					}
+				}
+			});
+		} catch (IOException ex) {
+			LOGGER.error("Could not list directory: " + dirPath);
+		}
+	}
 
 }
