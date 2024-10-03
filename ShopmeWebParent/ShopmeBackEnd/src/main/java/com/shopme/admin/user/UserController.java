@@ -27,10 +27,8 @@ public class UserController {
 	private UserService service;
 	
 	@GetMapping("/users")
-	public String listAll(Model model) {
-		List<User> listUsers = service.listAll();
-		model.addAttribute("listUsers", listUsers);
-		return "users";
+	public String listFirstPage(Model model) {
+		return listByPage(1, model);
 	}
 	
 	@GetMapping("/users/page/{pageNum}")
