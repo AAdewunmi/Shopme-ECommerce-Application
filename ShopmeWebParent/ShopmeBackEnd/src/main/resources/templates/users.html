@@ -144,6 +144,9 @@
 		    <li class="page-item">
 		    	<a class="page-link" th:href="@{'/users/page/' + ${currentPage + 1}}">Next</a>
 	    	</li>
+	    	<li class="page-item">
+		    	<a class="page-link" th:href="@{'/users/page/' + ${totalPages}}">Last</a>
+	    	</li>
 		  </ul>
 		</nav>
 	</div>
