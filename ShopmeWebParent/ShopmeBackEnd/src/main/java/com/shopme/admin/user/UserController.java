@@ -29,13 +29,15 @@ public class UserController {
 	
 	@GetMapping("/users")
 	public String listFirstPage(Model model) {
-		return listByPage(1, model);
+		return listByPage(1, model, "firstName", "asc");
 	}
 	
 	@GetMapping("/users/page/{pageNum}")
 	public String listByPage(@PathVariable(name = "pageNum") int pageNum, Model model,
 			@Param("sortField") String sortField, @Param("sortDir") String sortDir
 			) {
+		System.out.println("Sort Field: " + sortField);
+		System.out.println("Sort Order: " + sortDir);
 		Page<User> page = service.listByPage(pageNum, sortField, sortDir);
 		List<User> listUsers = page.getContent();
 		long startCount = (pageNum - 1) * UserService.USERS_PER_PAGE + 1;
