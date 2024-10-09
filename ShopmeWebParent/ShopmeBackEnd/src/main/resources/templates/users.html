@@ -72,6 +72,19 @@
 	</div>
 	
 	<div>
+		<form th:action="@{/users/page/1}" class="form-inline m-3">
+			<input type="hidden" name="sortField" th:value="${sortField}"/>
+			<input type="hidden" name="sortDir" th:value="${sortDir}"/>
+			Filter:&nbsp;
+			<input type="search" name="keyword" th:value="${keyword}" required/>
+			&nbsp;&nbsp;
+			<input type="submit" value="Search" class="btn btn-primary"/>
+			&nbsp;&nbsp;
+			<input type="button" value="Clear" class="btn btn-secondary"/>
+		</form>
+	</div>
+	
+	<div>
 		<table class="table table-bordered table-striped table-hover table-responsive-xl">
 			<thead class="thead-dark">
 				<tr>
@@ -194,7 +207,7 @@
 		<span>No users found</span>
 	</div>
 	
-	<div>
+	<div th:if="${totalPages > 1}">
 		<nav>
 		  <ul class="pagination justify-content-center">
 		    <li th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}">
