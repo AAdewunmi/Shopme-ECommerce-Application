@@ -80,7 +80,7 @@
 			&nbsp;&nbsp;
 			<input type="submit" value="Search" class="btn btn-primary"/>
 			&nbsp;&nbsp;
-			<input type="button" value="Clear" class="btn btn-secondary"/>
+			<input type="button" value="Clear" class="btn btn-secondary" onclick="clearFilter()"/>
 		</form>
 	</div>
 	
@@ -271,6 +271,9 @@
 			$("#confirmModal").modal();
 		});
 	});
+	function clearFilter(){
+		window.location = "[[@{/users}]]";
+	}
 </script>
 </body>
 </html>
