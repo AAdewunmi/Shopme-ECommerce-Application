@@ -88,22 +88,7 @@
 		<table class="table table-bordered table-striped table-hover table-responsive-xl">
 			<thead class="thead-dark">
 				<tr>
-					<th>
-						<a th:if="${sortField != 'id'}" class="text-dark"
-							th:href="@{'/users/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${sortDir}
-							+ ${keyword != null ? '&keyword=' + keyword : ''}}">
-							User ID
-						</a>
-						<a th:if="${sortField == 'id'}" class="text-dark"
-							th:href="@{'/users/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir}
-							+ ${keyword != null ? '&keyword=' + keyword : ''}}">
-							User ID
-						</a>
-												
-						<span th:if="${sortField == 'id'}"
-							th:class="${sortDir == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}" ></span>					
-						
-					</th>
+					<th th:replace="fragments :: column_link('id', 'User ID')" />
 					<th>Photos</th>
 					<th>
 						<a th:if="${sortField != 'email'}" class="text-dark"
@@ -279,7 +264,6 @@
 		$(".link-delete").on("click", function(e) {
 			e.preventDefault();
 			link = $(this);
-			//alert($(this).attr("href"));
 			userId = link.attr("userId");
 			$("#yesButton").attr("href", link.attr("href"));
 			$("#confirmText").text("Are you sure you want to delete this user ID " + userId + "?");

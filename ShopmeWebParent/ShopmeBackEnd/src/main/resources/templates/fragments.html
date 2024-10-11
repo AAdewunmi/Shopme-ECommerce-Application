@@ -5,17 +5,13 @@
 </head>
 <body>
 	<th th:fragment="column_link(fieldName, columnLabel)">
-		<a th:if="${sortField != 'id'}" class="text-dark"
-			th:href="@{'/users/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${sortDir}
+		<a class="text-dark"
+			th:href="@{'/users/page/' + ${currentPage} + '?sortField=' + ${fieldName} + '&sortDir=' 
+			+ ${sortField != fieldName ? sortDir : reverseSortDir}
 			+ ${keyword != null ? '&keyword=' + keyword : ''}}">
-			User ID
-		</a>
-		<a th:if="${sortField == 'id'}" class="text-dark"
-			th:href="@{'/users/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir}
-			+ ${keyword != null ? '&keyword=' + keyword : ''}}">
-			User ID
+			[[${columnLabel}]]
 		</a>					
-		<span th:if="${sortField == 'id'}"
+		<span th:if="${sortField == fieldName}"
 			th:class="${sortDir == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}" ></span>					
 	</th>
 </body>
