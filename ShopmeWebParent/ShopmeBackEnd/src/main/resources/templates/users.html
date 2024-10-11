@@ -92,22 +92,7 @@
 					<th>Photos</th>
 					<th th:replace="fragments :: column_link('email', 'E-mail')" />
 					<th th:replace="fragments :: column_link('firstName', 'First Name')" />
-					
-					<th>
-						<a th:if="${sortField != 'lastName'}" class="text-dark"
-							th:href="@{'/users/page/' + ${currentPage} + '?sortField=lastName&sortDir=' + ${sortDir}
-							+ ${keyword != null ? '&keyword=' + keyword : ''}}">
-							Last Name
-						</a>
-						<a th:if="${sortField == 'lastName'}" class="text-dark"
-							th:href="@{'/users/page/' + ${currentPage} + '?sortField=lastName&sortDir=' + ${reverseSortDir}
-							+ ${keyword != null ? '&keyword=' + keyword : ''}}">
-							Last Name
-						</a>
-												
-						<span th:if="${sortField == 'lastName'}"
-							th:class="${sortDir == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}" ></span>
-					</th>
+					<th th:replace="fragments :: column_link('lastName', 'Last Name')" />
 					<th>Roles</th>
 					<th>
 						<a th:if="${sortField != 'enabled'}" class="text-dark"
