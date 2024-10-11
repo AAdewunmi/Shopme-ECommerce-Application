@@ -1,10 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html  xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<meta charset="ISO-8859-1">
 </head>
 <body>
-
+	<th th:fragment="column_link(fieldName, columnLabel)">
+		<a th:if="${sortField != 'id'}" class="text-dark"
+			th:href="@{'/users/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${sortDir}
+			+ ${keyword != null ? '&keyword=' + keyword : ''}}">
+			User ID
+		</a>
+		<a th:if="${sortField == 'id'}" class="text-dark"
+			th:href="@{'/users/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir}
+			+ ${keyword != null ? '&keyword=' + keyword : ''}}">
+			User ID
+		</a>					
+		<span th:if="${sortField == 'id'}"
+			th:class="${sortDir == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}" ></span>					
+	</th>
 </body>
 </html>
