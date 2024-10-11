@@ -94,21 +94,7 @@
 					<th th:replace="fragments :: column_link('firstName', 'First Name')" />
 					<th th:replace="fragments :: column_link('lastName', 'Last Name')" />
 					<th>Roles</th>
-					<th>
-						<a th:if="${sortField != 'enabled'}" class="text-dark"
-							th:href="@{'/users/page/' + ${currentPage} + '?sortField=enabled&sortDir=' + ${sortDir}
-							+ ${keyword != null ? '&keyword=' + keyword : ''}}">
-							Enabled
-						</a>
-						<a th:if="${sortField == 'enabled'}" class="text-dark"
-							th:href="@{'/users/page/' + ${currentPage} + '?sortField=enabled&sortDir=' + ${reverseSortDir}
-							+ ${keyword != null ? '&keyword=' + keyword : ''}}">
-							Enabled
-						</a>
-												
-						<span th:if="${sortField == 'enabled'}"
-							th:class="${sortDir == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}" ></span>					
-					</th>
+					<th th:replace="fragments :: column_link('enabled', 'Enabled')" />
 					<th></th>
 				</tr>								
 			</thead>
