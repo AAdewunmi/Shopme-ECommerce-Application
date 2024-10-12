@@ -1,6 +1,5 @@
 package com.shopme.admin.user;
 
-import java.awt.print.Pageable;
 import java.io.IOException;
 import java.util.List;
 
@@ -86,7 +85,12 @@ public class UserController {
 			service.save(user);
 		}
 		redirectAttributes.addFlashAttribute("message", "The user has been saved successfully.");
-		return "redirect:/users";
+		return getRedirectedURLtoAffectedUser(user);
+	}
+
+	private String getRedirectedURLtoAffectedUser(User user) {
+		String firstPartOfEmail = user.getEmail().split("@")[0];
+		return "redirect:/users/page/1?sortField=id&sortDir=asc&keyword=" + firstPartOfEmail;
 	}
 	
 	@GetMapping("/users/edit/{id}")
