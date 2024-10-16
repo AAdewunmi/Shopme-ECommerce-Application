@@ -63,10 +63,32 @@ public class UserExcelExporter extends AbstractExporter{
 	public void export(List<User> listUsers, HttpServletResponse response) throws IOException {
 		super.setResponseHeader(response, "application/octet-stream", ".xlsx");
 		writeHeaderLine();
+		writeDataLines(listUsers);
 		ServletOutputStream outputStream = response.getOutputStream();
 		workbook.write(outputStream);
 		workbook.close();
 		outputStream.close();
+	}
+	
+	private void writeDataLines(List<User> listUsers) {
+		int rowIndex = 1;
+		
+		XSSFCellStyle cellStyle = workbook.createCellStyle();
+		XSSFFont font = workbook.createFont();
+		font.setFontHeight(14);
+		cellStyle.setFont(font);
+		
+		for (User user : listUsers) {
+			XSSFRow row = sheet.createRow(rowIndex++);
+			int columnIndex = 0;
+			
+			createCell(row, columnIndex++, user.getId(), cellStyle);
+			createCell(row, columnIndex++, user.getEmail(), cellStyle);
+			createCell(row, columnIndex++, user.getFirstName(), cellStyle);
+			createCell(row, columnIndex++, user.getLastName(), cellStyle);
+			createCell(row, columnIndex++, user.getRoles().toString(), cellStyle);
+			createCell(row, columnIndex++, user.isEnabled(), cellStyle);
+		}
 	}
 
 }
