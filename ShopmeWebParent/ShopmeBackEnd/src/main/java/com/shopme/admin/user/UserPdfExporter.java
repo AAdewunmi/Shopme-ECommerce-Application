@@ -43,7 +43,7 @@ public class UserPdfExporter extends AbstractExporter{
 		table.setWidths(new float[] {1.2f, 3.5f, 3.0f, 3.0f, 3.0f, 1.7f});
 		
 		writeTableHeader(table);
-		//writeTableData(table, listUsers);
+		writeTableData(table, listUsers);
 		
 		document.add(table);
 		
@@ -76,6 +76,17 @@ public class UserPdfExporter extends AbstractExporter{
 		
 		cell.setPhrase(new Phrase("Enabled", font));		
 		table.addCell(cell);		
+	}
+	
+	private void writeTableData(PdfPTable table, List<User> listUsers) {
+		for (User user : listUsers) {
+			table.addCell(String.valueOf(user.getId()));
+			table.addCell(user.getEmail());
+			table.addCell(user.getFirstName());
+			table.addCell(user.getLastName());
+			table.addCell(user.getRoles().toString());
+			table.addCell(String.valueOf(user.isEnabled()));
+		}
 	}
 
 }
