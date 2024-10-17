@@ -42,13 +42,40 @@ public class UserPdfExporter extends AbstractExporter{
 		table.setSpacingBefore(10);
 		table.setWidths(new float[] {1.2f, 3.5f, 3.0f, 3.0f, 3.0f, 1.7f});
 		
-		//writeTableHeader(table);
+		writeTableHeader(table);
 		//writeTableData(table, listUsers);
 		
 		document.add(table);
 		
 		document.close();
 		
+	}
+	
+	private void writeTableHeader(PdfPTable table) {
+		PdfPCell cell = new PdfPCell();
+		cell.setBackgroundColor(Color.BLUE);
+		cell.setPadding(5);
+		
+		Font font = FontFactory.getFont(FontFactory.HELVETICA);
+		font.setColor(Color.WHITE);		
+		
+		cell.setPhrase(new Phrase("ID", font));		
+		table.addCell(cell);
+		
+		cell.setPhrase(new Phrase("E-mail", font));		
+		table.addCell(cell);
+		
+		cell.setPhrase(new Phrase("First Name", font));		
+		table.addCell(cell);
+		
+		cell.setPhrase(new Phrase("Last Name", font));		
+		table.addCell(cell);		
+		
+		cell.setPhrase(new Phrase("Roles ", font));		
+		table.addCell(cell);
+		
+		cell.setPhrase(new Phrase("Enabled", font));		
+		table.addCell(cell);		
 	}
 
 }
