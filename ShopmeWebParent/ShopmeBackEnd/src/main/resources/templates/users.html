@@ -64,13 +64,13 @@
 	</div>
 	<div>
 		<h2>Manage Users</h2>	
-		<a th:href="@{/users/new}" class="fa-solid fa-user-plus fa-2x icon-dark"></a>
-		&nbsp;|&nbsp;
-		<a th:href="@{/users/export/csv}" class="fa-solid fa-file-csv fa-2x icon-dark"></a>
-		&nbsp;|&nbsp;
-		<a th:href="@{/users/export/excel}" class="fa-solid fa-file-excel fa-2x icon-dark"></a>
-		&nbsp;|&nbsp;
-		<a th:href="@{/users/export/pdf}" class="fa-solid fa-file-pdf fa-2x icon-dark"></a>
+		<a th:href="@{/users/new}" class="fa-solid fa-user-plus fa-2x icon-dark mr-2"></a>
+		&nbsp;&nbsp;
+		<a th:href="@{/users/export/csv}" class="fa-solid fa-file-csv fa-2x icon-dark mr-2"></a>
+		&nbsp;&nbsp;
+		<a th:href="@{/users/export/excel}" class="fa-solid fa-file-excel fa-2x icon-dark mr-2"></a>
+		&nbsp;&nbsp;
+		<a th:href="@{/users/export/pdf}" class="fa-solid fa-file-pdf fa-2x icon-dark mr-2"></a>
 	</div>
 	
 	<div th:if="${message != null}" class="alert alert-success text-center">
@@ -84,7 +84,9 @@
 			Filter:&nbsp;
 			<input type="search" name="keyword" th:value="${keyword}" required/>
 			&nbsp;&nbsp;
-			<input type="submit" value="Search" class="btn btn-primary"/>
+			<button type="submit" value="Search" class="btn btn-primary"/>
+				<i class="fas fa-search"></i>
+			</button>
 			&nbsp;&nbsp;
 			<input type="button" value="Clear" class="btn btn-secondary" onclick="clearFilter()"/>
 		</form>
