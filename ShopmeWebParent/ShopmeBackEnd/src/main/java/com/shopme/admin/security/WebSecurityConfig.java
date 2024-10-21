@@ -1,7 +1,5 @@
 package com.shopme.admin.security;
 
-import java.text.Normalizer.Form;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -48,6 +46,8 @@ public class WebSecurityConfig {
 		return http.build();
 	}
 	
-	
- 	
+	@Bean 
+ 	WebSecurityCustomizer configureWebSecurity() throws Exception { 
+ 		return (web) -> web.ignoring().requestMatchers("/images/**", "/js/**", "/webjars/**"); 
+ 	}
 }
