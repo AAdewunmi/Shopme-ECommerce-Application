@@ -15,5 +15,10 @@ public class WebSecurityConfig {
 	UserDetailsService userDetailsService() {
 		return new ShopmeUserDetailsService();
 	}
+	
+	@Bean 
+	PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 
 }
