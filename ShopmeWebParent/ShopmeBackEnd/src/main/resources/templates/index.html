@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
 	<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 	<title>Home - Shopme Admin</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/fontawesome/all.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
 	<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
 	<script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
 	<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
@@ -34,6 +36,8 @@
 						<li class="nav-item"><a class="nav-link" th:href="@{/articles}">Articles</a></li>
 						<li class="nav-item"><a class="nav-link" th:href="@{/menus}">Menus</a></li>
 						<li class="nav-item"><a class="nav-link" th:href="@{/settings}">Settings</a></li>
+						<li><span class="fas fa-user fa-2x icon-silver"></span></li>
+						<li class="nav-item"><a class="nav-link" sec:authentication="principal.fullname"></a></li>
 					</ul>
 				</div>
 			</nav>
