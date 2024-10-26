@@ -12,13 +12,5 @@
 		<div th:replace="fragments :: footer"></div>
 	</div>
 	<div th:replace="fragments :: popper"></div>
-	<script type="text/javascript">
-		$(document).ready(function(){
-			$("#logoutLink").on("click", function(e){
-				e.preventDefault();
-				document.logoutForm.submit();
-			});
-		});
-	</script>
 </body>
 </html>
