@@ -51,6 +51,9 @@ public class WebSecurityConfig {
 	          .logoutSuccessUrl("/login?logout")
 	          .permitAll();
 	    });
+	    http.rememberMe(rem -> rem
+	    		.key("AbcDefgHijKlmnOpqrs_1234567890")
+	    		.tokenValiditySeconds(7 * 24 * 60 * 60));
 	    return http.build();
 	  }
 	
