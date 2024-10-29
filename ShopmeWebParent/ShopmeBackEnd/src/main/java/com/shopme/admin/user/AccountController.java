@@ -31,7 +31,7 @@ public class AccountController {
 		User user = service.getByEmail(email);
 		model.addAttribute("user", user);
 		
-		return "users/account_form";
+		return "account_form";
 		
 	}
 
