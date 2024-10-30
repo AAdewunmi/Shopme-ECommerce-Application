@@ -19,7 +19,7 @@ import com.shopme.admin.security.ShopmeUserDetails;
 import com.shopme.admin.user.UserService;
 import com.shopme.common.entity.User;
 
-//@CrossOrigin
+@CrossOrigin
 @Controller
 public class AccountController {
 	
