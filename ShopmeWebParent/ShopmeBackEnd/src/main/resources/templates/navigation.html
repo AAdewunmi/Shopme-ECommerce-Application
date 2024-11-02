@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <body>
 	<div th:fragment="menu">
 			<form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
@@ -17,9 +18,13 @@
 					<li class="nav-item" sec:authorize="hasAuthority('Admin')">
 						<a class="nav-link" th:href="@{/users}">Users</a>
 					</li>
-					<li class="nav-item">
-						<a class="nav-link" th:href="@{/categories}">Categories</a>
-					</li>		
+					
+					<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+						<li class="nav-item">
+							<a class="nav-link" th:href="@{/categories}">Categories</a>
+						</li>
+					</th:block>
+							
 					<li class="nav-item">
 						<a class="nav-link" th:href="@{/brands}">Brands</a>
 					</li>
