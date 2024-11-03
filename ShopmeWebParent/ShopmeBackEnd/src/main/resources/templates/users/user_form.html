@@ -107,9 +107,9 @@
 	<div th:replace="fragments :: footer"></div>
 	<div th:replace="fragments :: popper"></div>
 </div>
-<script th:src="@{/js/common_form.js}"></script>
+
 <script type="text/javascript">
-	
+	moduleURL = "[[@{/users}]]";
 	function checkEmailUnique(form) {
 		url = "[[@{/users/check_email}]]";
 		userEmail = $("#email").val();
@@ -141,5 +141,6 @@
 	}
 	
 </script>
+<script th:src="@{/js/common_form.js}"></script>
 </body>
 </html>
