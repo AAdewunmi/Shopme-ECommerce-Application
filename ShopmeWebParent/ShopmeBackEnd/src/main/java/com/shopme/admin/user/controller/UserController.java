@@ -73,7 +73,7 @@ public class UserController {
 		model.addAttribute("user", user);
 		model.addAttribute("listRoles", listRoles);
 		model.addAttribute("pageTitle", "Create New User");
-		return "/users/user_form";
+		return "users/user_form";
 	}
 	
 	@PostMapping("/users/save")
@@ -108,7 +108,7 @@ public class UserController {
 			model.addAttribute("user", user);
 			model.addAttribute("pageTitle", "Edit New User (ID: " + id + ")");
 			model.addAttribute("listRoles", listRoles);
-			return "/users/user_form";
+			return "users/user_form";
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("message", e.getMessage());
 			return "redirect:/users";

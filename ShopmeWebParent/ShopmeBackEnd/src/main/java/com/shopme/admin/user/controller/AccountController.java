@@ -32,7 +32,7 @@ public class AccountController {
 		String email = loggedUser.getUsername();
 		User user = service.getByEmail(email);
 		model.addAttribute("user", user);
-		return "account_form";
+		return "users/account_form";
 		
 	}
 	
