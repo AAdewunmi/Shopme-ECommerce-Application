@@ -108,7 +108,7 @@ public class UserController {
 			model.addAttribute("user", user);
 			model.addAttribute("pageTitle", "Edit New User (ID: " + id + ")");
 			model.addAttribute("listRoles", listRoles);
-			return "user_form";
+			return "/users/user_form";
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("message", e.getMessage());
 			return "redirect:/users";
