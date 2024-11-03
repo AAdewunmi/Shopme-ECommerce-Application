@@ -73,7 +73,7 @@ public class UserController {
 		model.addAttribute("user", user);
 		model.addAttribute("listRoles", listRoles);
 		model.addAttribute("pageTitle", "Create New User");
-		return "user_form";
+		return "/users/user_form";
 	}
 	
 	@PostMapping("/users/save")
