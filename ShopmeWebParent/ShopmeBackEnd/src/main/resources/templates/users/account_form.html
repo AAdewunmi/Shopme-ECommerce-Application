@@ -107,33 +107,8 @@
 	<div th:replace="fragments :: footer"></div>
 	<div th:replace="fragments :: popper"></div>
 </div>
+<script th:src="@{/js/common_form.js}"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
-		$("#buttonCancel").on("click", function() {
-			window.location = "[[@{/users}]]";
-		});
-		
-		$("#fileImage").change(function(){
-			fileSize = this.files[0].size;
-			if(fileSize > 1048576){
-				this.setCustomValidity("You must choose an image less than 1MB!");
-				this.reportValidity();
-			} else {
-				this.setCustomValidity("");
-				showImageThumbnail(this);
-			}
-		});
-	});
-	
-	function showImageThumbnail(fileInput){
-		var file = fileInput.files[0];
-		var reader = new FileReader();
-		reader.onload = function(e){
-			$("#thumbnail").attr("src", e.target.result);
-		};
-		reader.readAsDataURL(file);
-	}
-	
 	function checkPasswordMatch(confirmPassword) {
 		if (confirmPassword.value != $("#password").val()) {
 			confirmPassword.setCustomValidity("Passwords do not match!");
@@ -141,7 +116,6 @@
 			confirmPassword.setCustomValidity("");
 		}
 	}
-	
 </script>
 </body>
 </html>
