@@ -38,6 +38,11 @@ public class Category {
 	@OneToMany(mappedBy = "parent")
 	@OrderBy("name asc")
 	private Set<Category> children = new HashSet<>();
+	
+	public Category(String name) {
+		super();
+		this.name = name;
+	}
 
 	public Integer getId() {
 		return id;
