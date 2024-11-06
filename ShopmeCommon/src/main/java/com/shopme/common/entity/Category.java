@@ -42,6 +42,8 @@ public class Category {
 	public Category(String name) {
 		super();
 		this.name = name;
+		this.alias = name;
+		this.image = "default.png";
 	}
 
 	public Integer getId() {
