@@ -39,6 +39,11 @@ public class Category {
 	@OrderBy("name asc")
 	private Set<Category> children = new HashSet<>();
 	
+	public Category(Integer id) {
+		super();
+		this.id = id;
+	}
+
 	public Category(String name) {
 		this.name = name;
 		this.alias = name;

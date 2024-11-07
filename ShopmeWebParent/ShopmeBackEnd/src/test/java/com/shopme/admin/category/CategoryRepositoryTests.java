@@ -25,5 +25,13 @@ public class CategoryRepositoryTests {
 		Category savedCategory = repo.save(category);
 		assertThat(savedCategory.getId()).isGreaterThan(0);
 	}
+	
+	@Test
+	public void testCreateSubCategory() {
+		Category parent = new Category(102);
+		Category subCategory = new Category("Desktops", parent);
+		Category savedCategory = repo.save(subCategory);
+		assertThat(savedCategory.getId()).isGreaterThan(0);
+	}
 
 }
