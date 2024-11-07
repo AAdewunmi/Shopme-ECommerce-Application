@@ -40,10 +40,14 @@ public class Category {
 	private Set<Category> children = new HashSet<>();
 	
 	public Category(String name) {
-		super();
 		this.name = name;
 		this.alias = name;
 		this.image = "default.png";
+	}
+	
+	public Category(String name, Category parent) {
+		this(name);
+		this.parent = parent;
 	}
 
 	public Integer getId() {

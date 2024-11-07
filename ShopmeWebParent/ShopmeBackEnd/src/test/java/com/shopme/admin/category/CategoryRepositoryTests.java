@@ -21,7 +21,7 @@ public class CategoryRepositoryTests {
 
 	@Test
 	public void testCreateRootCategory() {
-		Category category = new Category("Computers");
+		Category category = new Category("Electronics");
 		Category savedCategory = repo.save(category);
 		assertThat(savedCategory.getId()).isGreaterThan(0);
 	}
