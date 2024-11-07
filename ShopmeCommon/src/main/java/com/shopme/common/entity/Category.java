@@ -6,18 +6,19 @@ import java.util.Set;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.OrderBy;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "categories")
 public class Category {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
 	@Column(length = 128, nullable = false, unique = true)
@@ -32,15 +33,16 @@ public class Category {
 	private boolean enabled;
 	
 	@OneToOne
-	@JoinColumn(name = "parent_id")
+	@JoinColumn(name = "parent_id",unique = false)
 	private Category parent;
 	
 	@OneToMany(mappedBy = "parent")
-	@OrderBy("name asc")
 	private Set<Category> children = new HashSet<>();
+
+	public Category() {
+	}
 	
 	public Category(Integer id) {
-		super();
 		this.id = id;
 	}
 
@@ -53,7 +55,7 @@ public class Category {
 	public Category(String name, Category parent) {
 		this(name);
 		this.parent = parent;
-	}
+	}	
 
 	public Integer getId() {
 		return id;
@@ -110,7 +112,6 @@ public class Category {
 	public void setChildren(Set<Category> children) {
 		this.children = children;
 	}
-	
 	
 	
 }

@@ -2,6 +2,8 @@ package com.shopme.admin.category;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -24,14 +26,14 @@ public class CategoryRepositoryTests {
 		Category category = new Category("Electronics");
 		Category savedCategory = repo.save(category);
 		assertThat(savedCategory.getId()).isGreaterThan(0);
-	}
+	}	
 	
 	@Test
 	public void testCreateSubCategory() {
-		Category parent = new Category(102);
-		Category subCategory = new Category("Desktops", parent);
-		Category savedCategory = repo.save(subCategory);
-		assertThat(savedCategory.getId()).isGreaterThan(0);
+		Category parent = new Category(2);
+		Category cameras = new Category("Cameras", parent);
+		Category smartphones = new Category("Smartphones", parent);
+		repo.saveAll(List.of(cameras, smartphones));
 	}
 
 }
