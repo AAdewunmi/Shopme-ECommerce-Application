@@ -35,5 +35,13 @@ public class CategoryRepositoryTests {
 		Category smartphones = new Category("Smartphones", parent);
 		repo.saveAll(List.of(cameras, smartphones));
 	}
+	
+	@Test
+	public void testCreateSubCategory1() {
+		Category parent = new Category(5);
+		Category subCategory = new Category("Memory", parent);
+		Category savedCategory = repo.save(subCategory);
+		assertThat(savedCategory.getId()).isGreaterThan(0);
+	}
 
 }
