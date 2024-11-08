@@ -55,5 +55,16 @@ public class CategoryRepositoryTests {
 		}
 		assertThat(children.size()).isGreaterThan(0);
 	}
+	
+	@Test
+	public void testGetCategory1() {
+		Category category = repo.findById(2).get();
+		System.out.println(category.getName());
+		Set<Category> children = category.getChildren();
+		for (Category subCategory : children) {
+			System.out.println(subCategory.getName());
+		}
+		assertThat(children.size()).isGreaterThan(0);
+	}
 
 }
