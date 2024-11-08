@@ -55,6 +55,14 @@ public class CategoryRepositoryTests {
 	}
 	
 	@Test
+	public void testCreateSubCategory3() {
+		Category parent = new Category(7);
+		Category subCategory = new Category("iphone", parent);
+		Category savedCategory = repo.save(subCategory);
+		assertThat(savedCategory.getId()).isGreaterThan(0);
+	}
+	
+	@Test
 	public void testGetCategory() {
 		Category category = repo.findById(1).get();
 		System.out.println(category.getName());
