@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments :: page_head('Categories - Shopme Admin')" />
+<head th:replace="fragments :: head('Categories - Shopme Admin')" />
 <body>
 <div class="container-fluid">
 	<div th:replace="navigation :: menu"></div>
@@ -46,10 +46,10 @@
 					<td>[[${cat.name}]]</td>
 					<td>[[${cat.alias}]]</td>
 					<td>
-						<div th:replace="fragments :: category_status" />
+						<!-- <div th:replace="fragments :: category_status" ></div> -->
 					</td>
 					<td>
-						<div th:replace="fragments :: category_actions" />
+						<!-- <div th:replace="fragments :: category_actions" ></div> -->
 					</td>					
 				</tr>
 			</tbody>
