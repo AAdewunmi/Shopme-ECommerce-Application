@@ -29,6 +29,7 @@ public class CategoryController {
 	@GetMapping("/categories/new")
 	public String newCategory(Model model) {
 		model.addAttribute("category", new Category());
-		return "categories/categories_form";
+		model.addAttribute("pageTitle", "Create New Category");
+		return "categories/category_form";
 	}
 }
