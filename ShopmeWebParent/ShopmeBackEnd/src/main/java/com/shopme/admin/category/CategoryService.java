@@ -16,5 +16,9 @@ public class CategoryService {
 	public List<Category> listAll(){
 		return (List<Category>) repository.findAll();
 	}
+	
+	public List<Category> listCategoriesUsedInForm(){
+		return (List<Category>) repository.findAll();
+	}
 
 }
