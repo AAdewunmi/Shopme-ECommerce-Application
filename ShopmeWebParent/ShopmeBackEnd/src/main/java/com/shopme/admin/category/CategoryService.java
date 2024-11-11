@@ -24,31 +24,33 @@ public class CategoryService {
 		Iterable<Category> categoriesInDB = repository.findAll();
 		for (Category category : categoriesInDB) {
 			if (category.getParent() == null) {
-				System.out.println(category.getName());
+				categoriesUsedInForm.add(new Category(category.getName()));
 				
 				Set<Category> children = category.getChildren();
 				
 				for (Category subCategory : children) {
-					System.out.println("--" + subCategory.getName());
-					printChildren(subCategory, 1);
+					String name = "--" + subCategory.getName();
+					categoriesUsedInForm.add(new Category(name));
+					printChildren(categoriesUsedInForm, subCategory, 1);
 				}
 			}
 		}
 		return categoriesUsedInForm;
 	}
 	
-	private void printChildren(Category parent, int subLevel) {
+	private void printChildren(List<Category> categoriesUsedInForm, Category parent, int subLevel) {
 		int newSubLevel = subLevel + 1;
 		Set<Category> children = parent.getChildren();
 		
 		for (Category subCategory : children) {
+			String name = "";
 			for (int i = 0; i < newSubLevel; i++) {				
-				System.out.print("--");
+				name += "--";
 			}
+			name += subCategory.getName();
+			categoriesUsedInForm.add(new Category(name));
 			
-			System.out.println(subCategory.getName());
-			
-			printChildren(subCategory, newSubLevel);
+			printChildren(categoriesUsedInForm, subCategory, newSubLevel);
 		}		
 	}
 
