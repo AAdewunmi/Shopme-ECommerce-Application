@@ -19,6 +19,10 @@ public class CategoryService {
 		return (List<Category>) repository.findAll();
 	}
 	
+	public Category save(Category category) {
+		return repository.save(category);
+	}
+	
 	public List<Category> listCategoriesUsedInForm(){
 		List<Category> categoriesUsedInForm = new ArrayList<>();
 		Iterable<Category> categoriesInDB = repository.findAll();
