@@ -52,10 +52,18 @@ public class Category {
 		this.image = "default.png";
 	}
 	
-	public Category(String name, Category parent) {
-		this(name);
-		this.parent = parent;
-	}	
+	public static Category copyIdAndName(Category category) {
+		Category copyCategory = new Category();
+		category.setId(category.getId());
+		category.setName(category.getName());
+		return copyCategory;
+	}
+	
+	public Category(Integer id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
 
 	public Integer getId() {
 		return id;
