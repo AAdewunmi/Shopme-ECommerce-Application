@@ -2,6 +2,7 @@ package com.shopme.admin.category;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +57,14 @@ public class CategoryService {
 			
 			printChildren(categoriesUsedInForm, subCategory, newSubLevel);
 		}		
+	}
+	
+	public Category get(Integer id) throws CategoryNotFoundException {
+		try {
+			return repo.findById(id).get();
+		} catch (NoSuchElementException ex) {
+			throw new CategoryNotFoundException("Could not find any category with ID " + id);
+		}
 	}
 
 }
