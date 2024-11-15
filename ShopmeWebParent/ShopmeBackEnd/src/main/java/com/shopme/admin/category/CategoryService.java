@@ -61,7 +61,7 @@ public class CategoryService {
 	
 	public Category get(Integer id) throws CategoryNotFoundException {
 		try {
-			return repo.findById(id).get();
+			return repository.findById(id).get();
 		} catch (NoSuchElementException ex) {
 			throw new CategoryNotFoundException("Could not find any category with ID " + id);
 		}
