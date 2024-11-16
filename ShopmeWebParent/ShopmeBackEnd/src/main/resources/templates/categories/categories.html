@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head th:replace="fragments :: head('Categories - Shopme Admin')" />
 <body>
 <div class="container-fluid">
@@ -46,7 +47,9 @@
 			<tbody>
 				<tr th:each="cat : ${listCategories}">
 					<td>[[${cat.id}]]</td>
-					<td></td>
+					<td>
+						<img th:src="@{${cat.imagePath}}" style="width: 100px" class="img-fluid"/>
+					</td>
 					<td>[[${cat.name}]]</td>
 					<td>[[${cat.alias}]]</td>
 					<td>
