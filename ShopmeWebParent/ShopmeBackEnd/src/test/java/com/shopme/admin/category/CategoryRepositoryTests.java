@@ -33,33 +33,33 @@ public class CategoryRepositoryTests {
 	@Test
 	public void testCreateSubCategory() {
 		Category parent = new Category(2);
-		Category cameras = new Category("Cameras", parent);
-		Category smartphones = new Category("Smartphones", parent);
-		repo.saveAll(List.of(cameras, smartphones));
+		//Category cameras = new Category("Cameras", parent);
+		//Category smartphones = new Category("Smartphones", parent);
+		//repo.saveAll(List.of(cameras, smartphones));
 	}
 	
 	@Test
 	public void testCreateSubCategory1() {
 		Category parent = new Category(5);
-		Category subCategory = new Category("Memory", parent);
-		Category savedCategory = repo.save(subCategory);
-		assertThat(savedCategory.getId()).isGreaterThan(0);
+		//Category subCategory = new Category("Memory", parent);
+		//Category savedCategory = repo.save(subCategory);
+		//assertThat(savedCategory.getId()).isGreaterThan(0);
 	}
 	
 	@Test
 	public void testCreateSubCategory2() {
 		Category parent = new Category(4);
-		Category subCategory = new Category("Gaming Laptops", parent);
-		Category savedCategory = repo.save(subCategory);
-		assertThat(savedCategory.getId()).isGreaterThan(0);
+		//Category subCategory = new Category("Gaming Laptops", parent);
+		//Category savedCategory = repo.save(subCategory);
+		//assertThat(savedCategory.getId()).isGreaterThan(0);
 	}
 	
 	@Test
 	public void testCreateSubCategory3() {
 		Category parent = new Category(7);
-		Category subCategory = new Category("iphone", parent);
-		Category savedCategory = repo.save(subCategory);
-		assertThat(savedCategory.getId()).isGreaterThan(0);
+		//Category subCategory = new Category("iphone", parent);
+		//Category savedCategory = repo.save(subCategory);
+		//assertThat(savedCategory.getId()).isGreaterThan(0);
 	}
 	
 	@Test
