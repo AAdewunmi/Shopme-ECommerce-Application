@@ -116,5 +116,13 @@ public class CategoryRepositoryTests {
 			printChildren(subCategory, newSubLevel);
 		}		
 	}
+	
+	@Test
+	public void testFindByName() {
+		String categoryName = "Computers";
+		Category category = repo.findByName(categoryName);
+		assertThat(category).isNotNull();
+		assertThat(category.getName()).isEqualTo(categoryName);
+	}
 
 }
