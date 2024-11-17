@@ -124,5 +124,13 @@ public class CategoryRepositoryTests {
 		assertThat(category).isNotNull();
 		assertThat(category.getName()).isEqualTo(categoryName);
 	}
-
+	
+	@Test
+	public void testFindByAlias() {
+		String alias = "Electronics";
+		Category category = repo.findByAlias(alias);
+		assertThat(category).isNotNull();
+		assertThat(category.getAlias()).isEqualTo(alias);
+	}
+	
 }
