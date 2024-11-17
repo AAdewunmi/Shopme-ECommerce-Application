@@ -14,5 +14,7 @@ public interface CategoryRepository extends CrudRepository<Category, Integer> {
 	public List<Category> findRootCategories();
 	
 	public Category findByName(String name);
+	
+	public Category findByAlias(String alias);
 
 }
