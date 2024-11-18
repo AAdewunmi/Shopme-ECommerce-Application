@@ -75,7 +75,12 @@ public class CategoryService {
 		if (isCreatingNew) {
 			if (categoryByName != null) {
 				return "DuplicateName";
-			} 
+			} else {
+				Category categoryByAlias = repository.findByAlias(alias);
+				if (categoryByAlias != null) {
+					return "DuplicatedAlias";
+				}
+			}
 		}
 		return "OK";
 	}
