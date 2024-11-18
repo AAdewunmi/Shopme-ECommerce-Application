@@ -78,7 +78,7 @@ public class CategoryService {
 			} else {
 				Category categoryByAlias = repository.findByAlias(alias);
 				if (categoryByAlias != null) {
-					return "DuplicatedAlias";
+					return "DuplicateAlias";
 				}
 			}
 		}
