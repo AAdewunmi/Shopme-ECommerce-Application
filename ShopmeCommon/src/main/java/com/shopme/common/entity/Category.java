@@ -66,6 +66,13 @@ public class Category {
 		return copyCategory;
 	}
 	
+	public Category(Integer id, String name, String alias) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.alias = alias;
+	}
+
 	public Category(Integer id, String name) {
 		super();
 		this.id = id;
