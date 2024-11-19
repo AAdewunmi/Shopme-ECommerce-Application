@@ -99,5 +99,21 @@ public class CategoryServiceTests {
 		
 		assertThat(result).isEqualTo("DuplicateAlias");
 	}
+	
+	@Test
+	public void testCheckUniqueInEditModeReturnOK() {
+		Integer id = 1;
+		String name = "NameABC";
+		String alias = "Computers";
+		
+		Category category = new Category(id, name, alias);
+		
+		Mockito.when(repository.findByName(name)).thenReturn(null);
+		Mockito.when(repository.findByAlias(alias)).thenReturn(category);
+		
+		String result = service.checkUnique(id, name, alias);
+		
+		assertThat(result).isEqualTo("OK");
+	}		
 
 }
