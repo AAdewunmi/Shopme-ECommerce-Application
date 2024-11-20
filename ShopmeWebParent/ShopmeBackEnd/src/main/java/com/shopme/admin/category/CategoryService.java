@@ -82,7 +82,7 @@ public class CategoryService {
 				}
 			}
 		} else {
-			if(categoryByName != null && categoryByName.getId() != id) {
+			if (categoryByName != null && categoryByName.getId() != id) {
 				return "DuplicateName";
 			}
 			Category categoryByAlias = repository.findByAlias(alias);
@@ -91,6 +91,7 @@ public class CategoryService {
 			}
 		}
 		return "OK";
+	
 	}
 
 }

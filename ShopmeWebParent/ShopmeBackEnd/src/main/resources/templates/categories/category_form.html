@@ -107,18 +107,9 @@
 		params = {id: catId, name: catName, alias: catAlias, _csrf: csrfValue};
 		
 		$.post(url, params, function(response) {
-			if (response == "OK") {
-				form.submit();
-			} else if (response == "DuplicateName") {
-				showWarningModal("There is another category having same name " + catName);	
-			} else if (response == "DuplicateAlias") {
-				showWarningModal("There is another category having same alias " + catAlias);
-			} else {
-				showErrorModal("Unknown response from server");
-			}
-			
+			alert(response);
 		}).fail(function() {
-			showErrorModal("Could not connect to the server");
+			alert('failed')
 		});
 		
 		return false;
