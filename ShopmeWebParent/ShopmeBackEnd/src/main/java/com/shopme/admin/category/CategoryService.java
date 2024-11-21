@@ -22,6 +22,25 @@ public class CategoryService {
 		return listHierarchicalCategories(rootCategories);
 	}
 	
+	private List<Category> listHierarchicalCategories(List<Category> rootCategories, String sortDir) {
+		List<Category> hierarchicalCategories = new ArrayList<>();
+		
+		for (Category rootCategory : rootCategories) {
+			hierarchicalCategories.add(Category.copyFull(rootCategory));
+			
+			Set<Category> children = sortSubCategories(rootCategory.getChildren(), sortDir);
+			
+			for (Category subCategory : children) {
+				String name = "--" + subCategory.getName();
+				hierarchicalCategories.add(Category.copyFull(subCategory, name));
+				
+				listSubHierarchicalCategories(hierarchicalCategories, subCategory, 1, sortDir);
+			}
+		}
+		
+		return hierarchicalCategories;
+	}
+	
 	public Category save(Category category) {
 		return repository.save(category);
 	}
