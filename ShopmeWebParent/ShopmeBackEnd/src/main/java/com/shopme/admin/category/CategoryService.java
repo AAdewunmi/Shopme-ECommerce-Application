@@ -47,7 +47,7 @@ public class CategoryService {
 	
 	public List<Category> listCategoriesUsedInForm(){
 		List<Category> categoriesUsedInForm = new ArrayList<>();
-		Iterable<Category> categoriesInDB = repository.findAll();
+		Iterable<Category> categoriesInDB = repository.findRootCategories(Sort.by("name").ascending());
 		for (Category category : categoriesInDB) {
 			if (category.getParent() == null) {
 				categoriesUsedInForm.add(Category.copyIdAndName(category));
