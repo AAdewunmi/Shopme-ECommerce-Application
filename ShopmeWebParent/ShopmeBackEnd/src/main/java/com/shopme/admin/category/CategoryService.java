@@ -6,6 +6,7 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.shopme.common.entity.Category;
@@ -17,7 +18,8 @@ public class CategoryService {
 	private CategoryRepository repository;
 	
 	public List<Category> listAll(){
-		return (List<Category>) repository.findAll();
+		List<Category> rootCategories = repository.findRootCategories(Sort.by("name").ascending());
+		return listHierarchicalCategories(rootCategories);
 	}
 	
 	public Category save(Category category) {
