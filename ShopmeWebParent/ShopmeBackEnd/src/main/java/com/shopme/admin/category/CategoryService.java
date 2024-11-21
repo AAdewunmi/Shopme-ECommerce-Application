@@ -137,21 +137,25 @@ public class CategoryService {
 	
 	}
 	
-	/*
-	 * private SortedSet<Category> sortSubCategories(Set<Category> children) {
-	 * return sortSubCategories(children, "asc"); }
-	 * 
-	 * private SortedSet<Category> sortSubCategories(Set<Category> children, String
-	 * sortDir) { SortedSet<Category> sortedChildren = new TreeSet<>(new
-	 * Comparator<Category>() {
-	 * 
-	 * @Override public int compare(Category cat1, Category cat2) { if
-	 * (sortDir.equals("asc")) { return cat1.getName().compareTo(cat2.getName()); }
-	 * else { return cat2.getName().compareTo(cat1.getName()); } } });
-	 * 
-	 * sortedChildren.addAll(children);
-	 * 
-	 * return sortedChildren; }
-	 */
+	private SortedSet<Category> sortSubCategories(Set<Category> children) {
+		return sortSubCategories(children, "asc");
+	}
+	
+	private SortedSet<Category> sortSubCategories(Set<Category> children, String sortDir) {
+		SortedSet<Category> sortedChildren = new TreeSet<>(new Comparator<Category>() {
+			@Override
+			public int compare(Category cat1, Category cat2) {
+				if (sortDir.equals("asc")) {
+					return cat1.getName().compareTo(cat2.getName());
+				} else {
+					return cat2.getName().compareTo(cat1.getName());
+				}
+			}
+		});
+		
+		sortedChildren.addAll(children);
+		
+		return sortedChildren;
+	}
 
 }
