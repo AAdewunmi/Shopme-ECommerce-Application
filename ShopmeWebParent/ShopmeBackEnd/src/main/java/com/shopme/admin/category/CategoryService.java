@@ -1,9 +1,12 @@
 package com.shopme.admin.category;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -17,9 +20,9 @@ public class CategoryService {
 	@Autowired
 	private CategoryRepository repository;
 	
-	public List<Category> listAll(){
+	public List<Category> listAll(String sortDir){
 		List<Category> rootCategories = repository.findRootCategories(Sort.by("name").ascending());
-		return listHierarchicalCategories(rootCategories);
+		return listHierarchicalCategories(rootCategories, sortDir);
 	}
 	
 	private List<Category> listHierarchicalCategories(List<Category> rootCategories, String sortDir) {
@@ -39,6 +42,25 @@ public class CategoryService {
 		}
 		
 		return hierarchicalCategories;
+	}
+	
+	private void listSubHierarchicalCategories(List<Category> hierarchicalCategories,
+			Category parent, int subLevel, String sortDir) {
+		Set<Category> children = sortSubCategories(parent.getChildren(), sortDir);
+		int newSubLevel = subLevel + 1;
+		
+		for (Category subCategory : children) {
+			String name = "";
+			for (int i = 0; i < newSubLevel; i++) {				
+				name += "--";
+			}
+			name += subCategory.getName();
+		
+			hierarchicalCategories.add(Category.copyFull(subCategory, name));
+			
+			listSubHierarchicalCategories(hierarchicalCategories, subCategory, newSubLevel, sortDir);
+		}
+		
 	}
 	
 	public Category save(Category category) {
@@ -114,5 +136,22 @@ public class CategoryService {
 		return "OK";
 	
 	}
+	
+	/*
+	 * private SortedSet<Category> sortSubCategories(Set<Category> children) {
+	 * return sortSubCategories(children, "asc"); }
+	 * 
+	 * private SortedSet<Category> sortSubCategories(Set<Category> children, String
+	 * sortDir) { SortedSet<Category> sortedChildren = new TreeSet<>(new
+	 * Comparator<Category>() {
+	 * 
+	 * @Override public int compare(Category cat1, Category cat2) { if
+	 * (sortDir.equals("asc")) { return cat1.getName().compareTo(cat2.getName()); }
+	 * else { return cat2.getName().compareTo(cat1.getName()); } } });
+	 * 
+	 * sortedChildren.addAll(children);
+	 * 
+	 * return sortedChildren; }
+	 */
 
 }
