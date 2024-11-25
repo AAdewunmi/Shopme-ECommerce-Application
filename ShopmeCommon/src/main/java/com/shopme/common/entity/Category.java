@@ -164,6 +164,10 @@ public class Category {
 		return hasChildren;
 	}
 	
+	public void setHasChildren(boolean hasChildren) {
+		this.hasChildren = hasChildren;
+	}
+	
 	@Transient
 	private boolean hasChildren;
 	
