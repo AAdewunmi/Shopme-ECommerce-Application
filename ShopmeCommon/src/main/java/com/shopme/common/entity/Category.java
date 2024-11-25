@@ -160,4 +160,11 @@ public class Category {
 		return "/category-images/" + this.id + "/" + this.image;
 	}
 	
+	public boolean isHasChildren() {
+		return hasChildren;
+	}
+	
+	@Transient
+	private boolean hasChildren;
+	
 }
