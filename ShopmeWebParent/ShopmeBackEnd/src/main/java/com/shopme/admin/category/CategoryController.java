@@ -114,6 +114,6 @@ public class CategoryController {
 		}
 		
 		return "redirect:/categories";
-	}	
+	}
 	
 }
