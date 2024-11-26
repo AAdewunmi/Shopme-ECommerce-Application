@@ -51,10 +51,12 @@
 		<a class="fas fa-edit fa-2x icon-green" th:href="@{'/categories/edit/' + ${cat.id}}"
 			title="Edit this category"></a>
 		&nbsp; 
+		<th:block th:if="${cat.hasChildren == false}">
 		<a class="fas fa-trash fa-2x icon-dark link-delete" 
 			th:href="@{'/categories/delete/' + ${cat.id}}"
 			th:catId="${cat.id}"
 			title="Delete this category"></a>	
+		</th:block>
 	</div>
 </body>
 </html>
