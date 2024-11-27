@@ -27,18 +27,20 @@ public class CategoryController {
 	@Autowired
 	private CategoryService service;
 	
-	@GetMapping("/categories")
-	public String listAll(@Param("sortDir") String sortDir, Model model) {
+	
+	
+	@GetMapping("/categories/page/{pageNum}")
+	public String listByPage(@PathVariable(name = "pageNum") int pageNum, 
+			@Param("sortDir") String sortDir, Model model){
 		if (sortDir ==  null || sortDir.isEmpty()) {
 			sortDir = "asc";
 		}
-		List<Category> listCategories = service.listAll(sortDir);
+		List<Category> listCategories = service.listByPage(pageNum, sortDir);
 		String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
 		model.addAttribute("listCategories", listCategories);
 		model.addAttribute("reverseSortDir", reverseSortDir);
 		return "categories/categories";
 	}
-	
 	
 	@GetMapping("/categories/new")
 	public String newCategory(Model model) {
