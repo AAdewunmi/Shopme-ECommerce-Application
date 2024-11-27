@@ -27,7 +27,10 @@ public class CategoryController {
 	@Autowired
 	private CategoryService service;
 	
-	
+	@GetMapping("/categories")
+	public String listFirstPage(@Param("sortDir") String sortDir, Model model) {
+		return listByPage(1, sortDir, model);
+	}
 	
 	@GetMapping("/categories/page/{pageNum}")
 	public String listByPage(@PathVariable(name = "pageNum") int pageNum, 
