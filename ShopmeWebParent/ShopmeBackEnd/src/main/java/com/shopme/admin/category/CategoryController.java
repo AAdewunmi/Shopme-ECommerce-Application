@@ -38,8 +38,12 @@ public class CategoryController {
 		if (sortDir ==  null || sortDir.isEmpty()) {
 			sortDir = "asc";
 		}
-		List<Category> listCategories = service.listByPage(pageNum, sortDir);
+		CategoryPageInfo pageInfo = new CategoryPageInfo();
+		List<Category> listCategories = service.listByPage(pageInfo, pageNum, sortDir);
 		String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
+		model.addAttribute("totalPages", pageInfo.getTotalPages());
+		model.addAttribute("totalItems", pageInfo.getTotalElements());
+		model.addAttribute("currentPage", pageNum);
 		model.addAttribute("listCategories", listCategories);
 		model.addAttribute("reverseSortDir", reverseSortDir);
 		return "categories/categories";
