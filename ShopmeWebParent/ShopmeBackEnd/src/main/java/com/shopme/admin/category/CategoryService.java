@@ -9,6 +9,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -27,15 +28,18 @@ public class CategoryService {
 	@Autowired
 	private CategoryRepository repository;
 	
-	public List<Category> listByPage(int pageNum, String sortDir){
+	public List<Category> listByPage(CategoryPageInfo pageInfo, int pageNum, String sortDir){
 		Sort sort = Sort.by("name");
 		if (sortDir.equals("asc")) {
 			sort = sort.ascending();
 		} else if (sortDir.equals("desc")) {
 			sort = sort.descending();
 		}
-		Pageable pagaable = PageRequest.of(pageNum - 1, ROOT_CATEGORIES_PER_PAGE, sort);
-		List<Category> rootCategories = repository.findRootCategories(pagaable);
+		Pageable pageable = PageRequest.of(pageNum - 1, ROOT_CATEGORIES_PER_PAGE, sort);
+		Page<Category> pageCategories = repository.findRootCategories(pageable);
+		List<Category> rootCategories = pageCategories.getContent();
+		pageInfo.setTotalElements(pageCategories.getTotalElements());
+		pageInfo.setTotalPages(pageCategories.getTotalPages());
 		return listHierarchicalCategories(rootCategories, sortDir);
 	}
 	
