@@ -44,6 +44,8 @@ public class CategoryController {
 		model.addAttribute("totalPages", pageInfo.getTotalPages());
 		model.addAttribute("totalItems", pageInfo.getTotalElements());
 		model.addAttribute("currentPage", pageNum);
+		model.addAttribute("sortField", "name");
+		model.addAttribute("sortField", sortDir);
 		model.addAttribute("listCategories", listCategories);
 		model.addAttribute("reverseSortDir", reverseSortDir);
 		return "categories/categories";
