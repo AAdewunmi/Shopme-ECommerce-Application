@@ -26,7 +26,8 @@
 					<th>ID</th>
 					<th>Category Image</th>
 					<th>
-						<a class="link-dark" th:href="@{'/categories/page/' + ${pageNum} + '?sortDir=' + ${reverseSortDir}}">Category Name</a>
+						<a class="link-dark" th:href="@{'/categories/page/' + ${pageNum} + '?sortDir=' + ${reverseSortDir}
+						+ ${keyword != null ? '&keyword=' + keyword : ''}}">Category Name</a>
 						<span th:class="${reverseSortDir == 'desc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}" ></span>
 					</th>
 					<th>Alias</th>
@@ -52,7 +53,13 @@
 			</tbody>
 		</table>
 	</div>
-	<div th:replace="fragments :: pagination('/categories', 'top-level categories')"></div>	
+	<div th:if="${keyword != null}" class="text-center">
+		<span>Search result does not show categories in hierarchical form!</span>
+		<div th:replace="fragments :: pagination('/categories', 'categories')"></div>	
+	</div>
+	<div th:block th:unless="${keyword != null}">
+		<div th:replace="fragments :: pagination('/categories', 'top-level categories')"></div>	
+	</div>
 	<div th:replace="modal_fragments :: confirm_modal"></div>
 	<div th:replace="fragments :: footer"></div>
 	<div th:replace="fragments :: popper"></div>
