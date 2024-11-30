@@ -23,7 +23,7 @@ import jakarta.transaction.Transactional;
 @Transactional
 public class CategoryService {
 	
-	private static final int ROOT_CATEGORIES_PER_PAGE = 4;
+	public static final int ROOT_CATEGORIES_PER_PAGE = 4;
 	
 	@Autowired
 	private CategoryRepository repository;
@@ -38,7 +38,7 @@ public class CategoryService {
 		}
 		Pageable pageable = PageRequest.of(pageNum - 1, ROOT_CATEGORIES_PER_PAGE, sort);
 		Page<Category> pageCategories = null;
-		if (keyword != null & !(keyword.isEmpty())) {
+		if (keyword != null && !keyword.isEmpty()) {
 			pageCategories = repository.search(keyword, pageable);
 		} else {
 			 pageCategories = repository.findRootCategories(pageable);
@@ -46,7 +46,7 @@ public class CategoryService {
 		List<Category> rootCategories = pageCategories.getContent();
 		pageInfo.setTotalElements(pageCategories.getTotalElements());
 		pageInfo.setTotalPages(pageCategories.getTotalPages());
-		if (keyword != null & !(keyword.isEmpty())) {
+		if (keyword != null && !keyword.isEmpty()) {
 			List<Category> searchResult = pageCategories.getContent();
 			for (Category category : searchResult) {
 				category.setHasChildren(category.getChildren().size() > 0);
