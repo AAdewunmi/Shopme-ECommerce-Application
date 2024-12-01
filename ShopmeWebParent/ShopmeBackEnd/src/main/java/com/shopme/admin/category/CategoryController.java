@@ -20,6 +20,8 @@ import com.shopme.admin.FileUploadUtil;
 import com.shopme.admin.user.UserService;
 import com.shopme.common.entity.Category;
 
+import jakarta.servlet.http.HttpServletResponse;
+
 
 @Controller
 @CrossOrigin
@@ -136,6 +138,13 @@ public class CategoryController {
 		}
 		
 		return "redirect:/categories";
+	}
+	
+	@GetMapping("/categories/export/csv")
+	public void exportToCSV(HttpServletResponse response) throws IOException {
+		List<Category> listCategories = service.listCategoriesUsedInForm();
+		CategoryCsvExporter exporter = new CategoryCsvExporter();
+		exporter.export(listCategories, response);
 	}
 	
 }
