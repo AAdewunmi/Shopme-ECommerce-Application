@@ -80,4 +80,8 @@ public class Brand {
 		this.categories = categories;
 	}
 	
+	@Override
+	public String toString() {
+		return "Brand [id=" + id + ", name=" + name + ", categories=" + categories + "]";
+	}
 }
