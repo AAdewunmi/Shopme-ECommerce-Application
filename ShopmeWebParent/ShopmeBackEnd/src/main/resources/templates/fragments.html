@@ -13,9 +13,9 @@
 	<script type="text/javascript" th:src="@{/js/common.js}" ></script>
 </head>
 <body>
-	<th th:fragment="column_link(fieldName, columnLabel, removeTag)" th:remove="${removeTag}">
+	<th th:fragment="column_link(moduleURL, fieldName, columnLabel, removeTag)" th:remove="${removeTag}">
 		<a class="text-dark"
-			th:href="@{'/users/page/' + ${currentPage} + '?sortField=' + ${fieldName} + '&sortDir=' 
+			th:href="@{${moduleURL} + '/page/' + ${currentPage} + '?sortField=' + ${fieldName} + '&sortDir=' 
 			+ ${sortField != fieldName ? sortDir : reverseSortDir}
 			+ ${keyword != null ? '&keyword=' + keyword : ''}}">
 			[[${columnLabel}]]
