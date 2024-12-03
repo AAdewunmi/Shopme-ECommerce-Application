@@ -31,5 +31,20 @@ public class BrandRepositoryTests {
 		assertThat(savedBrand).isNotNull();
 		assertThat(savedBrand.getId()).isGreaterThan(0);
 	}
+	
+	@Test
+	public void testCreateBrand2() {
+		Category cellphones = new Category(4);
+		Category tablets = new Category(7);
+		
+		Brand apple = new Brand("Apple");
+		apple.getCategories().add(cellphones);
+		apple.getCategories().add(tablets);
+		
+		Brand savedBrand = repository.save(apple);
+		
+		assertThat(savedBrand).isNotNull();
+		assertThat(savedBrand.getId()).isGreaterThan(0);
+	}
 
 }
