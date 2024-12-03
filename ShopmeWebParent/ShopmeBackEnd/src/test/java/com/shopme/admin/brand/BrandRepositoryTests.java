@@ -2,6 +2,8 @@ package com.shopme.admin.brand;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -83,6 +85,16 @@ public class BrandRepositoryTests {
 		
 		Brand savedBrand = repository.save(samsung);
 		assertThat(savedBrand.getName()).isEqualTo(newName);
+	}
+	
+	@Test
+	public void testDelete() {
+		Integer id = 2;
+		repository.deleteById(id);
+		
+		Optional<Brand> result = repository.findById(id);
+		
+		assertThat(result.isEmpty());
 	}
 
 }
