@@ -59,5 +59,13 @@ public class BrandRepositoryTests {
 		assertThat(savedBrand).isNotNull();
 		assertThat(savedBrand.getId()).isGreaterThan(0);
 	}
+	
+	@Test
+	public void testFindAll() {
+		Iterable<Brand> brands = repository.findAll();
+		brands.forEach(System.out::println);
+		
+		assertThat(brands).isNotEmpty();
+	}
 
 }
