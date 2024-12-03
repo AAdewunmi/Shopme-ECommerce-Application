@@ -74,5 +74,15 @@ public class BrandRepositoryTests {
 		
 		assertThat(brand.getName()).isEqualTo("Acer");
 	}
+	
+	@Test
+	public void testUpdateName() {
+		String newName = "Samsung Electronics";
+		Brand samsung = repository.findById(3).get();
+		samsung.setName(newName);
+		
+		Brand savedBrand = repository.save(samsung);
+		assertThat(savedBrand.getName()).isEqualTo(newName);
+	}
 
 }
