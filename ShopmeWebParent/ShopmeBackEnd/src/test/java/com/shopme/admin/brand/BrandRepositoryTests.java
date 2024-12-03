@@ -46,5 +46,18 @@ public class BrandRepositoryTests {
 		assertThat(savedBrand).isNotNull();
 		assertThat(savedBrand.getId()).isGreaterThan(0);
 	}
+	
+	@Test
+	public void testCreateBrand3() {
+		Brand samsung = new Brand("Samsung");
+		
+		samsung.getCategories().add(new Category(29));	// category memory
+		samsung.getCategories().add(new Category(24));	// category internal hard drive
+		
+		Brand savedBrand = repository.save(samsung);
+		
+		assertThat(savedBrand).isNotNull();
+		assertThat(savedBrand.getId()).isGreaterThan(0);
+	}
 
 }
