@@ -1,5 +1,7 @@
 package com.shopme.admin.brand;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,4 +19,7 @@ public class BrandService {
 		return repository.save(brand);
 	}
 	
+	public List<Brand> listAll(){
+		return (List<Brand>) repository.findAll();
+	}
 }
