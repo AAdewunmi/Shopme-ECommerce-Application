@@ -11,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.persistence.JoinColumn;
 
 @Entity
@@ -83,5 +84,12 @@ public class Brand {
 	@Override
 	public String toString() {
 		return "Brand [id=" + id + ", name=" + name + ", categories=" + categories + "]";
+	}
+	
+	@Transient
+	public String getLogoPath() {
+		if (this.id == null) return "/images/image-thumbnail.png";
+		
+		return "/brand-logos/" + this.id + "/" + this.logo;		
 	}
 }
