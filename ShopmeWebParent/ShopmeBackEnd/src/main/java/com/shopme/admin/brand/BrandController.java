@@ -1,13 +1,20 @@
 package com.shopme.admin.brand;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.shopme.admin.FileUploadUtil;
 import com.shopme.admin.category.CategoryService;
 import com.shopme.common.entity.Brand;
 import com.shopme.common.entity.Category;
@@ -17,14 +24,14 @@ import com.shopme.common.entity.Category;
 public class BrandController {
 	
 	@Autowired
-	private BrandService service;
+	private BrandService brandService;
 	
 	@Autowired
 	private CategoryService categoryService;
 	
 	@GetMapping("/brands")
 	public String listAll(Model model) {
-		List<Brand> listBrands = service.listAll();
+		List<Brand> listBrands = brandService.listAll();
 		model.addAttribute("listBrands", listBrands);
 		return "brands/brands";
 	}
@@ -38,6 +45,27 @@ public class BrandController {
 		model.addAttribute("pageTitle", "Create New Brand");
 		
 		return "brands/brand_form";		
+	}
+	
+	@PostMapping("/brands/save")
+	public String saveBrand(Brand brand, @RequestParam("fileImage") MultipartFile multipartFile,
+			RedirectAttributes ra) throws IOException {
+		if (!multipartFile.isEmpty()) {
+			String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+			brand.setLogo(fileName);
+			
+			Brand savedBrand = brandService.save(brand);
+			String uploadDir = "../brand-logos/" + savedBrand.getId();
+			
+			FileUploadUtil.cleanDir(uploadDir);
+			FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+			
+		} else {
+			brandService.save(brand);
+		}
+		
+		ra.addFlashAttribute("message", "The brand has been saved successfully.");
+		return "redirect:/brands";		
 	}
 	
 }
