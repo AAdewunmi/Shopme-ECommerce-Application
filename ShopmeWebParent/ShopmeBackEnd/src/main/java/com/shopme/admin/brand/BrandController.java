@@ -86,4 +86,22 @@ public class BrandController {
 			return "redirect:/brands";
 		}
 	}
+	
+	@GetMapping("/brands/delete/{id}")
+	public String deleteBrand(@PathVariable(name = "id") Integer id, 
+			Model model,
+			RedirectAttributes redirectAttributes) {
+		try {
+			brandService.delete(id);
+			String brandDir = "../brand-logos/" + id;
+			FileUploadUtil.removeDir(brandDir);
+			
+			redirectAttributes.addFlashAttribute("message", 
+					"The brand ID " + id + " has been deleted successfully");
+		} catch (BrandNotFoundException ex) {
+			redirectAttributes.addFlashAttribute("message", ex.getMessage());
+		}
+		
+		return "redirect:/brands";
+	}	
 }
