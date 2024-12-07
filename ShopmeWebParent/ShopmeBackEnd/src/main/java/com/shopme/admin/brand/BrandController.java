@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -68,4 +69,21 @@ public class BrandController {
 		return "redirect:/brands";		
 	}
 	
+	@GetMapping("/brands/edit/{id}")
+	public String editBrand(@PathVariable(name = "id") Integer id, Model model,
+			RedirectAttributes ra) {
+		try {
+			Brand brand = brandService.get(id);
+			List<Category> listCategories = categoryService.listCategoriesUsedInForm();
+			
+			model.addAttribute("brand", brand);
+			model.addAttribute("listCategories", listCategories);
+			model.addAttribute("pageTitle", "Edit Brand (ID: " + id + ")");
+			
+			return "brands/brand_form";			
+		} catch (BrandNotFoundException ex) {
+			ra.addFlashAttribute("message", ex.getMessage());
+			return "redirect:/brands";
+		}
+	}
 }
