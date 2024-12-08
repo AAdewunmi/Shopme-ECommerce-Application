@@ -31,5 +31,16 @@ public class BrandServiceTests {
 		String result = service.checkUnique(id, name);
 		assertThat(result).isEqualTo("Duplicate");
 	}
+	
+	@Test
+	public void testCheckUniqueInNewModeReturnOK() {
+		Integer id = null;
+		String name = "AMD";
+		
+		Mockito.when(repository.findByName(name)).thenReturn(null);
+		
+		String result = service.checkUnique(id, name);
+		assertThat(result).isEqualTo("OK");
+	}
 
 }
