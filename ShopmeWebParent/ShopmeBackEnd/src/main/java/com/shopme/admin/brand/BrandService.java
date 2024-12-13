@@ -16,7 +16,7 @@ import com.shopme.common.entity.Brand;
 @Service
 public class BrandService {
 	
-	public static final int BRANDS_PER_PAGE = 10;
+	public static final int BRANDS_PER_PAGE = 4;
 	
 	@Autowired
 	private BrandRepository repository;

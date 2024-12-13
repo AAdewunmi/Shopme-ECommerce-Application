@@ -41,7 +41,7 @@ public class CategoryService {
 		if (keyword != null && !keyword.isEmpty()) {
 			pageCategories = repository.search(keyword, pageable);
 		} else {
-			 pageCategories = repository.findRootCategories(pageable);
+			 pageCategories = repository.pagableFindRootCategories(pageable);
 		}
 		List<Category> rootCategories = pageCategories.getContent();
 		pageInfo.setTotalElements(pageCategories.getTotalElements());
