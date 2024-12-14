@@ -56,5 +56,10 @@ public class ProductRepositoryTests {
 	}
 	
 	
-	
+	@Test
+	public void testListAllProducts() {
+		Iterable<Product> iterableProducts = repo.findAll();
+
+		iterableProducts.forEach(System.out::println);
+	}
 }
