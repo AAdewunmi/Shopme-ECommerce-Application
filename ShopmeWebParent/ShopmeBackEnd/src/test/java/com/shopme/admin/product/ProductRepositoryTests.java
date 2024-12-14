@@ -62,4 +62,13 @@ public class ProductRepositoryTests {
 
 		iterableProducts.forEach(System.out::println);
 	}
+	
+	@Test
+	public void testGetProduct() {
+		Integer id = 2;
+		Product product = repo.findById(id).get();
+		System.out.println(product);
+		
+		assertThat(product).isNotNull();
+	}
 }
