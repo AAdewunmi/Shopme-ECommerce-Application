@@ -85,5 +85,13 @@ public class ProductRepositoryTests {
 		assertThat(updatedProduct.getPrice()).isEqualTo(499);
 	}
 	
-	
+	@Test
+	public void testDeleteProduct() {
+		Integer id = 3;
+		repo.deleteById(id);
+		
+		Optional<Product> result = repo.findById(id);
+		
+		assertThat(!result.isPresent());
+	}
 }
