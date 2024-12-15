@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.shopme.admin.brand.BrandService;
+import com.shopme.common.entity.Brand;
 import com.shopme.common.entity.Product;
 
 @Controller
@@ -24,5 +25,20 @@ public class ProductController {
 		model.addAttribute("listProducts", listProducts);
 		
 		return "products/products";
+	}
+	
+	@GetMapping("/products/new")
+	public String newProduct(Model model) {
+		List<Brand> listBrands = brandService.listAll();
+		
+		Product product = new Product();
+		product.setEnabled(true);
+		product.setInStock(true);
+		
+		model.addAttribute("product", product);
+		model.addAttribute("listBrands", listBrands);
+		model.addAttribute("pageTitle", "Create New Product");
+		
+		return "products/product_form";
 	}
 }
