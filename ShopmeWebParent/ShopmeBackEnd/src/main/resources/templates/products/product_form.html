@@ -29,6 +29,9 @@
 		  <li class="nav-item" role="details">
 		    <button class="nav-link" id="details-tab" data-bs-toggle="tab" data-bs-target="#details" type="button" role="tab" aria-controls="details" aria-selected="false">Details</button>
 		  </li>
+		  <li class="nav-item" role="shipping">
+		    <button class="nav-link" id="shipping-tab" data-bs-toggle="tab" data-bs-target="#shipping" type="button" role="tab" aria-controls="shipping" aria-selected="false">Shipping</button>
+		  </li>
 		</ul>
 		
 	</div>
@@ -42,6 +45,9 @@
 		  </div>
 		  <div class="tab-pane fade" id="images" role="tabpanel">Images</div>
 		  <div class="tab-pane fade" id="details" role="tabpanel">Details</div>
+		  <div class="tab-pane fade" id="shipping" role="tabpanel">
+		  	<div th:replace="products/product_shipping :: content"></div>
+		  </div>
 		</div>	
 	</div>
 	<div class="text-center">
