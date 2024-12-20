@@ -76,4 +76,8 @@ public class ProductService {
 		return "OK";
 	}
 	
+	public void updateProductEnabledStatus(Integer id, boolean enabled) {
+		repo.updateEnabledStatus(id, enabled);
+	}
+	
 }
