@@ -10,7 +10,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import com.shopme.common.entity.Product;
 
+import jakarta.transaction.Transactional;
+
 @Service
+@Transactional
 public class ProductService {
 	
 	public static final int PRODUCTS_PER_PAGE = 5;
