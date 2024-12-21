@@ -15,4 +15,6 @@ public interface ProductRepository extends CrudRepository<Product, Integer>{
 	@Modifying
 	public void updateEnabledStatus(Integer id, boolean enabled);
 	
+	public Long countById(Integer id);
+	
 }
