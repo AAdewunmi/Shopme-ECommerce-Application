@@ -231,6 +231,10 @@ public class Product {
 	public void setImages(Set<ProductImage> images) {
 		this.images = images;
 	}
+	
+	public void addExtraImage(String imageName) {
+		this.images.add(new ProductImage());
+	}
 
 	@Override
 	public String toString() {
