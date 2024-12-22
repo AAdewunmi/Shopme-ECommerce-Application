@@ -233,7 +233,7 @@ public class Product {
 	}
 	
 	public void addExtraImage(String imageName) {
-		this.images.add(new ProductImage());
+		this.images.add(new ProductImage(imageName, this));
 	}
 
 	@Override
