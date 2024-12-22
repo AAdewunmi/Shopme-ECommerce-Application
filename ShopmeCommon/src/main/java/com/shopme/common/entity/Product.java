@@ -53,6 +53,9 @@ public class Product {
 	private float height;
 	private float weight;
 	
+	@Column(name = "main_image", nullable = false)
+	private String mainImage;
+	
 	@ManyToOne
 	@JoinColumn(name = "category_id")
 	private Category category;
@@ -203,6 +206,14 @@ public class Product {
 
 	public void setBrand(Brand brand) {
 		this.brand = brand;
+	}
+
+	public String getMainImage() {
+		return mainImage;
+	}
+
+	public void setMainImage(String mainImage) {
+		this.mainImage = mainImage;
 	}
 
 	@Override
