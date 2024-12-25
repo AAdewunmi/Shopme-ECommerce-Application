@@ -1,4 +1,4 @@
-
+var extraImagesCount = 0;
 dropdownBrands = $("#brand");
 dropdownCategories = $("#category");
 
@@ -14,6 +14,7 @@ $(document).ready(function() {
 	
 	$("input[name='extraImage']").each(function(index){
 		$(this).change(function(){
+			extraImagesCount++;
 			showExtraImageThumbnail(this, index);
 		});
 	});
@@ -56,6 +57,10 @@ function addNextExtraImageSection(index) {
 	$("#extraImageHeader" + (index - 1)).append(htmlLinkRemove);
 	
 	extraImagesCount++;
+}
+
+function removeExtraImage(index) {
+	$("#divExtraImage" + index).remove();
 }
 
 function getCategories() {
