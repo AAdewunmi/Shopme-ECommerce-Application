@@ -13,8 +13,8 @@ $(document).ready(function() {
 	getCategories();
 	
 	$("input[name='extraImage']").each(function(index){
+		extraImagesCount++;
 		$(this).change(function(){
-			extraImagesCount++;
 			showExtraImageThumbnail(this, index);
 		});
 	});
@@ -27,7 +27,9 @@ function showExtraImageThumbnail(fileInput, index){
 		$("#extraThumbnail1" + index).attr("src", e.target.result);
 	};
 	reader.readAsDataURL(file);
-	addNextExtraImageSection(index + 1);
+	if(index >= extraImagesCount - 1){
+		addNextExtraImageSection(index + 1);
+	}
 }
 
 function addNextExtraImageSection(index) {
