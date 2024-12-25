@@ -52,23 +52,28 @@ public class ProductController {
 	
 	@PostMapping("/products/save")
 	public String saveProduct(Product product, RedirectAttributes ra, 
-			@RequestParam("fileImage") MultipartFile multipartFile) throws IOException{
-		if (!multipartFile.isEmpty()) {
-			String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-			product.setMainImage(fileName);
-			
-			Product productProduct = productService.save(product);
-			String uploadDir = "../product-images/" + productProduct.getId();
-			
-			FileUploadUtil.cleanDir(uploadDir);
-			FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-		} else {
-			productService.save(product);
-		}
+			@RequestParam("fileImage") MultipartFile mainImageMultipart,
+			@RequestParam("extraImage") MultipartFile[] extraImageMultiparts
+			) throws IOException{
+		setMainImageName(mainImageMultipart, product);
+		setExtraImageNames();
+		Product productProduct = productService.save(product);
+		String uploadDir = "../product-images/" + productProduct.getId();
+		
+		FileUploadUtil.cleanDir(uploadDir);
+		FileUploadUtil.saveFile(uploadDir, fileName, mainImageMultipart);
+	
 		ra.addFlashAttribute("message", "The product has been saved successfully!");
 		return "redirect:/products";
 	}
 	
+	private void setMainImageName(MultipartFile mainImageMultipart, Product product) {
+		if (!mainImageMultipart.isEmpty()) {
+			String fileName = StringUtils.cleanPath(mainImageMultipart.getOriginalFilename());
+			product.setMainImage(fileName);
+		
+	}
+
 	@GetMapping("/products/{id}/enabled/{status}")
 	public String updateCategoryEnabledStatus(@PathVariable("id") Integer id,
 			@PathVariable("status") boolean enabled, RedirectAttributes redirectAttributes) {
