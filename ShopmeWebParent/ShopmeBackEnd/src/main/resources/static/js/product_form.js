@@ -82,8 +82,6 @@ function checkUnique(form) {
 	
 	csrfValue = $("input[name='_csrf']").val();
 	
-	url = "[[@{/products/check_unique}]]"
-	
 	params = {id: productId, name: productName, _csrf: csrfValue};
 	
 	$.post(checkUniqueUrl, params, function(response) {
