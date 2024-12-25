@@ -62,16 +62,30 @@ public class ProductController {
 		
 		saveUploadedImages(mainImageMultipart, extraImageMultiparts, savedProduct);
 		
-		String uploadDir = "../product-images/" + savedProduct.getId();
-		
-		FileUploadUtil.cleanDir(uploadDir);
-		FileUploadUtil.saveFile(uploadDir, fileName, mainImageMultipart);
-	
 		ra.addFlashAttribute("message", "The product has been saved successfully!");
 		return "redirect:/products";
 	}
 	
 	
+
+	private void saveUploadedImages(MultipartFile mainImageMultipart, MultipartFile[] extraImageMultiparts,
+			Product savedProduct) throws IOException {
+		if (!mainImageMultipart.isEmpty()) {
+			String fileName = StringUtils.cleanPath(mainImageMultipart.getOriginalFilename());
+			String uploadDir = "../product-images/" + savedProduct.getId();
+			FileUploadUtil.cleanDir(uploadDir);
+			FileUploadUtil.saveFile(uploadDir, fileName, mainImageMultipart);
+		}
+		
+		if (extraImageMultiparts.length > 0) {
+			String uploadDir = "../product-images/" + savedProduct.getId() + "/extra";
+			for (MultipartFile multipartFile : extraImageMultiparts) {
+				if (!multipartFile.isEmpty()) {continue;}
+					String fileName = StringUtils.cleanPath(multipartFile .getOriginalFilename());
+					FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+			}
+		}
+	}
 
 	private void setExtraImageNames(MultipartFile[] extraImageMultiparts, Product product) {
 		if (extraImageMultiparts.length > 0) {
