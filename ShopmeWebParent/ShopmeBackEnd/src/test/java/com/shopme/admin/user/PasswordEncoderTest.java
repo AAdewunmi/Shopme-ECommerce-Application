@@ -14,4 +14,17 @@ public class PasswordEncoderTest {
 		boolean matches = passwordEncoder.matches(rawPassword, encodedPassword);
 		assertThat(matches).isTrue();
 	}
+	
+	@Test
+	public void testEncodePassword1() {
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String rawPassword = "bb2024";
+		String encodedPassword = passwordEncoder.encode(rawPassword);
+		
+		System.out.println(encodedPassword);
+		
+		boolean matches = passwordEncoder.matches(rawPassword, encodedPassword);
+		
+		assertThat(matches).isTrue();
+	}
 }
