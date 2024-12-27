@@ -75,7 +75,7 @@ public class Product {
 	private Set<ProductImage> images = new HashSet<>();
 	
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-	private List<ProductDetail> details = new ArrayList<>();
+	public List<ProductDetail> details = new ArrayList<>();
 
 	public Integer getId() {
 		return id;
