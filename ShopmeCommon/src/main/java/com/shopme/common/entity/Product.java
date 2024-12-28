@@ -258,6 +258,10 @@ public class Product {
 	public void addDetail(String name, String value) {
 		this.details.add(new ProductDetail(name, value, this));
 	}
+	
+	public void addDetail(Integer id, String name, String value) {
+		this.details.add(new ProductDetail(id, name, value, this));
+	}
 
 	public boolean containsImageName(String imageName) {
 		Iterator<ProductImage> iterator = images.iterator();
