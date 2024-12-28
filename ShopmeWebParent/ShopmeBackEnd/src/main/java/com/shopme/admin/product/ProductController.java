@@ -52,20 +52,29 @@ public class ProductController {
 	}
 	
 	@PostMapping("/products/save")
-	public String saveProduct(Product product, RedirectAttributes ra, 
-			@RequestParam("fileImage") MultipartFile mainImageMultipart,
+	public String saveProduct(Product product, RedirectAttributes ra,
+			@RequestParam("fileImage") MultipartFile mainImageMultipart,			
 			@RequestParam("extraImage") MultipartFile[] extraImageMultiparts,
+			@RequestParam(name = "detailIDs", required = false) String[] detailIDs,
 			@RequestParam(name = "detailNames", required = false) String[] detailNames,
-			@RequestParam(name = "detailValues", required = false) String[] detailValues
-			) throws IOException{
+			@RequestParam(name = "detailValues", required = false) String[] detailValues,
+			@RequestParam(name = "imageIDs", required = false) String[] imageIDs,
+			@RequestParam(name = "imageNames", required = false) String[] imageNames
+			) 
+					throws IOException {
 		setMainImageName(mainImageMultipart, product);
-		setExtraImageNames(extraImageMultiparts, product);
-		setProductDetails(detailNames, detailValues, product);
+		setExistingExtraImageNames(imageIDs, imageNames, product);
+		setNewExtraImageNames(extraImageMultiparts, product);
+		setProductDetails(detailIDs, detailNames, detailValues, product);
+			
 		Product savedProduct = productService.save(product);
 		
 		saveUploadedImages(mainImageMultipart, extraImageMultiparts, savedProduct);
 		
-		ra.addFlashAttribute("message", "The product has been saved successfully!");
+		deleteExtraImagesWeredRemovedOnForm(product);
+		
+		ra.addFlashAttribute("message", "The product has been saved successfully.");
+		
 		return "redirect:/products";
 	}
 	
