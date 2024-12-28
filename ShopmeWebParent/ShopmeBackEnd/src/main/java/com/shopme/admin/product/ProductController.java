@@ -86,19 +86,6 @@ public class ProductController {
 		
 		return "redirect:/products";
 	}
-	
-	private void setProductDetails(String[] detailNames, String[] detailValues, Product product) {
-		if (detailNames == null || detailNames.length == 0) return;
-		
-		for (int count = 0; count < detailNames.length; count++) {
-			String name = detailNames[count];
-			String value = detailValues[count];
-			
-			if (!name.isEmpty() && !value.isEmpty()) {
-				product.addDetail(name, value);
-			}
-		}
-	}
 
 	private void saveUploadedImages(MultipartFile mainImageMultipart, MultipartFile[] extraImageMultiparts,
 			Product savedProduct) throws IOException {
