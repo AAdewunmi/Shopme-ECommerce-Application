@@ -1,11 +1,16 @@
 package com.shopme.admin.product;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +32,7 @@ import com.shopme.common.entity.ProductImage;
 @Controller
 @CrossOrigin
 public class ProductController {
+	private static final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
 	@Autowired private ProductService productService;
 	@Autowired private BrandService brandService;
 	
@@ -175,6 +181,30 @@ public class ProductController {
 			} else if (!name.isEmpty() && !value.isEmpty()) {
 				product.addDetail(name, value);
 			}
+		}
+	}
+	
+	private void deleteExtraImagesWeredRemovedOnForm(Product product) {
+		String extraImageDir = "../product-images/" + product.getId() + "/extras";
+		Path dirPath = Paths.get(extraImageDir);
+		
+		try {
+			Files.list(dirPath).forEach(file -> {
+				String filename = file.toFile().getName();
+				
+				if (!product.containsImageName(filename)) {
+					try {
+						Files.delete(file);
+						LOGGER.info("Deleted extra image: " + filename);
+						
+					} catch (IOException e) {
+						LOGGER.error("Could not delete extra image: " + filename);
+					}
+				}
+				
+			});
+		} catch (IOException ex) {
+			LOGGER.error("Could not list directory: " + dirPath);
 		}
 	}
 
