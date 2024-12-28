@@ -127,6 +127,22 @@ public class ProductController {
 			product.setMainImage(fileName);
 		}
 	}
+	
+	private void setExistingExtraImageNames(String[] imageIDs, String[] imageNames, 
+			Product product) {
+		if (imageIDs == null || imageIDs.length == 0) return;
+		
+		Set<ProductImage> images = new HashSet<>();
+		
+		for (int count = 0; count < imageIDs.length; count++) {
+			Integer id = Integer.parseInt(imageIDs[count]);
+			String name = imageNames[count];
+			
+			images.add(new ProductImage(id, name, product));
+		}
+		
+		product.setImages(images);
+	}
 
 	@GetMapping("/products/{id}/enabled/{status}")
 	public String updateCategoryEnabledStatus(@PathVariable("id") Integer id,
