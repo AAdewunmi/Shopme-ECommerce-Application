@@ -1,8 +1,10 @@
 package com.shopme.admin.product;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,7 @@ import com.shopme.admin.FileUploadUtil;
 import com.shopme.admin.brand.BrandService;
 import com.shopme.common.entity.Brand;
 import com.shopme.common.entity.Product;
+import com.shopme.common.entity.ProductImage;
 
 @Controller
 @CrossOrigin
@@ -142,6 +145,20 @@ public class ProductController {
 		}
 		
 		product.setImages(images);
+	}
+	
+	private void setNewExtraImageNames(MultipartFile[] extraImageMultiparts, Product product) {
+		if (extraImageMultiparts.length > 0) {
+			for (MultipartFile multipartFile : extraImageMultiparts) {
+				if (!multipartFile.isEmpty()) {
+					String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+					
+					if (!product.containsImageName(fileName)) {
+						product.addExtraImage(fileName);
+					}
+				}
+			}
+		}
 	}
 
 	@GetMapping("/products/{id}/enabled/{status}")
