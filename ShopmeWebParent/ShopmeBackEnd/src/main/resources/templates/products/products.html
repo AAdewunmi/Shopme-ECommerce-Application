@@ -34,14 +34,19 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
 					<td>
 						<img th:src="@{${product.mainImagePath}}" style="width: 120px" class="img-fluid" />
 					</td>
-					<td>[[${product.name}]]</td>
+					<td>
+						<a class="link-detail"
+							th:href="@{'/products/detail/' + ${product.id}}"
+							title="View details of this product"
+							>[[${product.name}]]</a>	
+					</td>
 					<td>[[${product.brand.name}]]</td>
 					<td>[[${product.category.name}]]</td>
 					<td>
 						<div th:replace="fragments :: status(${product.enabled}, 'product', '/products/' + ${product.id})" />
 					</td>
 					<td>
-						<a class="fas fa-file-alt fa-2x icon-green"
+						<a class="fas fa-file-alt fa-2x icon-green link-detail"
 							th:href="@{'/products/detail/' + ${product.id}}"
 							title="View details of this product"
 							></a>
@@ -62,7 +67,7 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
 </div>
 <script th:src="@{/js/common_list.js}"></script>
 <script type="text/javascript">
-	moduleURL = "[[@{/brands}]]";
+	moduleURL = "[[@{/products}]]";
 
 	$(document).ready(function() {
 		$(".link-delete").on("click", function(e) {
