@@ -75,9 +75,12 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
 			showDeleteConfirmModal($(this), 'product');
 		});
 	});
-	function clearFilter(){
-		window.location = "[[@{/products}]]";
-	}
+	
+	$(".link-detail").on("click", function(e) {
+		e.preventDefault();
+		linkDetailURL = $(this).attr("href");
+		$("#detailModal").modal("show").find(".modal-content").load(linkDetailURL);
+	});
 </script>
 </body>
 </html>
