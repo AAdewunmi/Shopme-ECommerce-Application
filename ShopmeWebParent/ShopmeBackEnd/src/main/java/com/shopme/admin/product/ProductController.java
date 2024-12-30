@@ -39,12 +39,8 @@ public class ProductController {
 	@Autowired private BrandService brandService;
 	
 	@GetMapping("/products")
-	public String listAll(Model model) {
-		List<Product> listProducts = productService.listAll();
-		
-		model.addAttribute("listProducts", listProducts);
-		
-		return "products/products";
+	public String listFirstPage(Model model) {
+		return listByPage(1, model, "name", "asc", null);
 	}
 	
 	@GetMapping("/products/new")
