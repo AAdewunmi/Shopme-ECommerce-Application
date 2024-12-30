@@ -3,9 +3,9 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-/brand-logos
-/category-images
-/product-images
+/brand-logos/
+/category-images/
+/product-images/
 ### STS ###
 .apt_generated
 .classpath
