@@ -178,6 +178,14 @@ public class Category {
 	public String toString() {
 		return this.name;
 	}
+
+	public String getAllParentID() {
+		return allParentID;
+	}
+
+	public void setAllParentID(String allParentID) {
+		this.allParentID = allParentID;
+	}
 	
 	
 }
