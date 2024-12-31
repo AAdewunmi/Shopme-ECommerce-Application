@@ -96,6 +96,12 @@ public class CategoryService {
 	}
 	
 	public Category save(Category category) {
+		Category parent = category.getParent();
+		if (parent != null) {
+			String allParentId = parent.getAllParentID() == null ? "-" : parent.getAllParentID();
+			allParentId += String.valueOf(parent.getId()) + "-"; 
+			category.setAllParentID(allParentId);
+		}
 		return repository.save(category);
 	}
 	
