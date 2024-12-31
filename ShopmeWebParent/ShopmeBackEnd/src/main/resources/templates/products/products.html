@@ -37,8 +37,8 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
 					<td>
 						<a class="link-detail"
 							th:href="@{'/products/detail/' + ${product.id}}"
-							title="View details of this product"
-							>[[${product.name}]]</a>	
+							th:title="${product.name}"
+							>[[${product.shortName}]]</a>		
 					</td>
 					<td>[[${product.brand.name}]]</td>
 					<td>[[${product.category.name}]]</td>
