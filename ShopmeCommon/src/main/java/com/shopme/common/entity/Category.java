@@ -32,6 +32,9 @@ public class Category {
 	
 	private boolean enabled;
 	
+	@Column(name = "all_parent_ids", length = 256, nullable = true)
+	private String allParentID;
+	
 	@OneToOne
 	@JoinColumn(name = "parent_id",unique = false)
 	private Category parent;
