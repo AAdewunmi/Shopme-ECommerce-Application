@@ -45,7 +45,7 @@ public class ProductController {
 	
 	@GetMapping("/products")
 	public String listFirstPage(Model model) {
-		return listByPage(1, model, "name", "asc", null);
+		return listByPage(1, model, "name", "asc", null, 0);
 	}
 	
 	@GetMapping("/products/new")
