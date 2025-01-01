@@ -276,7 +276,7 @@ public class ProductController {
 			@Param("keyword") String keyword,
 			@Param("categoryId") Integer categoryId
 			) {
-		Page<Product> page = productService.listByPage(pageNum, sortField, sortDir, keyword);
+		Page<Product> page = productService.listByPage(pageNum, sortField, sortDir, keyword, categoryId);
 		List<Product> listProducts = page.getContent();
 		List<Category> listCategories = categoryService.listCategoriesUsedInForm();
 		
