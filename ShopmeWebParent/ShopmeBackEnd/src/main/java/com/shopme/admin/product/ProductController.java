@@ -288,6 +288,8 @@ public class ProductController {
 		
 		String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
 		
+		if (categoryId != null) model.addAttribute("categoryId", categoryId); 
+		
 		model.addAttribute("currentPage", pageNum);
 		model.addAttribute("totalPages", page.getTotalPages());
 		model.addAttribute("startCount", startCount);

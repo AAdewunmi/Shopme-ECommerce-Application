@@ -35,7 +35,7 @@ public class ProductService {
 				
 		Pageable pageable = PageRequest.of(pageNum - 1, PRODUCTS_PER_PAGE, sort);
 		
-		if (keyword != null) {
+		if (keyword != null && !keyword.isEmpty()) {
 			return repo.findAll(keyword, pageable);
 		}
 		
