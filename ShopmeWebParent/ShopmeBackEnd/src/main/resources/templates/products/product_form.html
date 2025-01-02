@@ -44,7 +44,12 @@
 		  	<div th:replace="products/product_overview :: content"></div>
 		  </div>
 		  <div class="tab-pane fade" id="description" role="tabpanel">
+		  <th:block sec:authorize="hasAuthority('Salesperson')">	
+		  	<div th:replace="products/product_description_read_only :: content"></div>
+		  </th:block>
+		  <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">	
 		  	<div th:replace="products/product_description :: content"></div>
+	  	   </th:block>
 		  </div>
 		  <div class="tab-pane fade" id="images" role="tabpanel">
 		  	<div th:replace="products/product_images :: content"></div>
