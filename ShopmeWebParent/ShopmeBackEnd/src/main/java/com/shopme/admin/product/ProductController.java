@@ -38,16 +38,50 @@ import com.shopme.common.entity.ProductImage;
 @Controller
 @CrossOrigin
 public class ProductController {
-	private static final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
-	
 	@Autowired private ProductService productService;
 	@Autowired private BrandService brandService;
 	@Autowired private CategoryService categoryService;
 	
-	
 	@GetMapping("/products")
 	public String listFirstPage(Model model) {
 		return listByPage(1, model, "name", "asc", null, 0);
+	}
+	
+	@GetMapping("/products/page/{pageNum}")
+	public String listByPage(
+			@PathVariable(name = "pageNum") int pageNum, Model model,
+			@Param("sortField") String sortField, @Param("sortDir") String sortDir,
+			@Param("keyword") String keyword,
+			@Param("categoryId") Integer categoryId
+			) {
+		Page<Product> page = productService.listByPage(pageNum, sortField, sortDir, keyword, categoryId);
+		List<Product> listProducts = page.getContent();
+		
+		List<Category> listCategories = categoryService.listCategoriesUsedInForm();
+		
+		long startCount = (pageNum - 1) * ProductService.PRODUCTS_PER_PAGE + 1;
+		long endCount = startCount + ProductService.PRODUCTS_PER_PAGE - 1;
+		if (endCount > page.getTotalElements()) {
+			endCount = page.getTotalElements();
+		}
+		
+		String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
+		
+		if (categoryId != null) model.addAttribute("categoryId", categoryId); 
+			
+		model.addAttribute("currentPage", pageNum);
+		model.addAttribute("totalPages", page.getTotalPages());
+		model.addAttribute("startCount", startCount);
+		model.addAttribute("endCount", endCount);
+		model.addAttribute("totalItems", page.getTotalElements());
+		model.addAttribute("sortField", sortField);
+		model.addAttribute("sortDir", sortDir);
+		model.addAttribute("reverseSortDir", reverseSortDir);
+		model.addAttribute("keyword", keyword);		
+		model.addAttribute("listProducts", listProducts);
+		model.addAttribute("listCategories", listCategories);		
+		
+		return "products/products";		
 	}
 	
 	@GetMapping("/products/new")
@@ -62,6 +96,7 @@ public class ProductController {
 		model.addAttribute("listBrands", listBrands);
 		model.addAttribute("pageTitle", "Create New Product");
 		model.addAttribute("numberOfExistingExtraImages", 0);
+		
 		return "products/product_form";
 	}
 	
@@ -82,120 +117,24 @@ public class ProductController {
 			ra.addFlashAttribute("message", "The product has been saved successfully.");			
 			return "redirect:/products";			
 		}
+		
+		ProductSaveHelper.setMainImageName(mainImageMultipart, product);
+		ProductSaveHelper.setExistingExtraImageNames(imageIDs, imageNames, product);
+		ProductSaveHelper.setNewExtraImageNames(extraImageMultiparts, product);
+		ProductSaveHelper.setProductDetails(detailIDs, detailNames, detailValues, product);
 			
 		Product savedProduct = productService.save(product);
+		
+		ProductSaveHelper.saveUploadedImages(mainImageMultipart, extraImageMultiparts, savedProduct);
+		
+		ProductSaveHelper.deleteExtraImagesWeredRemovedOnForm(product);
+		
 		ra.addFlashAttribute("message", "The product has been saved successfully.");
+		
 		return "redirect:/products";
 	}
 
-	private void saveUploadedImages(MultipartFile mainImageMultipart, MultipartFile[] extraImageMultiparts,
-			Product savedProduct) throws IOException {
-		if (!mainImageMultipart.isEmpty()) {
-			String fileName = StringUtils.cleanPath(mainImageMultipart.getOriginalFilename());
-			String uploadDir = "../product-images/" + savedProduct.getId();
-			FileUploadUtil.cleanDir(uploadDir);
-			FileUploadUtil.saveFile(uploadDir, fileName, mainImageMultipart);
-		}
-		
-		if (extraImageMultiparts.length > 0) {
-			String uploadDir = "../product-images/" + savedProduct.getId() + "/extra";
-			for (MultipartFile multipartFile : extraImageMultiparts) {
-				if (!multipartFile.isEmpty()) {continue;}
-					String fileName = StringUtils.cleanPath(multipartFile .getOriginalFilename());
-					FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-			}
-		}
-	}
-
-	private void setExtraImageNames(MultipartFile[] extraImageMultiparts, Product product) {
-		if (extraImageMultiparts.length > 0) {
-			for (MultipartFile multipartFile : extraImageMultiparts) {
-				if (!multipartFile.isEmpty()) {
-					String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-					product.addExtraImage(fileName);
-				}
-			}
-		}
-	}
-
-	private void setMainImageName(MultipartFile mainImageMultipart, Product product) {
-		if (!mainImageMultipart.isEmpty()) {
-			String fileName = StringUtils.cleanPath(mainImageMultipart.getOriginalFilename());
-			product.setMainImage(fileName);
-		}
-	}
 	
-	private void setExistingExtraImageNames(String[] imageIDs, String[] imageNames, 
-			Product product) {
-		if (imageIDs == null || imageIDs.length == 0) return;
-		
-		Set<ProductImage> images = new HashSet<>();
-		
-		for (int count = 0; count < imageIDs.length; count++) {
-			Integer id = Integer.parseInt(imageIDs[count]);
-			String name = imageNames[count];
-			
-			images.add(new ProductImage(id, name, product));
-		}
-		
-		product.setImages(images);
-	}
-	
-	private void setNewExtraImageNames(MultipartFile[] extraImageMultiparts, Product product) {
-		if (extraImageMultiparts.length > 0) {
-			for (MultipartFile multipartFile : extraImageMultiparts) {
-				if (!multipartFile.isEmpty()) {
-					String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-					
-					if (!product.containsImageName(fileName)) {
-						product.addExtraImage(fileName);
-					}
-				}
-			}
-		}
-	}
-	
-	private void setProductDetails(String[] detailIDs, String[] detailNames, 
-			String[] detailValues, Product product) {
-		if (detailNames == null || detailNames.length == 0) return;
-		
-		for (int count = 0; count < detailNames.length; count++) {
-			String name = detailNames[count];
-			String value = detailValues[count];
-			Integer id = Integer.parseInt(detailIDs[count]);
-			
-			if (id != 0) {
-				product.addDetail(id, name, value);
-			} else if (!name.isEmpty() && !value.isEmpty()) {
-				product.addDetail(name, value);
-			}
-		}
-	}
-	
-	private void deleteExtraImagesWeredRemovedOnForm(Product product) {
-		String extraImageDir = "../product-images/" + product.getId() + "/extras";
-		Path dirPath = Paths.get(extraImageDir);
-		
-		try {
-			Files.list(dirPath).forEach(file -> {
-				String filename = file.toFile().getName();
-				
-				if (!product.containsImageName(filename)) {
-					try {
-						Files.delete(file);
-						LOGGER.info("Deleted extra image: " + filename);
-						
-					} catch (IOException e) {
-						LOGGER.error("Could not delete extra image: " + filename);
-					}
-				}
-				
-			});
-		} catch (IOException ex) {
-			LOGGER.error("Could not list directory: " + dirPath);
-		}
-	}
-
 	@GetMapping("/products/{id}/enabled/{status}")
 	public String updateCategoryEnabledStatus(@PathVariable("id") Integer id,
 			@PathVariable("status") boolean enabled, RedirectAttributes redirectAttributes) {
@@ -239,6 +178,8 @@ public class ProductController {
 			model.addAttribute("product", product);
 			model.addAttribute("listBrands", listBrands);
 			model.addAttribute("pageTitle", "Edit Product (ID: " + id + ")");
+			model.addAttribute("numberOfExistingExtraImages", numberOfExistingExtraImages);
+			
 			
 			return "products/product_form";
 			
@@ -263,41 +204,5 @@ public class ProductController {
 			
 			return "redirect:/products";
 		}
-	}
-	
-	@GetMapping("/products/page/{pageNum}")
-	public String listByPage(
-			@PathVariable(name = "pageNum") int pageNum, Model model,
-			@Param("sortField") String sortField, @Param("sortDir") String sortDir,
-			@Param("keyword") String keyword,
-			@Param("categoryId") Integer categoryId
-			) {
-		Page<Product> page = productService.listByPage(pageNum, sortField, sortDir, keyword, categoryId);
-		List<Product> listProducts = page.getContent();
-		List<Category> listCategories = categoryService.listCategoriesUsedInForm();
-		
-		long startCount = (pageNum - 1) * ProductService.PRODUCTS_PER_PAGE + 1;
-		long endCount = startCount + ProductService.PRODUCTS_PER_PAGE - 1;
-		if (endCount > page.getTotalElements()) {
-			endCount = page.getTotalElements();
-		}
-		
-		String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
-		
-		if (categoryId != null) model.addAttribute("categoryId", categoryId); 
-		
-		model.addAttribute("currentPage", pageNum);
-		model.addAttribute("totalPages", page.getTotalPages());
-		model.addAttribute("startCount", startCount);
-		model.addAttribute("endCount", endCount);
-		model.addAttribute("totalItems", page.getTotalElements());
-		model.addAttribute("sortField", sortField);
-		model.addAttribute("sortDir", sortDir);
-		model.addAttribute("reverseSortDir", reverseSortDir);
-		model.addAttribute("keyword", keyword);		
-		model.addAttribute("listProducts", listProducts);
-		model.addAttribute("listCategories", listCategories);	
-		
-		return "products/products";		
-	}
+	}	
 }
