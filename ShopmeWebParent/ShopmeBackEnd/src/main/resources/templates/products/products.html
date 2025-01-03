@@ -1,19 +1,20 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
->
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head th:replace="fragments :: header('Products - Shopme Admin', 'none')" />
 <body>
 <div class="container-fluid">
 	<div th:replace="navigation :: menu"></div>
 	<div>
 		<h2>Manage Products</h2>	
+		
 		<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
-			<a th:href="@{/products/new}" class="fas fa-folder-plus fa-2x icon-dark mr-2"></a>
-			<a th:href="@{/products/export/csv}" class="fas fa-file-csv fa-2x icon-dark mr-2"></a>
+		<a th:href="@{/products/new}" class="fas fa-folder-plus fa-2x icon-dark mr-2"></a>
+		<a th:href="@{/products/export/csv}" class="fas fa-file-csv fa-2x icon-dark mr-2"></a>
 		</th:block>
+		
 	</div>
-	
+		
 	<div>
 		<form th:action="@{/products/page/1}" class="form-inline m-3" id="searchForm">
 			<input type="hidden" name="sortField" th:value="${sortField}" />
@@ -49,20 +50,31 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
 		<table class="table table-bordered table-striped table-hover table-responsive-xl">
 			<thead class="thead-dark">
 				<tr>
-					<th th:replace="fragments :: column_link('/products', 'id', 'ID', 'none')" />
+					<th class="hideable-column"> 
+					<th th:replace="fragments :: column_link('/products', 'id', 'ID', 'tag')" />
+					</th>
+					
 					<th>Main Image</th>
 					<th th:replace="fragments :: column_link('/products', 'name', 'Product Name', 'none')" />
-					<th th:replace="fragments :: column_link('/products', 'brand', 'Brand', 'none')" />
-					<th th:replace="fragments :: column_link('/products', 'category', 'Category', 'none')" />
+					
+					<th class="hideable-column"> 
+					<th th:replace="fragments :: column_link('/products', 'brand', 'Brand', 'tag')" />
+					</th>
+					
+					<th class="hideable-column">
+					<th th:replace="fragments :: column_link('/products', 'category', 'Category', 'tag')" />
+					</th>
+					
 					<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
-						<th>Enabled</th>
+					<th>Enabled</th>
 					</th:block>
+					
 					<th></th>
-				</tr>									
+				</tr>								
 			</thead>
 			<tbody>
 				<tr th:each="product : ${listProducts}">
-					<td>[[${product.id}]]</td>
+					<td class="hideable-column">[[${product.id}]]</td>
 					<td>
 						<img th:src="@{${product.mainImagePath}}" style="width: 120px" class="img-fluid" />
 					</td>
@@ -70,45 +82,80 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
 						<a class="link-detail"
 							th:href="@{'/products/detail/' + ${product.id}}"
 							th:title="${product.name}"
-							>[[${product.shortName}]]</a>		
+							>[[${product.shortName}]]</a>					
+						
 					</td>
-					<td>[[${product.brand.name}]]</td>
-					<td>[[${product.category.name}]]</td>
+					<td class="hideable-column">[[${product.brand.name}]]</td>
+					<td class="hideable-column">[[${product.category.name}]]</td>
+					
 					<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
-						<td>
-							<div th:replace="fragments :: status(${product.enabled}, 'product', '/products/' + ${product.id})" />
-						</td>
+					<td>
+						<div th:replace="fragments :: status(${product.enabled}, 'product', '/products/' + ${product.id})" />
+					</td>
 					</th:block>
+					
 					<td>
 						<a class="fas fa-file-alt fa-2x icon-green link-detail"
 							th:href="@{'/products/detail/' + ${product.id}}"
 							title="View details of this product"
 							></a>
-							<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor', 'Salesperson')">
-								&nbsp; 	
-								<div th:replace="fragments :: edit('product', '/products/edit/' + ${product.id})" />
-							</th:block>
-							<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
-							&nbsp; 
-							<div th:replace="fragments :: delete('product', ${product.id}, '/products/delete/' + ${product.id}, true)" />						
+							
+						<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor', 'Salesperson')">
+						&nbsp; 	
+						<div th:replace="fragments :: edit('product', '/products/edit/' + ${product.id})" />
 						</th:block>
+						
+						<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+						&nbsp; 
+						<div th:replace="fragments :: delete('product', ${product.id}, '/products/delete/' + ${product.id}, true)" />
+						</th:block>						
 					</td>					
 				</tr>
 			</tbody>
 		</table>
 	</div>
 	
-	<div th:replace="modal_fragments :: confirm_modal" /></div>
+	<div class="less-details">
+		<div th:each="product : ${listProducts}" class="row m-1">
+			<div class="col-4">
+				<img th:src="@{${product.mainImagePath}}" style="width: 80px" class="img-fluid" />			
+			</div>
+			<div class="col-8">
+				<div>
+					<a class="link-detail" th:href="@{'/products/detail/' + ${product.id}}">[[${product.shortName}]]</a>				
+				</div>
+				<div class="mt-2">
+					<a class="fas fa-file-alt fa-2x icon-green link-detail"
+						th:href="@{'/products/detail/' + ${product.id}}"
+						></a>
+						
+					<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor', 'Salesperson')">
+					&nbsp; 	
+					<div th:replace="fragments :: edit('product', '/products/edit/' + ${product.id})" />
+					</th:block>
+					
+					<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+					&nbsp; 
+					<div th:replace="fragments :: delete('product', ${product.id}, '/products/delete/' + ${product.id}, true)" />
+					</th:block>		
+				</div>
+			</div>
+			<div>&nbsp;</div>
+		</div>	
+	</div>
+		
+	<div th:replace="modal_fragments :: confirm_modal" />
+	
 	<div class="modal fade" id="detailModal">
 		<div class="modal-dialog modal-xl">
 			<div class="modal-content">
 			</div>
 		</div>
 	</div>
+	
 	<div th:replace="fragments :: pagination('/products', 'products')"></div>
 	<div th:replace="fragments :: footer"></div>
 	<div th:replace="fragments :: popper"></div>
-	
 </div>
 <script th:src="@{/js/common_list.js}"></script>
 <script type="text/javascript">
@@ -119,16 +166,17 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
 			e.preventDefault();
 			showDeleteConfirmModal($(this), 'product');
 		});
-	});
-	
-	$(".link-detail").on("click", function(e) {
-		e.preventDefault();
-		linkDetailURL = $(this).attr("href");
-		$("#detailModal").modal("show").find(".modal-content").load(linkDetailURL);
-	});
-	
-	$("#dropdownCategory").on("change", function() {
-		$("#searchForm").submit();
+		
+		$(".link-detail").on("click", function(e) {
+			e.preventDefault();
+			linkDetailURL = $(this).attr("href");
+			$("#detailModal").modal("show").find(".modal-content").load(linkDetailURL);
+		});
+		
+		$("#dropdownCategory").on("change", function() {
+			$("#searchForm").submit();
+		});
+		
 	});
 </script>
 </body>
