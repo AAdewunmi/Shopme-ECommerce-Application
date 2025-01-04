@@ -4,6 +4,13 @@
 <head th:replace="fragments :: header('Home - Shopme', 'none')">
 </head>
 <body>
-	<h1>Welcome to Shopme eCommerce</h1>
+	<div class="container-fluid">
+		<div th:replace="navigation :: header_menu"></div>
+		<div>
+			<h1>Welcome to Shopme eCommerce</h1>
+		</div>
+		<div th:replace="navigation :: footer_menu"></div>
+	</div>
+		
 </body>
 </html>
