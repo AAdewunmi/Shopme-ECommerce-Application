@@ -12,7 +12,8 @@ import com.shopme.common.entity.Category;
 @Service
 public class CategoryService {
 	
-@Autowired private CategoryRepository repo;
+	@Autowired 
+	private CategoryRepository repo;
 	
 	public List<Category> listNoChildrenCategories() {
 		List<Category> listNoChildrenCategories = new ArrayList<>();
