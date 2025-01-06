@@ -4,15 +4,15 @@
 <head th:replace="fragments :: header('Error - Shopme Admin', 'none')">
 </head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>500 Error</title>
 </head>
 <body>
 	<div class="container-fluid">
-		<div th:replace="navigation :: menu"></div>
+		<div th:replace="navigation :: header_menu"></div>
 		<div class="m-3">
 			<h2>Sorry, the server has encounter an error while processing your request!</h2>
 		</div>
-		<div th:replace="fragments :: footer"></div>
+		<div th:replace="navigation :: footer_menu"></div>
 	</div>
 	<div th:replace="fragments :: popper"></div>
 </body>
