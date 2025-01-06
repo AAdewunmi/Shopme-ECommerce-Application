@@ -30,4 +30,8 @@ public class CategoryService {
 		return listNoChildrenCategories;
 	}
 	
+	public Category getCategory(String alias) {
+		return repo.findByAliasEnabled(alias);
+	}
+	
 }
