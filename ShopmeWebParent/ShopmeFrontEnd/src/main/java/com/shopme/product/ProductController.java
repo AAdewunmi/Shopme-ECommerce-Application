@@ -23,6 +23,12 @@ public class ProductController {
 	private ProductService productService;
 	
 	@GetMapping("/c/{category_alias}")
+	public String viewCategoryFirstPage(@PathVariable("category_alias") String alias,
+			Model model) {
+		return viewCategoryByPage(alias, 1, model);
+	}
+	
+	@GetMapping("/c/{category_alias}/page/{pageNum}")
 	public String viewCategoryByPage(@PathVariable("category_alias") String alias,
 			@PathVariable("pageNum") Integer pageNum,
 			Model model) {
