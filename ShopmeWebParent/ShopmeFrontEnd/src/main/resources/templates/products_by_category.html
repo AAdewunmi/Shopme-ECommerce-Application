@@ -25,7 +25,20 @@
 			</div>
 		</div>
 	</div>
-	
+	<div class="row">&nbsp;</div>
+	<div class="row">
+		<th:block th:each="product : ${listProducts}">
+		<div class="col">
+			<div>
+				<img th:src="@{${product.mainImagePath}}" width="150" />
+				<br/>
+				<b>[[${product.name}]]</b>
+			</div>		
+		</div>
+		</th:block>
+	</div>
+	<div th:replace="fragments :: pagination('/c/' + ${category.alias}, 'product')"></div>
+	<div th:replace="fragments :: popper"></div>
 	<div th:replace="navigation :: footer_menu"></div>
 </div>	
 </body>

@@ -37,7 +37,7 @@ public class ProductController {
 			return "error/404";
 		}
 		List<Category> listCategoryParents = categoryService.getCategoryParents(category);
-		Page<Product> pageProducts = productService.listByCategory(1, category.getId());
+		Page<Product> pageProducts = productService.listByCategory(pageNum, category.getId());
 		List<Product> listProducts = pageProducts.getContent();
 		
 		long startCount = (pageNum - 1) * ProductService.PRODUCTS_PER_PAGE + 1;
@@ -54,6 +54,7 @@ public class ProductController {
 		model.addAttribute("pageTitle", category.getName());
 		model.addAttribute("listCategoryParents", listCategoryParents);
 		model.addAttribute("listProducts", listProducts);
+		model.addAttribute("category", category);
 		return "products_by_category";
 	}
 	
