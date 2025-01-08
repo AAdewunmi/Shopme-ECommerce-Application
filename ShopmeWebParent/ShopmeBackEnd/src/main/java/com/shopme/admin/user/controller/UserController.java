@@ -27,8 +27,8 @@ import com.shopme.common.entity.User;
 
 import jakarta.servlet.http.HttpServletResponse;
 
-@Controller
 @CrossOrigin
+@Controller
 public class UserController {
 	
 	@Autowired

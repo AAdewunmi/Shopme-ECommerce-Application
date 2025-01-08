@@ -52,7 +52,7 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
 	<div class="less-details">
 		<div th:each="brand : ${listBrands}" class="row m-1">
 			<div class="col-6">
-				<img th:src="@{${brand.logoPath}}" style="width: 100px" class="img-fluid"/>			
+				<img th:src="@{${brand.logoPath}}" style="width: 100px" class="img-fluid"/>		
 			</div>
 			<div class="col-6">
 				<div><b>[[${brand.name}]]</b></div>
