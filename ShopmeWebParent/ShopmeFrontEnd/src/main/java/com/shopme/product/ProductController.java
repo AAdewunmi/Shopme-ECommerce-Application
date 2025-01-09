@@ -12,6 +12,7 @@ import com.shopme.category.CategoryService;
 import com.shopme.common.entity.Category;
 import com.shopme.common.entity.Product;
 import com.shopme.common.exception.CategoryNotFoundException;
+import com.shopme.common.exception.ProductNotFoundException;
 
 @Controller
 @CrossOrigin
@@ -56,8 +57,25 @@ public class ProductController {
 			model.addAttribute("listProducts", listProducts);
 			model.addAttribute("category", category);
 			
-			return "product/products_by_category";
+			return "products_by_category";
 		} catch (CategoryNotFoundException ex) {
+			return "error/404";
+		}
+	}
+	
+	@GetMapping("/p/{product_alias}")
+	public String viewProductDetail(@PathVariable("product_alias") String alias, Model model) {
+		
+		try {
+			Product product = productService.getProduct(alias);
+			List<Category> listCategoryParents = categoryService.getCategoryParents(product.getCategory());
+			
+			model.addAttribute("listCategoryParents", listCategoryParents);
+			model.addAttribute("product", product);
+			model.addAttribute("pageTitle", product.getShortName());
+			
+			return "product/product_detail";
+		} catch (ProductNotFoundException e) {
 			return "error/404";
 		}
 	}
