@@ -49,6 +49,19 @@ public class Brand {
 		this.name = name;
 	}
 
+	public Brand(Integer id, String name, String logo) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.logo = logo;
+	}
+
+	public Brand(String name, String logo) {
+		super();
+		this.name = name;
+		this.logo = logo;
+	}
+
 	public Integer getId() {
 		return id;
 	}
