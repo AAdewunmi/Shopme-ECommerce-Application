@@ -18,7 +18,7 @@ public class MainController {
 	@Autowired
 	private CategoryService categoryService;
 	
-	@GetMapping("")
+	@GetMapping("/")
 	public String viewHomePage(Model model) {
 		List<Category> listCategories = categoryService.listNoChildrenCategories();
 		model.addAttribute("listCategories", listCategories);
