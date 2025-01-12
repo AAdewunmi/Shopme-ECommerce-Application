@@ -3,6 +3,7 @@ package com.shopme.product;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -78,6 +79,11 @@ public class ProductController {
 		} catch (ProductNotFoundException e) {
 			return "error/404";
 		}
+	}
+	
+	@GetMapping("/search")
+	public String search(@Param("keyword") String keyword, Model model) {
+		return "product/search_results";
 	}
 	
 }
