@@ -81,6 +81,11 @@ public class ProductController {
 		}
 	}
 	
+	@GetMapping("/search")
+	public String searchFirstPage(@Param("keyword") String keyword, Model model) {
+		return searchByPage(keyword, 1, model);
+	}
+	
 	@GetMapping("/search/page/{pageNum}")
 	public String searchByPage(@Param("keyword") String keyword,
 			@PathVariable("pageNum") int pageNum,
