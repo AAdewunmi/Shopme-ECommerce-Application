@@ -18,7 +18,8 @@ import com.shopme.common.entity.SettingCategory;
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @Rollback(false)
 public class SettingRepositoryTests {
-@Autowired SettingRepository repo;
+	@Autowired 
+	SettingRepository repo;
 	
 	@Test
 	public void testCreateGeneralSettings() {
@@ -45,5 +46,11 @@ public class SettingRepositoryTests {
 		repo.saveAll(List.of(currencyId, symbol, symbolPosition, decimalPointType, 
 				decimalDigits, thousandsPointType));
 		
+	}
+	
+	@Test
+	public void testListSettingsByCategory() {
+		List<Setting> settings = repo.findByCategory(SettingCategory.GENERAL);
+		settings.forEach(System.out::println);
 	}
 }
