@@ -68,7 +68,7 @@ public class Currency {
 
 	@Override
 	public String toString() {
-		return "Currency [id=" + id + ", name=" + name + ", symbol=" + symbol + ", code=" + code + "]";
+		return name + " - " + code + " - " + symbol;
 	}
 	
 }
