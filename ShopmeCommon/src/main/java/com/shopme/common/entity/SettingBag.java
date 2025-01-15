@@ -34,5 +34,9 @@ public class SettingBag {
 			setting.setValue(value);
 		}
 	}
+	
+	public List<Setting> list() {
+		return listSettings;
+	}
 
 }
