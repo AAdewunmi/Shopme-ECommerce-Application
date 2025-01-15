@@ -18,5 +18,14 @@ public class SettingBag {
 		}
 		return null;
 	}
+	
+	public String getValue(String key) {
+		Setting setting = get(key);
+		if (setting != null) {
+			return setting.getValue();
+		}
+		
+		return null;
+	}
 
 }
