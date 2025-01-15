@@ -8,5 +8,7 @@ import com.shopme.common.entity.Setting;
 import com.shopme.common.entity.SettingCategory;
 
 public interface SettingRepository extends CrudRepository<Setting, String>{
+	
 	public List<Setting> findByCategory(SettingCategory category);
+	
 }
