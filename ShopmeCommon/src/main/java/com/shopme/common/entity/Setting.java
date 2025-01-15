@@ -77,5 +77,11 @@ public class Setting {
 		Setting other = (Setting) obj;
 		return Objects.equals(key, other.key);
 	}
+
+	@Override
+	public String toString() {
+		return "Setting [key=" + key + ", value=" + value + ", category=" + category + "]";
+	}
+	
 	
 }
