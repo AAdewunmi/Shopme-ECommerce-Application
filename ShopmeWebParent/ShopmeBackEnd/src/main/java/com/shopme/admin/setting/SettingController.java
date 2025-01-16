@@ -80,5 +80,16 @@ public class SettingController {
 			settingBag.updateCurrencySymbol(currency.getSymbol());
 		}
 	}
+	
+	private void updateSettingValuesFromForm(HttpServletRequest request, List<Setting> listSettings) {
+		for (Setting setting : listSettings) {
+			String value = request.getParameter(setting.getKey());
+			if (value != null) {
+				setting.setValue(value);
+			}
+		}
+		
+		service.saveAll(listSettings);
+	}
 
 }
