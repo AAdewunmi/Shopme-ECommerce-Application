@@ -30,4 +30,8 @@ public class SettingsService {
 		return new GeneralSettingBag(settings);
 	}
 	
+	public void saveAll(Iterable<Setting> settings) {
+		repo.saveAll(settings);
+	}
+	
 }
