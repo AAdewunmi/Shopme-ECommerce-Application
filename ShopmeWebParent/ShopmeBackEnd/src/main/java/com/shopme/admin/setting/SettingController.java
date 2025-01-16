@@ -56,6 +56,16 @@ public class SettingController {
 		return "redirect:/settings";
 	}
 	
-	
+	private void saveSiteLogo(MultipartFile multipartFile, GeneralSettingBag settingBag) throws IOException {
+		if (!multipartFile.isEmpty()) {
+			String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+			String value = "/site-logo/" + fileName;
+			settingBag.updateSiteLogo(value);
+			
+			String uploadDir = "../site-logo/";
+			FileUploadUtil.cleanDir(uploadDir);
+			FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+		}
+	}
 
 }
