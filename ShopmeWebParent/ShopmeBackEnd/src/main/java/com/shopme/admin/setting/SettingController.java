@@ -1,5 +1,6 @@
 package com.shopme.admin.setting;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,9 +8,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.shopme.common.entity.Currency;
 import com.shopme.common.entity.Setting;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 @CrossOrigin
@@ -33,5 +40,22 @@ public class SettingController {
 		
 		return "settings/settings";
 	}
+	
+	@PostMapping("/settings/save_general")
+	public String saveGeneralSettings(@RequestParam("fileImage") MultipartFile multipartFile,
+			HttpServletRequest request, RedirectAttributes ra) throws IOException {
+		GeneralSettingBag settingBag = service.getGeneralSettings();
+		
+		saveSiteLogo(multipartFile, settingBag);
+		saveCurrencySymbol(request, settingBag);
+		
+		updateSettingValuesFromForm(request, settingBag.list());
+		
+		ra.addFlashAttribute("message", "General settings have been saved.");
+		
+		return "redirect:/settings";
+	}
+	
+	
 
 }
