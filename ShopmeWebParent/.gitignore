@@ -6,6 +6,7 @@ target/
 /brand-logos/
 /category-images/
 /product-images/
+/site-logo/
 ### STS ###
 .apt_generated
 .classpath
