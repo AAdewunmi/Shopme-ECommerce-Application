@@ -3,6 +3,7 @@ package com.shopme.admin.setting.country;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,15 @@ public class CountryRepositoryTests {
 		Integer id = 1;		
 		Country country = repo.findById(id).get();
 		assertThat(country).isNotNull();
+	}
+	
+	@Test
+	public void testDeleteCountry() {
+		Integer id = 5;
+		repo.deleteById(id);
+		
+		Optional<Country> findById = repo.findById(id);
+		assertThat(findById.isEmpty());
 	}
 
 }
