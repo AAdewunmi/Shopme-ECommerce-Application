@@ -48,5 +48,12 @@ public class CountryRepositoryTests {
 		
 		assertThat(updatedCountry.getName()).isEqualTo(name);
 	}
+	
+	@Test
+	public void testGetCountry() {
+		Integer id = 1;		
+		Country country = repo.findById(id).get();
+		assertThat(country).isNotNull();
+	}
 
 }
