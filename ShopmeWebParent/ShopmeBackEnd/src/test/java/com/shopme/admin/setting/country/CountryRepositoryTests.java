@@ -2,6 +2,8 @@ package com.shopme.admin.setting.country;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -24,6 +26,14 @@ public class CountryRepositoryTests {
 		Country country = repo.save(new Country("China", "CN"));
 		assertThat(country).isNotNull();
 		assertThat(country.getId()).isGreaterThan(0);
+	}
+	
+	@Test
+	public void testListCountries() {
+		List<Country> listCountries = repo.findAllByOrderByNameAsc();
+		listCountries.forEach(System.out::println);
+		
+		assertThat(listCountries.size()).isGreaterThan(0);
 	}
 
 }
