@@ -35,5 +35,18 @@ public class CountryRepositoryTests {
 		
 		assertThat(listCountries.size()).isGreaterThan(0);
 	}
+	
+	@Test
+	public void testUpdateCountry() {
+		Integer id = 1;
+		String name = "Republic of India";
+		
+		Country country = repo.findById(id).get();
+		country.setName(name);
+		
+		Country updatedCountry = repo.save(country);
+		
+		assertThat(updatedCountry.getName()).isEqualTo(name);
+	}
 
 }
