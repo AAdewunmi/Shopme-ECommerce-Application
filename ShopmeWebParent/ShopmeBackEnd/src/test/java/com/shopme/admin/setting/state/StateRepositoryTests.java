@@ -38,4 +38,18 @@ public class StateRepositoryTests {
 		assertThat(state.getId()).isGreaterThan(0);
 	}
 	
+	@Test
+	public void testCreateStatesInUS() {
+		Integer countryId = 2;
+		Country country = entityManager.find(Country.class, countryId);
+		
+//		State state = repo.save(new State("California", country));
+//		State state = repo.save(new State("Texas", country));
+//		State state = repo.save(new State("New York", country));
+		State state = repo.save(new State("Washington", country));
+		
+		assertThat(state).isNotNull();
+		assertThat(state.getId()).isGreaterThan(0);
+	}
+	
 }
