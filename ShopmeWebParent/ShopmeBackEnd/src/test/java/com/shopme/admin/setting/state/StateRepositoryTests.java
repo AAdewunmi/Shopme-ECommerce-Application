@@ -75,4 +75,11 @@ public class StateRepositoryTests {
 		assertThat(updatedState.getName()).isEqualTo(stateName);
 	}
 	
+	@Test
+	public void testGetState() {
+		Integer stateId = 1;
+		Optional<State> findById = repo.findById(stateId);
+		assertThat(findById.isPresent());
+	}
+	
 }
