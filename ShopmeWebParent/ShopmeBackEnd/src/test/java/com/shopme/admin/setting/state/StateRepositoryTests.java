@@ -52,4 +52,15 @@ public class StateRepositoryTests {
 		assertThat(state.getId()).isGreaterThan(0);
 	}
 	
+	@Test
+	public void testListStatesByCountry() {
+		Integer countryId = 2;
+		Country country = entityManager.find(Country.class, countryId);
+		List<State> listStates = repo.findByCountryOrderByNameAsc(country);
+		
+		listStates.forEach(System.out::println);
+		
+		assertThat(listStates.size()).isGreaterThan(0);
+	}
+	
 }
