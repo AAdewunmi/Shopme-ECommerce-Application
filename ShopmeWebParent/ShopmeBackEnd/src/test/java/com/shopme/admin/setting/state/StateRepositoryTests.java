@@ -63,4 +63,16 @@ public class StateRepositoryTests {
 		assertThat(listStates.size()).isGreaterThan(0);
 	}
 	
+	@Test
+	public void testUpdateState() {
+		Integer stateId = 3;
+		String stateName = "Tamil Nadu";
+		State state = repo.findById(stateId).get();
+		
+		state.setName(stateName);
+		State updatedState = repo.save(state);
+		
+		assertThat(updatedState.getName()).isEqualTo(stateName);
+	}
+	
 }
