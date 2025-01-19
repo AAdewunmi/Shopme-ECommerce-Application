@@ -82,4 +82,13 @@ public class StateRepositoryTests {
 		assertThat(findById.isPresent());
 	}
 	
+	@Test
+	public void testDeleteState() {
+		Integer stateId = 8;
+		repo.deleteById(stateId);
+
+		Optional<State> findById = repo.findById(stateId);
+		assertThat(findById.isEmpty());		
+	}
+	
 }
