@@ -30,7 +30,24 @@ public class Country {
 		
 	}
 	
+	public Country(String name) {
+		this.name = name;
+	}
+	
 	public Country(String name, String code) {
+		this.name = name;
+		this.code = code;
+	}
+	
+	public Country(String name, String code, Set<State> states) {
+		this.name = name;
+		this.code = code;
+		this.states = states;
+	}
+	
+	public Country(Integer id, String name, String code) {
+		super();
+		this.id = id;
 		this.name = name;
 		this.code = code;
 	}
@@ -58,12 +75,6 @@ public class Country {
 	public void setCode(String code) {
 		this.code = code;
 	}
-
-	/*
-	 * public Set<State> getStates() { return states; }
-	 * 
-	 * public void setStates(Set<State> states) { this.states = states; }
-	 */
 
 	@Override
 	public String toString() {
