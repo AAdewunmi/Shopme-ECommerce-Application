@@ -162,3 +162,8 @@ function loadCountries() {
 		showToastMessage("ERROR: Could not connect to server or server encountered an error");
 	});
 }
+
+function showToastMessage(message) {
+	$("#toastMessage").text(message);
+	$(".toast").toast('show');
+}
