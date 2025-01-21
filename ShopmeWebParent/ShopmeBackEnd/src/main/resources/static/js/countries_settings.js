@@ -108,3 +108,13 @@ function addCountry() {
 	});
 		
 }
+
+function selectNewlyAddedCountry(countryId, countryCode, countryName) {
+	optionValue = countryId + "-" + countryCode;
+	$("<option>").val(optionValue).text(countryName).appendTo(dropDownCountry);
+	
+	$("#dropDownCountries option[value='" + optionValue + "']").prop("selected", true);
+	
+	fieldCountryCode.val("");
+	fieldCountryName.val("").focus();
+}
