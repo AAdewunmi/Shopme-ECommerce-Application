@@ -118,3 +118,14 @@ function selectNewlyAddedCountry(countryId, countryCode, countryName) {
 	fieldCountryCode.val("");
 	fieldCountryName.val("").focus();
 }
+
+function changeFormStateToNew() {
+	buttonAddCountry.val("Add");
+	labelCountryName.text("Country Name:");
+	
+	buttonUpdateCountry.prop("disabled", true);
+	buttonDeleteCountry.prop("disabled", true);
+	
+	fieldCountryCode.val("");
+	fieldCountryName.val("").focus();	
+}
