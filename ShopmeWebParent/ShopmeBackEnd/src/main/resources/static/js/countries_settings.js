@@ -129,3 +129,18 @@ function changeFormStateToNew() {
 	fieldCountryCode.val("");
 	fieldCountryName.val("").focus();	
 }
+
+function changeFormStateToSelectedCountry() {
+	buttonAddCountry.prop("value", "New");
+	buttonUpdateCountry.prop("disabled", false);
+	buttonDeleteCountry.prop("disabled", false);
+	
+	labelCountryName.text("Selected Country:");
+	
+	selectedCountryName = $("#dropDownCountries option:selected").text();
+	fieldCountryName.val(selectedCountryName);
+	
+	countryCode = dropDownCountry.val().split("-")[1];
+	fieldCountryCode.val(countryCode);
+	
+}
