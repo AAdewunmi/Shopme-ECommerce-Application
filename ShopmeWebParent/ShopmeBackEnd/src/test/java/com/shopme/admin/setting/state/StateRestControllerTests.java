@@ -98,5 +98,18 @@ public class StateRestControllerTests {
 		assertThat(updatedState.getName()).isEqualTo(stateName);
 		
 	}
+	
+	@Test
+	@WithMockUser(username = "nam", password = "something", roles = "Admin")
+	public void testDeleteState() throws Exception {
+		Integer stateId = 8;
+		String uri = "/states/delete/" + stateId;
+		
+		mockMvc.perform(get(uri)).andExpect(status().isOk());
+		
+		Optional<State> findById = stateRepo.findById(stateId);
+		
+		assertThat(findById).isNotPresent();
+	}	
 
 }
