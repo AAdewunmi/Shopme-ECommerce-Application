@@ -29,4 +29,10 @@ public class StateRestController {
 		
 		return result;
 	}
+	
+	@PostMapping("/states/save")
+	public String save(@RequestBody State state) {
+		State savedState = repo.save(state);
+		return String.valueOf(savedState.getId());
+	}
 }
