@@ -73,5 +73,30 @@ public class StateRestControllerTests {
 		
 		assertThat(findById.isPresent());		
 	}
+	
+	@Test
+	@WithMockUser(username = "nam", password = "something", roles = "Admin")
+	public void testUpdateState() throws Exception {
+		String url = "/states/save";
+		Integer stateId = 8;
+		String stateName = "Alaska";
+		
+		State state = stateRepo.findById(stateId).get();
+		state.setName(stateName);
+		
+		mockMvc.perform(post(url).contentType("application/json")
+			.content(objectMapper.writeValueAsString(state))
+			.with(csrf()))
+			.andDo(print())
+			.andExpect(status().isOk())
+			.andExpect(content().string(String.valueOf(stateId)));
+		
+		Optional<State> findById = stateRepo.findById(stateId);
+		assertThat(findById.isPresent());
+		
+		State updatedState = findById.get();
+		assertThat(updatedState.getName()).isEqualTo(stateName);
+		
+	}
 
 }
