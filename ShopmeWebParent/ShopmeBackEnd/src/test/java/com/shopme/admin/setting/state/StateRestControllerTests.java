@@ -51,5 +51,27 @@ public class StateRestControllerTests {
 		
 		assertThat(states).hasSizeGreaterThan(1);
 	}
+	
+	@Test
+	@WithMockUser(username = "nam", password = "something", roles = "Admin")
+	public void testCreateState() throws Exception {
+		String url = "/states/save";
+		Integer countryId = 2;
+		Country country = countryRepo.findById(countryId).get();
+		State state = new State("Arizona", country);
+		
+		MvcResult result = mockMvc.perform(post(url).contentType("application/json")
+				.content(objectMapper.writeValueAsString(state))
+				.with(csrf()))
+			.andDo(print())
+			.andExpect(status().isOk())
+			.andReturn();
+		
+		String response = result.getResponse().getContentAsString();
+		Integer stateId = Integer.parseInt(response);
+		Optional<State> findById = stateRepo.findById(stateId);
+		
+		assertThat(findById.isPresent());		
+	}
 
 }
