@@ -128,3 +128,13 @@ function selectNewlyAddedState(stateId, stateName) {
 	
 	fieldStateName.val("").focus();
 }
+
+function changeFormStateToNew() {
+	buttonAddState.val("Add");
+	labelStateName.text("State/Province Name:");
+	
+	buttonUpdateState.prop("disabled", true);
+	buttonDeleteState.prop("disabled", true);
+	
+	fieldStateName.val("").focus();	
+}
