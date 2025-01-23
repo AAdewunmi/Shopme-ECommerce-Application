@@ -120,3 +120,11 @@ function addState() {
 	});
 		
 }
+
+function selectNewlyAddedState(stateId, stateName) {
+	$("<option>").val(stateId).text(stateName).appendTo(dropDownStates);
+	
+	$("#dropDownStates option[value='" + stateId + "']").prop("selected", true);
+	
+	fieldStateName.val("").focus();
+}
