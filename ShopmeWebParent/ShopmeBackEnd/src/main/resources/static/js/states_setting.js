@@ -170,3 +170,20 @@ function loadStates4Country() {
 		showToastMessage("ERROR: Could not connect to server or server encountered an error");
 	});	
 }
+
+function loadCountries4States() {
+	url = contextPath + "countries/list";
+	$.get(url, function(responseJSON) {
+		dropDownCountry4States.empty();
+		
+		$.each(responseJSON, function(index, country) {
+			$("<option>").val(country.id).text(country.name).appendTo(dropDownCountry4States);
+		});
+		
+	}).done(function() {
+		buttonLoad4States.val("Refresh Country List");
+		showToastMessage("All countries have been loaded");
+	}).fail(function() {
+		showToastMessage("ERROR: Could not connect to server or server encountered an error");
+	});
+}
