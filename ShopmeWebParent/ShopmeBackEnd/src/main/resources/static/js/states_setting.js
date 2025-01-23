@@ -45,3 +45,23 @@ $(document).ready(function() {
 		deleteState();
 	});
 });
+
+function deleteState() {
+	stateId = dropDownStates.val();
+	
+	url = contextPath + "states/delete/" + stateId;
+	
+	$.ajax({
+		type: 'DELETE',
+		url: url,
+		beforeSend: function(xhr) {
+			xhr.setRequestHeader(csrfHeaderName, csrfValue);
+		}
+	}).done(function() {
+		$("#dropDownStates option[value='" + stateId + "']").remove();
+		changeFormStateToNew();
+		showToastMessage("The state has been deleted");
+	}).fail(function() {
+		showToastMessage("ERROR: Could not connect to server or server encountered an error");
+	});		
+}
