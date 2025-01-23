@@ -138,3 +138,15 @@ function changeFormStateToNew() {
 	
 	fieldStateName.val("").focus();	
 }
+
+function changeFormStateToSelectedState() {
+	buttonAddState.prop("value", "New");
+	buttonUpdateState.prop("disabled", false);
+	buttonDeleteState.prop("disabled", false);
+	
+	labelStateName.text("Selected State/Province:");
+	
+	selectedStateName = $("#dropDownStates option:selected").text();
+	fieldStateName.val(selectedStateName);
+	
+}
