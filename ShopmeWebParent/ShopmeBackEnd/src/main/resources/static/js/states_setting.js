@@ -65,3 +65,31 @@ function deleteState() {
 		showToastMessage("ERROR: Could not connect to server or server encountered an error");
 	});		
 }
+
+function updateState() {
+	url = contextPath + "states/save";
+	stateId = dropDownStates.val();
+	stateName = fieldStateName.val();
+	
+	selectedCountry = $("#dropDownCountriesForStates option:selected");
+	countryId = selectedCountry.val();
+	countryName = selectedCountry.text();
+	
+	jsonData = {id: stateId, name: stateName, country: {id: countryId, name: countryName}};
+	
+	$.ajax({
+		type: 'POST',
+		url: url,
+		beforeSend: function(xhr) {
+			xhr.setRequestHeader(csrfHeaderName, csrfValue);
+		},
+		data: JSON.stringify(jsonData),
+		contentType: 'application/json'
+	}).done(function(stateId) {
+		$("#dropDownStates option:selected").text(stateName);
+		showToastMessage("The state has been updated");
+		changeFormStateToNew();
+	}).fail(function() {
+		showToastMessage("ERROR: Could not connect to server or server encountered an error");
+	});	
+}
