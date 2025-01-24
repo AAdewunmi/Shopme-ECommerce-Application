@@ -85,14 +85,17 @@ public class CustomerRepositoryTests {
 	@Test
 	public void testUpdateCustomer() {
 		Integer customerId = 1;
-		String lastName = "Stanfield";
+		//String lastName = "Stanfield";
+		String veriCode = "111";
 		
 		Customer customer = repo.findById(customerId).get();
-		customer.setLastName(lastName);
+		//customer.setLastName(lastName);
+		customer.setVerificationCode(veriCode);
 		customer.setEnabled(true);
 		
 		Customer updatedCustomer = repo.save(customer);
-		assertThat(updatedCustomer.getLastName()).isEqualTo(lastName);
+		//assertThat(updatedCustomer.getLastName()).isEqualTo(lastName);
+		assertThat(updatedCustomer.getVerificationCode()).isEqualTo(veriCode);
 	}
 	
 	@Test
@@ -119,6 +122,15 @@ public class CustomerRepositoryTests {
 	public void testFindByEmail() {
 		String email = "david.s.fountaine@gmail.com";
 		Customer customer = repo.findByEmail(email);
+		
+		assertThat(customer).isNotNull();
+		System.out.println(customer);		
+	}
+	
+	@Test
+	public void testFindByVerificationCode() {
+		String code = "111";
+		Customer customer = repo.findByVerificationCode(code);
 		
 		assertThat(customer).isNotNull();
 		System.out.println(customer);		
