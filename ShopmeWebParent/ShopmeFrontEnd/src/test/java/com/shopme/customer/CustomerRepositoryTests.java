@@ -72,6 +72,14 @@ public class CustomerRepositoryTests {
 		
 		assertThat(savedCustomer).isNotNull();
 		assertThat(savedCustomer.getId()).isGreaterThan(0);
-	}	
+	}
+	
+	@Test
+	public void testListCustomers() {
+		Iterable<Customer> customers = repo.findAll();
+		customers.forEach(System.out::println);
+		
+		assertThat(customers).hasSizeGreaterThan(1);
+	}
 	
 }
