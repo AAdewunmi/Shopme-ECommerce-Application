@@ -95,4 +95,15 @@ public class CustomerRepositoryTests {
 		assertThat(updatedCustomer.getLastName()).isEqualTo(lastName);
 	}
 	
+	@Test
+	public void testGetCustomer() {
+		Integer customerId = 2;
+		Optional<Customer> findById = repo.findById(customerId);
+		
+		assertThat(findById).isPresent();
+		
+		Customer customer = findById.get();
+		System.out.println(customer);
+	}
+	
 }
