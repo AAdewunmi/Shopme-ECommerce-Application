@@ -49,6 +49,29 @@ public class CustomerRepositoryTests {
 		assertThat(savedCustomer.getId()).isGreaterThan(0);
 	}
 	
-	
+	@Test
+	public void testCreateCustomer2() {
+		Integer countryId = 106; // India
+		Country country = entityManager.find(Country.class, countryId);
+		
+		Customer customer = new Customer();
+		customer.setCountry(country);
+		customer.setFirstName("Sanya");
+		customer.setLastName("Lad");
+		customer.setPassword("password456");
+		customer.setEmail("sanya.lad2020@gmail.com");
+		customer.setPhoneNumber("02224928052");
+		customer.setAddressLine1("173 , A-, Shah & Nahar Indl.estate, Sunmill Road");
+		customer.setAddressLine2("Dhanraj Mill Compound, Lower Parel (west)");
+		customer.setCity("Mumbai");
+		customer.setState("Maharashtra");
+		customer.setPostalCode("400013");
+		customer.setCreatedTime(new Date());
+		
+		Customer savedCustomer = repo.save(customer);
+		
+		assertThat(savedCustomer).isNotNull();
+		assertThat(savedCustomer.getId()).isGreaterThan(0);
+	}	
 	
 }
