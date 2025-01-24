@@ -136,4 +136,13 @@ public class CustomerRepositoryTests {
 		System.out.println(customer);		
 	}
 	
+	@Test
+	public void testEnableCustomer() {
+		Integer customerId = 1;
+		repo.enable(customerId);
+		
+		Customer customer = repo.findById(customerId).get();
+		assertThat(customer.isEnabled()).isTrue();
+	}
+	
 }
