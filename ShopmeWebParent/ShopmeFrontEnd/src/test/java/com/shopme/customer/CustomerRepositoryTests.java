@@ -106,4 +106,13 @@ public class CustomerRepositoryTests {
 		System.out.println(customer);
 	}
 	
+	@Test
+	public void testDeleteCustomer() {
+		Integer customerId = 2;
+		repo.deleteById(customerId);
+		
+		Optional<Customer> findById = repo.findById(customerId);		
+		assertThat(findById).isNotPresent();		
+	}
+	
 }
