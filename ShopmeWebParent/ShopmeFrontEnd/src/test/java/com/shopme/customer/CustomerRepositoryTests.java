@@ -115,4 +115,13 @@ public class CustomerRepositoryTests {
 		assertThat(findById).isNotPresent();		
 	}
 	
+	@Test
+	public void testFindByEmail() {
+		String email = "david.s.fountaine@gmail.com";
+		Customer customer = repo.findByEmail(email);
+		
+		assertThat(customer).isNotNull();
+		System.out.println(customer);		
+	}
+	
 }
