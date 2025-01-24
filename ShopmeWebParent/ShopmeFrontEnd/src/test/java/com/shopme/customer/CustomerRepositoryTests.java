@@ -82,4 +82,17 @@ public class CustomerRepositoryTests {
 		assertThat(customers).hasSizeGreaterThan(1);
 	}
 	
+	@Test
+	public void testUpdateCustomer() {
+		Integer customerId = 1;
+		String lastName = "Stanfield";
+		
+		Customer customer = repo.findById(customerId).get();
+		customer.setLastName(lastName);
+		customer.setEnabled(true);
+		
+		Customer updatedCustomer = repo.save(customer);
+		assertThat(updatedCustomer.getLastName()).isEqualTo(lastName);
+	}
+	
 }
