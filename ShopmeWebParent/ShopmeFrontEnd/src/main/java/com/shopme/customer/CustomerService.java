@@ -12,6 +12,11 @@ import com.shopme.setting.CountryRepository;
 
 public class CustomerService {
 	
+	@Autowired private CountryRepository countryRepo;
+	@Autowired private CustomerRepository customerRepo;
 	
+	public List<Country> listAllCountries() {
+		return countryRepo.findAllByOrderByNameAsc();
+	}
 	
 }
