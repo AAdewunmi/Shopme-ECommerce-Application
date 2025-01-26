@@ -19,4 +19,9 @@ public class CustomerService {
 		return countryRepo.findAllByOrderByNameAsc();
 	}
 	
+	public boolean isEmailUnique(String email) {
+		Customer customer = customerRepo.findByEmail(email);
+		return customer == null;
+	}
+	
 }
