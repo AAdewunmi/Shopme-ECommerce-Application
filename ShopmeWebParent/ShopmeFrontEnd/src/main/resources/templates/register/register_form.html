@@ -131,6 +131,22 @@
 	<div th:replace="navigation :: footer_menu"></div>
 </div>
 <script type="text/javascript">
+	contextPath = "[[@{/}]]";
+	
+	var dropDownCountry;
+	var dataListState;
+	var fieldState;
+	
+	$(document).ready(function() {
+		dropDownCountry = $("#country");
+		dataListState = $("#listStates");
+		fieldState = $("#state");
+		
+		dropDownCountry.on("change", function() {
+			loadStatesForCountry();
+			fieldState.val("").focus();
+		});
+	});
 </script>
 </body>
 </html>
