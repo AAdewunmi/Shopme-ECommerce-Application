@@ -10,6 +10,8 @@ import com.shopme.common.entity.Country;
 import com.shopme.common.entity.Customer;
 import com.shopme.setting.CountryRepository;
 
+
+@Service
 public class CustomerService {
 	
 	@Autowired private CountryRepository countryRepo;
