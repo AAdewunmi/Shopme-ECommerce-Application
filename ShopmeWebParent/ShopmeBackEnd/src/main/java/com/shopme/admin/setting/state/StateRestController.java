@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.shopme.common.entity.Country;
 import com.shopme.common.entity.State;
+import com.shopme.common.entity.StateDTO;
 
 @RestController
 public class StateRestController {
