@@ -101,5 +101,15 @@ public class SettingController {
 		
 		return "redirect:/settings#mailServer";
 	}
+	
+	@PostMapping("/settings/save_mail_templates")
+	public String saveMailTemplateSetttings(HttpServletRequest request, RedirectAttributes ra) {
+		List<Setting> mailTemplateSettings = service.getMailTemplateSettings();
+		updateSettingValuesFromForm(request, mailTemplateSettings);
+		
+		ra.addFlashAttribute("message", "Mail template settings have been saved");
+		
+		return "redirect:/settings#mailTemplates";
+	}	
 
 }
