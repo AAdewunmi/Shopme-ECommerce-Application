@@ -34,4 +34,7 @@ public class SettingsService {
 		repo.saveAll(settings);
 	}
 	
+	public List<Setting> getMailServerSettings() {
+		return repo.findByCategory(SettingCategory.MAIL_SERVER);
+	}
 }
