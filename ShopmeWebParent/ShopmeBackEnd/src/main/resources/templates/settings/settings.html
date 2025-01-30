@@ -76,6 +76,11 @@
 	contextPath = "[[@{/}]]";
 	var csrfHeaderName = "[[${_csrf.headerName}]]";
 	var csrfValue = "[[${_csrf.token}]]";
+	
+	$(document).ready(function() {
+		$("#customerVerificationContent").richText();
+	});
+	
 </script>
 <script th:src="@{/js/common_form.js}"></script>
 <script th:src="@{/js/countries_setting.js}"></script>
