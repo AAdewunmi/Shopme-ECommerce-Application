@@ -15,6 +15,7 @@ import com.shopme.common.entity.Customer;
 import com.shopme.setting.SettingService;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.mail.MessagingException;
 
 @Controller
 @CrossOrigin
@@ -43,6 +44,36 @@ public class CustomerController {
 		model.addAttribute("pageTitle", "Registration Succeeded!");
 		
 		return "/register/register_success";
+	}
+	
+	private void sendVerificationEmail(HttpServletRequest request, Customer customer) 
+			throws UnsupportedEncodingException, MessagingException {
+		EmailSettingBag emailSettings = settingService.getEmailSettings();
+		JavaMailSenderImpl mailSender = Utility.prepareMailSender(emailSettings);
+		
+		String toAddress = customer.getEmail();
+		String subject = emailSettings.getCustomerVerifySubject();
+		String content = emailSettings.getCustomerVerifyContent();
+		
+		MimeMessage message = mailSender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(message);
+		
+		helper.setFrom(emailSettings.getFromAddress(), emailSettings.getSenderName());
+		helper.setTo(toAddress);
+		helper.setSubject(subject);
+		
+		content = content.replace("[[name]]", customer.getFullName());
+		
+		String verifyURL = Utility.getSiteURL(request) + "/verify?code=" + customer.getVerificationCode();
+		
+		content = content.replace("[[URL]]", verifyURL);
+		
+		helper.setText(content, true);
+		
+		mailSender.send(message);
+		
+		System.out.println("to Address: " + toAddress);
+		System.out.println("Verify URL: " + verifyURL);
 	}
 	
 }
