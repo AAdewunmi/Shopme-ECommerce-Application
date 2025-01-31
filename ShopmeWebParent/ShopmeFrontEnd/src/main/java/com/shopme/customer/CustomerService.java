@@ -1,6 +1,7 @@
 package com.shopme.customer;
 
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,18 @@ public class CustomerService {
 	public boolean isEmailUnique(String email) {
 		Customer customer = customerRepo.findByEmail(email);
 		return customer == null;
+	}
+	
+	public void registerCustomer(Customer customer) {
+		encodePassword(customer);
+		customer.setEnabled(false);
+		customer.setCreatedTime(new Date());
+		
+		String randomCode = RandomString.make(64);
+		customer.setVerificationCode(randomCode);
+		
+		customerRepo.save(customer);
+		
 	}
 	
 }
