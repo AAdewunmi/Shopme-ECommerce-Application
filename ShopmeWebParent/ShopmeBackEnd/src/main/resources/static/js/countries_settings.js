@@ -89,6 +89,8 @@ function updateCountry() {
 	});	
 }
 
+
+
 function addCountry() {
 	url = contextPath + "countries/save";
 	countryName = fieldCountryName.val();
