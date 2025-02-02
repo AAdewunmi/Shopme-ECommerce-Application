@@ -89,7 +89,15 @@ function updateCountry() {
 	});	
 }
 
-
+function validateFormCountry() {
+	formCountry = document.getElementById("formCountry");
+	if (!formCountry.checkValidity()) {
+		formCountry.reportValidity();
+		return false;
+	}	
+	
+	return true;
+}
 
 function addCountry() {
 	url = contextPath + "countries/save";
