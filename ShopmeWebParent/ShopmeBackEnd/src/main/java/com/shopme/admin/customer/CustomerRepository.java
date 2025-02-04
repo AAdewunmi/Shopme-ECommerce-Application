@@ -19,4 +19,7 @@ public interface CustomerRepository extends SearchRepository<Customer, Integer> 
 	@Modifying
 	public void updateEnabledStatus(Integer id, boolean enabled);
 	
+	@Query("SELECT c FROM Customer c WHERE c.email = ?1")
+	public Customer findByEmail(String email);
+	
 }
