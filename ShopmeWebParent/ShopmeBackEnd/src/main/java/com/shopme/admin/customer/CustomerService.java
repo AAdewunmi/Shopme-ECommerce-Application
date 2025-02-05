@@ -3,6 +3,7 @@ package com.shopme.admin.customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.shopme.admin.PagingAndSortingHelper;
 import com.shopme.admin.setting.country.CountryRepository;
 
 public class CustomerService {
