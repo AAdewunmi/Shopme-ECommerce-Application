@@ -3,7 +3,9 @@ package com.shopme.admin;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
 import com.shopme.admin.paging.SearchRepository;
@@ -55,5 +57,11 @@ public class PagingAndSortingHelper {
 		
 		updateModelAttributes(pageNum, page);		
 	}
+	
+	public Pageable createPageable(int pageSize, int pageNum) {
+		Sort sort = Sort.by(sortField);
+		sort = sortDir.equals("asc") ? sort.ascending() : sort.descending();
+		return PageRequest.of(pageNum - 1, pageSize, sort);		
+	}	
 	
 }
