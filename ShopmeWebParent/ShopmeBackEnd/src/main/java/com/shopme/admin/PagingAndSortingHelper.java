@@ -1,5 +1,13 @@
 package com.shopme.admin;
 
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.method.support.ModelAndViewContainer;
+
+import com.shopme.admin.paging.SearchRepository;
+
 public class PagingAndSortingHelper {
 	
 	private ModelAndViewContainer model;
@@ -33,6 +41,19 @@ public class PagingAndSortingHelper {
 		model.addAttribute("endCount", endCount);
 		model.addAttribute("totalItems", page.getTotalElements());
 		model.addAttribute(listName, listItems);
+	}
+	
+	public void listEntities(int pageNum, int pageSize, SearchRepository<?, Integer> repo) {
+		Pageable pageable = createPageable(pageSize, pageNum);
+		Page<?> page = null;
+		
+		if (keyword != null) {
+			page = repo.findAll(keyword, pageable);
+		} else {
+			page = repo.findAll(pageable);
+		}
+		
+		updateModelAttributes(pageNum, page);		
 	}
 	
 }
