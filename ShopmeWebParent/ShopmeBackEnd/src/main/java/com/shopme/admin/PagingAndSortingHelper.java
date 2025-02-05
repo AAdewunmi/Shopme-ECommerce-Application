@@ -68,4 +68,8 @@ public class PagingAndSortingHelper {
 		return sortField;
 	}
 	
+	public String getSortDir() {
+		return sortDir;
+	}
+	
 }
