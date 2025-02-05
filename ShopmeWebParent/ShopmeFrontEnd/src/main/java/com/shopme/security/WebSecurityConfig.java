@@ -17,13 +17,13 @@ public class WebSecurityConfig {
     PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-	
+    @Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 	    http.authorizeHttpRequests(auth -> auth
 	    		.anyRequest().permitAll());
 	    return http.build();
 	  }
-	
+    @Bean
 	WebSecurityCustomizer configureWebSecurity() throws Exception { 
  		return (web) -> web.ignoring().requestMatchers("/images/**","/js/**", "/webjars/**"); 
  	}
