@@ -72,4 +72,8 @@ public class PagingAndSortingHelper {
 		return sortDir;
 	}
 	
+	public String getKeyword() {
+		return keyword;
+	}
+	
 }
