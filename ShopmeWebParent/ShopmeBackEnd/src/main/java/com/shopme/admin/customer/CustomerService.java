@@ -44,6 +44,17 @@ public static final int CUSTOMERS_PER_PAGE = 10;
 	
 	public List<Country> listAllCountries() {
 		return countryRepo.findAllByOrderByNameAsc();
-	}	
+	}
+	
+	public boolean isEmailUnique(Integer id, String email) {
+		Customer existCustomer = customerRepo.findByEmail(email);
+
+		if (existCustomer != null && existCustomer.getId() != id) {
+			// found another customer having the same email
+			return false;
+		}
+		
+		return true;
+	}
 
 }
