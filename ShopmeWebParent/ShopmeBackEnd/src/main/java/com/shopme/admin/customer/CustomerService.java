@@ -73,5 +73,14 @@ public static final int CUSTOMERS_PER_PAGE = 10;
 		
 		customerRepo.save(customerInForm);
 	}
+	
+	public void delete(Integer id) throws CustomerNotFoundException {
+		Long count = customerRepo.countById(id);
+		if (count == null || count == 0) {
+			throw new CustomerNotFoundException("Could not find any customers with ID " + id);
+		}
+		
+		customerRepo.deleteById(id);
+	}
 
 }
