@@ -56,5 +56,22 @@ public static final int CUSTOMERS_PER_PAGE = 10;
 		
 		return true;
 	}
+	
+	public void save(Customer customerInForm) {
+		Customer customerInDB = customerRepo.findById(customerInForm.getId()).get();
+		
+		if (!customerInForm.getPassword().isEmpty()) {
+			String encodedPassword = passwordEncoder.encode(customerInForm.getPassword());
+			customerInForm.setPassword(encodedPassword);			
+		} else {
+			customerInForm.setPassword(customerInDB.getPassword());
+		}		
+		
+		customerInForm.setEnabled(customerInDB.isEnabled());
+		customerInForm.setCreatedTime(customerInDB.getCreatedTime());
+		customerInForm.setVerificationCode(customerInDB.getVerificationCode());
+		
+		customerRepo.save(customerInForm);
+	}
 
 }
