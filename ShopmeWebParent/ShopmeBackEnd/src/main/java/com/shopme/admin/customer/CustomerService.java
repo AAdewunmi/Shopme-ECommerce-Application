@@ -1,5 +1,6 @@
 package com.shopme.admin.customer;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +8,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.shopme.admin.PagingAndSortingHelper;
 import com.shopme.admin.setting.country.CountryRepository;
+import com.shopme.common.entity.Country;
+import com.shopme.common.entity.Customer;
 import com.shopme.common.exception.CustomerNotFoundException;
+import com.shopme.admin.paging.SearchRepository;
 
 public class CustomerService {
 	
@@ -37,5 +41,9 @@ public static final int CUSTOMERS_PER_PAGE = 10;
 			throw new CustomerNotFoundException("Could not find any customers with ID " + id);
 		}
 	}
+	
+	public List<Country> listAllCountries() {
+		return countryRepo.findAllByOrderByNameAsc();
+	}	
 
 }
