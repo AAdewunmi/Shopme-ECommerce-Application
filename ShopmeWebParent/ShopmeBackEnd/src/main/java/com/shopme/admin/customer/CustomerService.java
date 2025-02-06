@@ -22,5 +22,9 @@ public static final int CUSTOMERS_PER_PAGE = 10;
 	public void listByPage(int pageNum, PagingAndSortingHelper helper) {
 		helper.listEntities(pageNum, CUSTOMERS_PER_PAGE, customerRepo);
 	}
+	
+	public void updateCustomerEnabledStatus(Integer id, boolean enabled) {
+		customerRepo.updateEnabledStatus(id, enabled);
+	}
 
 }
