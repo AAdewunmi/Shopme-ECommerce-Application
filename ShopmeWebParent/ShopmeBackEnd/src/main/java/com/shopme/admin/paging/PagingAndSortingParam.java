@@ -12,5 +12,5 @@ public @interface PagingAndSortingParam {
 	
 	public String moduleURL();
 	
-	
+	public String listName();
 }
