@@ -56,4 +56,22 @@ public class PagingAndSortingHelper {
 		updateModelAttributes(pageNum, page);		
 	}
 	
+	public Pageable createPageable(int pageSize, int pageNum) {
+		Sort sort = Sort.by(sortField);
+		sort = sortDir.equals("asc") ? sort.ascending() : sort.descending();
+		return PageRequest.of(pageNum - 1, pageSize, sort);		
+	}	
+
+	public String getSortField() {
+		return sortField;
+	}
+
+	public String getSortDir() {
+		return sortDir;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+	
 }
