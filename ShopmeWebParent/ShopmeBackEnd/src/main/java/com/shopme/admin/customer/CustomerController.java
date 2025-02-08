@@ -48,6 +48,19 @@ private String defaultRedirectURL = "redirect:/customers/page/1?sortField=firstN
 		redirectAttributes.addFlashAttribute("message", message);
 		
 		return defaultRedirectURL;
-	}	
+	}
+	
+	@GetMapping("/customers/detail/{id}")
+	public String viewCustomer(@PathVariable("id") Integer id, Model model, RedirectAttributes ra) {
+		try {
+			Customer customer = service.get(id);
+			model.addAttribute("customer", customer);
+			
+			return "customers/customer_detail_modal";
+		} catch (CustomerNotFoundException ex) {
+			ra.addFlashAttribute("message", ex.getMessage());
+			return defaultRedirectURL;		
+		}
+	}
 	
 }
