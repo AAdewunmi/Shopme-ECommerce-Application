@@ -88,4 +88,17 @@ private String defaultRedirectURL = "redirect:/customers/page/1?sortField=firstN
 		return defaultRedirectURL;
 	}
 	
+	@GetMapping("/customers/delete/{id}")
+	public String deleteCustomer(@PathVariable Integer id, RedirectAttributes ra) {
+		try {
+			service.delete(id);			
+			ra.addFlashAttribute("message", "The customer ID " + id + " has been deleted successfully.");
+			
+		} catch (CustomerNotFoundException ex) {
+			ra.addFlashAttribute("message", ex.getMessage());
+		}
+		
+		return defaultRedirectURL;
+	}
+	
 }
