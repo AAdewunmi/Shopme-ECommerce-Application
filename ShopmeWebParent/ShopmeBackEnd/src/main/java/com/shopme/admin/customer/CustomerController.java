@@ -39,4 +39,15 @@ private String defaultRedirectURL = "redirect:/customers/page/1?sortField=firstN
 		return "customers/customers";
 	}
 	
+	@GetMapping("/customers/{id}/enabled/{status}")
+	public String updateCustomerEnabledStatus(@PathVariable("id") Integer id,
+			@PathVariable("status") boolean enabled, RedirectAttributes redirectAttributes) {
+		service.updateCustomerEnabledStatus(id, enabled);
+		String status = enabled ? "enabled" : "disabled";
+		String message = "The Customer ID " + id + " has been " + status;
+		redirectAttributes.addFlashAttribute("message", message);
+		
+		return defaultRedirectURL;
+	}	
+	
 }
