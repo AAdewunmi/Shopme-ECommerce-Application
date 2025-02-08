@@ -21,11 +21,22 @@ public class CustomerController {
 	
 private String defaultRedirectURL = "redirect:/customers/page/1?sortField=firstName&sortDir=asc";
 	
-	@Autowired private CustomerService service;
+	@Autowired 
+	private CustomerService service;
 	
 	@GetMapping("/customers")
 	public String listFirstPage(Model model) {
 		return defaultRedirectURL;
+	}
+	
+	@GetMapping("/customers/page/{pageNum}")
+	public String listByPage(
+			@PagingAndSortingParam(listName = "listCustomers", moduleURL = "/customers") PagingAndSortingHelper helper,
+			@PathVariable(name = "pageNum") int pageNum) {
+
+		service.listByPage(pageNum, helper);
+		
+		return "customers/customers";
 	}
 	
 }

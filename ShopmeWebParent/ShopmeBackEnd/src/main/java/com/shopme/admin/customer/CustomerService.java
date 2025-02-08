@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.shopme.admin.PagingAndSortingHelper;
+import com.shopme.admin.paging.PagingAndSortingHelper;
 import com.shopme.admin.setting.country.CountryRepository;
 import com.shopme.common.entity.Country;
 import com.shopme.common.entity.Customer;
@@ -15,7 +15,7 @@ import com.shopme.common.exception.CustomerNotFoundException;
 
 import jakarta.transaction.Transactional;
 
-import com.shopme.admin.paging.SearchRepository;
+
 
 @Service
 @Transactional
