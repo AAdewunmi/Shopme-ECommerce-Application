@@ -81,4 +81,11 @@ private String defaultRedirectURL = "redirect:/customers/page/1?sortField=firstN
 		}
 	}
 	
+	@PostMapping("/customers/save")
+	public String saveCustomer(Customer customer, Model model, RedirectAttributes ra) {
+		service.save(customer);
+		ra.addFlashAttribute("message", "The customer ID " + customer.getId() + " has been updated successfully.");
+		return defaultRedirectURL;
+	}
+	
 }
