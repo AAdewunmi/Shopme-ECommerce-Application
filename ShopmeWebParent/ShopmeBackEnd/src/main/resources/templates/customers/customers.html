@@ -89,9 +89,9 @@
 			<div>&nbsp;</div>
 		</div>	
 	</div>		
-	
+	<!--  
 	<div th:replace="fragments :: pagination('customers')"></div>
-	
+	-->
 	<div th:replace="modal_fragments :: confirm_modal" />
 	
 	<div class="modal fade" id="detailModal">
@@ -106,20 +106,20 @@
 </div>
 <script th:src="@{/js/common_list.js}"></script>
 <script type="text/javascript">
-moduleURL = "[[@{/customers}]]";
+	moduleURL = "[[@{/customers}]]";
 
-$(document).ready(function() {
-	$(".link-delete").on("click", function(e) {
-		e.preventDefault();
-		showDeleteConfirmModal($(this), 'customer');
+	$(document).ready(function() {
+		$(".link-delete").on("click", function(e) {
+			e.preventDefault();
+			showDeleteConfirmModal($(this), 'customer');
+		});
+		
+		$(".link-detail").on("click", function(e) {
+			e.preventDefault();
+			linkDetailURL = $(this).attr("href");
+			$("#detailModal").modal("show").find(".modal-content").load(linkDetailURL);
+		});		
 	});
-	
-	$(".link-detail").on("click", function(e) {
-		e.preventDefault();
-		linkDetailURL = $(this).attr("href");
-		$("#detailModal").modal("show").find(".modal-content").load(linkDetailURL);
-	});		
-});
 </script>
 </body>
 </html>
