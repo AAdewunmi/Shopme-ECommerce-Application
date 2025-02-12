@@ -6,14 +6,14 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
-public class PagingAndSortingArgumentResolver {
+public class PagingAndSortingArgumentResolver implements HandlerMethodArgumentResolver {
 	
-	//@Override
+	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
 		return parameter.getParameterAnnotation(PagingAndSortingParam.class) != null;
 	}
 	
-	//@Override
+	@Override
 	public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer model,
 			NativeWebRequest request, WebDataBinderFactory binderFactory) throws Exception {
 		PagingAndSortingParam annotation = parameter.getParameterAnnotation(PagingAndSortingParam.class);
