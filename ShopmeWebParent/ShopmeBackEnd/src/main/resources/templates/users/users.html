@@ -1,84 +1,63 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
-
-<head th:replace="fragments :: header('Users - Shopme Admin', 'none')"></head>
-
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: header('Users - Shopme Admin', 'none')" />
 <body>
 <div class="container-fluid">
-	<div th:replace="navigation :: menu"></div>	
+	<div th:replace="navigation :: menu"></div>
 	<div>
 		<h2>Manage Users</h2>	
-		<a th:href="@{/users/new}" class="fa-solid fa-user-plus fa-2x icon-dark mr-2"></a>
-		&nbsp;&nbsp;
-		<a th:href="@{/users/export/csv}" class="fa-solid fa-file-csv fa-2x icon-dark mr-2"></a>
-		&nbsp;&nbsp;
-		<a th:href="@{/users/export/excel}" class="fa-solid fa-file-excel fa-2x icon-dark mr-2"></a>
-		&nbsp;&nbsp;
-		<a th:href="@{/users/export/pdf}" class="fa-solid fa-file-pdf fa-2x icon-dark mr-2"></a>
+		<a th:href="@{/users/new}" class="fas fa-user-plus fa-2x icon-dark mr-2"></a>
+		
+		<a th:href="@{/users/export/csv}" class="fas fa-file-csv fa-2x icon-dark mr-2"></a>
+		
+		<a th:href="@{/users/export/excel}" class="fas fa-file-excel fa-2x icon-dark mr-2"></a>		
+		
+		<a th:href="@{/users/export/pdf}" class="fas fa-file-pdf fa-2x icon-dark"></a>		
 	</div>
 	
-	<div th:if="${message != null}" class="alert alert-success text-center">
-		[[${message}]]
-	</div>
-	
-	<div th:replace="fragments :: search_form('/users/page/1')"></div>
+	<div th:replace="fragments :: search_form_and_message" />
 	
 	<div class="full-details">
 		<table class="table table-bordered table-striped table-hover table-responsive-xl">
 			<thead class="thead-dark">
-				<thead class="thead-dark">
 				<tr>
 					<th class="hideable-column">
-						<th th:replace="fragments :: column_link('/users','id', 'User ID', 'tag')" />
+						<th th:replace="fragments :: column_link('id', 'User ID', 'tag')" />
 					</th>
 					
 					<th>Photos</th>
 					
 					<th class="hideable-column">
-						<th th:replace="fragments :: column_link('/users','email', 'E-mail', 'tag')" />
+						<th th:replace="fragments :: column_link('email', 'E-mail', 'tag')" />
 					</th>
 					
-					<th th:replace="fragments :: column_link('/users','firstName', 'First Name', 'none')" />
-					<th th:replace="fragments :: column_link('/users','lastName', 'Last Name', 'none')" />
+					<th th:replace="fragments :: column_link('firstName', 'First Name', 'none')" />
+					<th th:replace="fragments :: column_link('lastName', 'Last Name', 'none')" />
 					
 					<th>Roles</th>
-					<th th:replace="fragments :: column_link('/users','enabled', 'Enabled', 'none')" />
+					<th th:replace="fragments :: column_link('enabled', 'Enabled', 'none')" />
 					<th></th>
 				</tr>								
-			</thead>						
 			</thead>
 			<tbody>
 				<tr th:each="user : ${listUsers}">
-					<td class="hidable-column">[[${user.id}]]</td>
+					<td class="hideable-column">[[${user.id}]]</td>
 					<td>
-						<span th:if="${user.photos == null}" class="fas fa-portrait fa-3x icon-silver"></span>
-						<img th:if="${user.photos != null}" th:src="@{${user.photosImagePath}}"
-							style="width: 100px" />
+						<div th:replace="fragments :: user_photos" />
 					</td>
-					<td class="hidable-column">[[${user.email}]]</td>
+					<td class="hideable-column">[[${user.email}]]</td>
 					<td>[[${user.firstName}]]</td>
 					<td>[[${user.lastName}]]</td>
 					<td>[[${user.roles}]]</td>
 					
 					<td>
-						<a th:if="${user.enabled == true}" class="fas fa-check-circle fa-2x icon-green" 
-							th:href="@{'/users/' + ${user.id} + '/enabled/false'}"
-							title="Disable this user"
-							></a>
-							
-						<a th:if="${user.enabled == false}" class="fas fa-circle fa-2x icon-dark" 
-							th:href="@{'/users/' + ${user.id} + '/enabled/true'}"
-							title="Enable this user"
-							></a>
+						<div th:replace="fragments :: status(${user.enabled}, 'user', '/users/' + ${user.id})" />
 					</td>
 					
 					<td>
-						<a class="fas fa-edit fa-2x icon-green" th:href="@{'/users/edit/' + ${user.id}}"
-							title="Edit this user"></a>
-						&nbsp; 
-						<a class="fas fa-trash fa-2x icon-dark link-delete" th:href="@{'/users/delete/' + ${user.id}}"
-							th:userId="${user.id}" title="Delete this user"></a>
+						<div th:replace="fragments :: edit('user', '/users/edit/' + ${user.id})" />
+						&nbsp;&nbsp;
+						<div th:replace="fragments :: delete('user', ${user.id}, '/users/delete/' + ${user.id}, true)" />
 					</td>
 				</tr>
 			</tbody>
@@ -88,52 +67,42 @@
 	<div class="less-details">
 		<div th:each="user : ${listUsers}" class="row m-1">
 			<div class="col-4">
-				<span th:if="${user.photos == null}" class="fas fa-portrait fa-3x icon-silver"></span>
-						<img th:if="${user.photos != null}" th:src="@{${user.photosImagePath}}" style="width: 100px" />
+				<div th:replace="fragments :: user_photos" />			
 			</div>
 			<div class="col-8">
 				<div>[[${user.fullName}]]</div>
 				<div>[[${user.roles}]]</div>
 				<div class="mt-2">
-					<a th:if="${user.enabled == true}" class="fas fa-check-circle fa-2x icon-green" 
-							th:href="@{'/users/' + ${user.id} + '/enabled/false'}"
-							title="Disable this user"
-							></a>		
-					<a th:if="${user.enabled == false}" class="fas fa-circle fa-2x icon-dark" 
-						th:href="@{'/users/' + ${user.id} + '/enabled/true'}"
-						title="Enable this user"
-						></a>
-					<a class="fas fa-edit fa-2x icon-green" th:href="@{'/users/edit/' + ${user.id}}"
-							title="Edit this user"></a>
+					<div th:replace="fragments :: status(${user.enabled}, 'user', '/users/' + ${user.id})" />
+					&nbsp; 			
+					<div th:replace="fragments :: edit('user', '/users/edit/' + ${user.id})" />
 					&nbsp; 
-					<a class="fas fa-trash fa-2x icon-dark link-delete" th:href="@{'/users/delete/' + ${user.id}}"
-						th:userId="${user.id}" title="Delete this user"></a>
+					<div th:replace="fragments :: delete('user', ${user.id}, '/users/delete/' + ${user.id}, true)" />
 				</div>
 			</div>
 			<div>&nbsp;</div>
 		</div>
 	</div>
-	<div th:replace="fragments :: pagination('/users', 'users')"></div>
-	<div th:replace="modal_fragments :: confirm_modal"></div>
+	
+	<div th:replace="fragments :: pagination('users')"></div>
+	
+	<div th:replace="modal_fragments :: confirm_modal" />
+		
 	<div th:replace="fragments :: footer"></div>
+	
 	<div th:replace="fragments :: popper"></div>
 	
 </div>
 <script th:src="@{/js/common_list.js}"></script>
 <script type="text/javascript">
+	moduleURL = "[[@{/users}]]";
+
 	$(document).ready(function() {
 		$(".link-delete").on("click", function(e) {
 			e.preventDefault();
-			link = $(this);
-			userId = link.attr("userId");
-			$("#yesButton").attr("href", link.attr("href"));
-			$("#confirmText").text("Are you sure you want to delete this user ID " + userId + "?");
-			$("#confirmModal").modal('show');
+			showDeleteConfirmModal($(this), 'user');
 		});
 	});
-	function clearFilter(){
-		window.location = "[[@{/users}]]";
-	}
 </script>
 </body>
 </html>
