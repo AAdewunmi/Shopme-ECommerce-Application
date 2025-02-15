@@ -8,11 +8,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
+import com.shopme.admin.paging.SearchRepository;
 import com.shopme.common.entity.Brand;
 import com.shopme.common.entity.User;
 
 public interface BrandRepository extends CrudRepository<Brand, Integer>, 
-PagingAndSortingRepository<Brand, Integer> {
+PagingAndSortingRepository<Brand, Integer>, SearchRepository<Brand, Integer>{
 	
 	public Long countById(Integer id);
 	
