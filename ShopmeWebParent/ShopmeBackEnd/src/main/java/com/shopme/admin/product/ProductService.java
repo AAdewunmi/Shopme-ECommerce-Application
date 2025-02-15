@@ -10,6 +10,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import com.shopme.admin.paging.PagingAndSortingHelper;
 import com.shopme.common.entity.Product;
 import com.shopme.common.exception.ProductNotFoundException;
 
@@ -28,30 +30,50 @@ public class ProductService {
 	}
 	
 	
-	public Page<Product> listByPage(int pageNum, String sortField, String sortDir, 
-			String keyword, Integer categoryId) {
-		Sort sort = Sort.by(sortField);
-		
-		sort = sortDir.equals("asc") ? sort.ascending() : sort.descending();
-				
-		Pageable pageable = PageRequest.of(pageNum - 1, PRODUCTS_PER_PAGE, sort);
+	/*
+	 * public Page<Product> listByPage(int pageNum, String sortField, String
+	 * sortDir, String keyword, Integer categoryId) { Sort sort =
+	 * Sort.by(sortField);
+	 * 
+	 * sort = sortDir.equals("asc") ? sort.ascending() : sort.descending();
+	 * 
+	 * Pageable pageable = PageRequest.of(pageNum - 1, PRODUCTS_PER_PAGE, sort);
+	 * 
+	 * if (keyword != null && !keyword.isEmpty()) { if (categoryId != null &&
+	 * categoryId > 0) { String categoryIdMatch = "-" + String.valueOf(categoryId) +
+	 * "-"; return repo.searchInCategory(categoryId, categoryIdMatch, keyword,
+	 * pageable); } return repo.findAll(keyword, pageable); }
+	 * 
+	 * if (categoryId != null && categoryId > 0) { String categoryIdMatch = "-" +
+	 * String.valueOf(categoryId) + "-"; return repo.findAllInCategory(categoryId,
+	 * categoryIdMatch, pageable); }
+	 * 
+	 * return repo.findAll(pageable); }
+	 */
+	
+	public void listByPage(int pageNum, PagingAndSortingHelper helper, Integer categoryId) {
+		Pageable pageable = helper.createPageable(PRODUCTS_PER_PAGE, pageNum);
+		String keyword = helper.getKeyword();
+		Page<Product> page = null;
 		
 		if (keyword != null && !keyword.isEmpty()) {
 			if (categoryId != null && categoryId > 0) {
 				String categoryIdMatch = "-" + String.valueOf(categoryId) + "-";
-				return repo.searchInCategory(categoryId, categoryIdMatch, keyword, pageable);
+				page = repo.searchInCategory(categoryId, categoryIdMatch, keyword, pageable);
+			} else {
+				page = repo.findAll(keyword, pageable);
 			}
-			return repo.findAll(keyword, pageable);
+		} else {
+			if (categoryId != null && categoryId > 0) {
+				String categoryIdMatch = "-" + String.valueOf(categoryId) + "-";
+				page = repo.findAllInCategory(categoryId, categoryIdMatch, pageable);
+			} else {		
+				page = repo.findAll(pageable);
+			}
 		}
 		
-		if (categoryId != null && categoryId > 0) {
-			String categoryIdMatch = "-" + String.valueOf(categoryId) + "-";
-			return repo.findAllInCategory(categoryId, categoryIdMatch, pageable);
-		}
-		
-		return repo.findAll(pageable);		
+		helper.updateModelAttributes(pageNum, page);
 	}	
-	 
 	
 	public Product save(Product product) {
 		if (product.getId() == null) {
