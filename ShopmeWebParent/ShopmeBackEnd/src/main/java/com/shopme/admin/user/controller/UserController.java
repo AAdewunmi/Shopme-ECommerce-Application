@@ -18,6 +18,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.shopme.admin.FileUploadUtil;
+import com.shopme.admin.paging.PagingAndSortingHelper;
+import com.shopme.admin.paging.PagingAndSortingParam;
 import com.shopme.admin.user.UserService;
 import com.shopme.admin.user.export.UserCsvExporter;
 import com.shopme.admin.user.export.UserExcelExporter;
@@ -65,6 +67,15 @@ public class UserController {
 	@GetMapping("/users")
 	public String listFirstPage() {
 		return defaultRedirectURL;
+	}
+	
+	@GetMapping("/users/page/{pageNum}")
+	public String listByPage(
+			@PagingAndSortingParam(listName = "listUsers", moduleURL = "/users") PagingAndSortingHelper helper,
+			@PathVariable(name = "pageNum") int pageNum) {
+		service.listByPage(pageNum, helper);		
+		
+		return "users/users";		
 	}
 	
 	@GetMapping("/users/new")
