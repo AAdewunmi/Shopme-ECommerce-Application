@@ -26,48 +26,52 @@ import com.shopme.common.entity.Category;
 @CrossOrigin
 public class BrandController {
 	
-	@Autowired
-	private BrandService brandService;
+	/*
+	 * @Autowired private BrandService brandService;
+	 * 
+	 * @Autowired private CategoryService categoryService;
+	 * 
+	 * @GetMapping("/brands") public String listAll(Model model) { List<Brand>
+	 * listBrands = brandService.listAll(); model.addAttribute("listBrands",
+	 * listBrands); return "brands/brands"; }
+	 * 
+	 * @GetMapping("/brands/page/{pageNum}") public String listByPage(
+	 * 
+	 * @PathVariable(name = "pageNum") int pageNum, Model model,
+	 * 
+	 * @Param("sortField") String sortField, @Param("sortDir") String sortDir,
+	 * 
+	 * @Param("keyword") String keyword ) { Page<Brand> page =
+	 * brandService.listByPage(pageNum, sortField, sortDir, keyword); List<Brand>
+	 * listBrands = page.getContent();
+	 * 
+	 * long startCount = (pageNum - 1) * BrandService.BRANDS_PER_PAGE + 1; long
+	 * endCount = startCount + BrandService.BRANDS_PER_PAGE - 1; if (endCount >
+	 * page.getTotalElements()) { endCount = page.getTotalElements(); }
+	 * 
+	 * String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
+	 * 
+	 * model.addAttribute("currentPage", pageNum); model.addAttribute("totalPages",
+	 * page.getTotalPages()); model.addAttribute("startCount", startCount);
+	 * model.addAttribute("endCount", endCount); model.addAttribute("totalItems",
+	 * page.getTotalElements()); model.addAttribute("sortField", sortField);
+	 * model.addAttribute("sortDir", sortDir); model.addAttribute("reverseSortDir",
+	 * reverseSortDir); model.addAttribute("keyword", keyword);
+	 * model.addAttribute("listBrands", listBrands);
+	 * 
+	 * return "brands/brands"; }
+	 */
 	
-	@Autowired
+	private String defaultRedirectURL = "redirect:/brands/page/1?sortField=name&sortDir=asc";
+	@Autowired 
+	private BrandService brandService;	
+	
+	@Autowired 
 	private CategoryService categoryService;
 	
 	@GetMapping("/brands")
-	public String listAll(Model model) {
-		List<Brand> listBrands = brandService.listAll();
-		model.addAttribute("listBrands", listBrands);
-		return "brands/brands";
-	}
-	
-	@GetMapping("/brands/page/{pageNum}")
-	public String listByPage(
-			@PathVariable(name = "pageNum") int pageNum, Model model,
-			@Param("sortField") String sortField, @Param("sortDir") String sortDir,
-			@Param("keyword") String keyword
-			) {
-		Page<Brand> page = brandService.listByPage(pageNum, sortField, sortDir, keyword);
-		List<Brand> listBrands = page.getContent();
-		
-		long startCount = (pageNum - 1) * BrandService.BRANDS_PER_PAGE + 1;
-		long endCount = startCount + BrandService.BRANDS_PER_PAGE - 1;
-		if (endCount > page.getTotalElements()) {
-			endCount = page.getTotalElements();
-		}
-		
-		String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
-		
-		model.addAttribute("currentPage", pageNum);
-		model.addAttribute("totalPages", page.getTotalPages());
-		model.addAttribute("startCount", startCount);
-		model.addAttribute("endCount", endCount);
-		model.addAttribute("totalItems", page.getTotalElements());
-		model.addAttribute("sortField", sortField);
-		model.addAttribute("sortDir", sortDir);
-		model.addAttribute("reverseSortDir", reverseSortDir);
-		model.addAttribute("keyword", keyword);		
-		model.addAttribute("listBrands", listBrands);
-		
-		return "brands/brands";		
+	public String listFirstPage() {
+		return defaultRedirectURL;
 	}
 	
 	@GetMapping("/brands/new")
