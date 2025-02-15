@@ -62,7 +62,9 @@ public class UserController {
 	 */
 	
 	private String defaultRedirectURL = "redirect:/users/page/1?sortField=firstName&sortDir=asc";
-	@Autowired private UserService service;
+	
+	@Autowired 
+	private UserService service;
 	
 	@GetMapping("/users")
 	public String listFirstPage() {

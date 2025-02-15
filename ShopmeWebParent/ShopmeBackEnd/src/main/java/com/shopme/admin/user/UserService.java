@@ -13,6 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.shopme.admin.paging.PagingAndSortingHelper;
 import com.shopme.admin.user.controller.UserNotFoundException;
 import com.shopme.common.entity.Role;
 import com.shopme.common.entity.User;
@@ -40,14 +41,17 @@ public class UserService {
 		return (List<User>) userRepo.findAll();
 	}
 	
-	public Page<User> listByPage(int pageNum, String sortField, String sortDir, String keyword){
-		Sort sort = Sort.by(sortField);
-		sort = sortDir.equals("asc") ? sort.ascending() : sort.descending();
-		PageRequest pageable = PageRequest.of(pageNum - 1, USERS_PER_PAGE, sort);
-		if (keyword != null) {
-			return userRepo.findAll(keyword, pageable);
-		}
-		return userRepo.findAll(pageable);
+	/*
+	 * public Page<User> listByPage(int pageNum, String sortField, String sortDir,
+	 * String keyword){ Sort sort = Sort.by(sortField); sort = sortDir.equals("asc")
+	 * ? sort.ascending() : sort.descending(); PageRequest pageable =
+	 * PageRequest.of(pageNum - 1, USERS_PER_PAGE, sort); if (keyword != null) {
+	 * return userRepo.findAll(keyword, pageable); } return
+	 * userRepo.findAll(pageable); }
+	 */
+	
+	public void listByPage(int pageNum, PagingAndSortingHelper helper) {
+		helper.listEntities(pageNum, USERS_PER_PAGE, userRepo);
 	}
 	
 	public List<Role> listRoles(){
