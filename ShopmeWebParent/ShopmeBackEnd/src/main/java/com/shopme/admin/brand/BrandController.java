@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import com.shopme.admin.paging.PagingAndSortingHelper;
+import com.shopme.admin.paging.PagingAndSortingParam;
 
 import com.shopme.admin.FileUploadUtil;
 import com.shopme.admin.category.CategoryService;
@@ -72,6 +74,15 @@ public class BrandController {
 	@GetMapping("/brands")
 	public String listFirstPage() {
 		return defaultRedirectURL;
+	}
+	
+	@GetMapping("/brands/page/{pageNum}")
+	public String listByPage(
+			@PagingAndSortingParam(listName = "listBrands", moduleURL = "/brands") PagingAndSortingHelper helper,
+			@PathVariable(name = "pageNum") int pageNum
+			) {
+		brandService.listByPage(pageNum, helper);
+		return "brands/brands";		
 	}
 	
 	@GetMapping("/brands/new")
