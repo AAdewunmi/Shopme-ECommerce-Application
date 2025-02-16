@@ -145,10 +145,13 @@ public class ProductController {
 			@AuthenticationPrincipal ShopmeUserDetails loggedUser
 			) 
 					throws IOException {
-		if (loggedUser.hasRole("Salesperson")) {
-			productService.saveProductPrice(product);
-			ra.addFlashAttribute("message", "The product has been saved successfully.");			
-			return "redirect:/products";			
+		
+		if (!loggedUser.hasRole("Admin") && !loggedUser.hasRole("Editor")) {
+			if (loggedUser.hasRole("Salesperson")) {
+				productService.saveProductPrice(product);
+				ra.addFlashAttribute("message", "The product has been saved successfully.");			
+				return defaultRedirectURL;
+			}
 		}
 		
 		ProductSaveHelper.setMainImageName(mainImageMultipart, product);
@@ -164,7 +167,7 @@ public class ProductController {
 		
 		ra.addFlashAttribute("message", "The product has been saved successfully.");
 		
-		return "redirect:/products";
+		return defaultRedirectURL;
 	}
 
 	
