@@ -23,5 +23,10 @@ private Customer customer;
 	public String getPassword() {
 		return customer.getPassword();
 	}
+	
+	@Override
+	public String getUsername() {
+		return customer.getEmail();
+	}
 
 }
