@@ -43,5 +43,10 @@ private Customer customer;
 	public boolean isCredentialsNonExpired() {
 		return true;
 	}
+	
+	@Override
+	public boolean isEnabled() {
+		return customer.isEnabled();
+	}
 
 }
