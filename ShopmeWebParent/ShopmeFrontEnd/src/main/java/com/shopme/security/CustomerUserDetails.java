@@ -48,5 +48,9 @@ private Customer customer;
 	public boolean isEnabled() {
 		return customer.isEnabled();
 	}
+	
+	public String getFullName() {
+		return customer.getFirstName() + " " + customer.getLastName();
+	}
 
 }
