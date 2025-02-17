@@ -28,5 +28,10 @@ private Customer customer;
 	public String getUsername() {
 		return customer.getEmail();
 	}
+	
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
 
 }
