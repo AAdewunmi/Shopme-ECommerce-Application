@@ -33,5 +33,10 @@ private Customer customer;
 	public boolean isAccountNonExpired() {
 		return true;
 	}
+	
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
 
 }
