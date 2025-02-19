@@ -2,12 +2,14 @@ package com.shopme.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -17,10 +19,23 @@ public class WebSecurityConfig {
     PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
+    
     @Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 	    http.authorizeHttpRequests(auth -> auth
-	    		.anyRequest().permitAll());
+	    		.requestMatchers("/customer/**").authenticated()
+	    		.anyRequest().authenticated());
+	    http.formLogin(fL -> fL.loginPage("/login").usernameParameter("email").permitAll());
+	    http.logout(lOut -> {
+	      lOut.invalidateHttpSession(true)
+	          .clearAuthentication(true)
+	          .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+	          .logoutSuccessUrl("/login?logout")
+	          .permitAll();
+	    });
+	    http.rememberMe(rem -> rem
+	    		.key("AbcDefgHijKlmnOpqrs_1234567890")
+	    		.tokenValiditySeconds(7 * 24 * 60 * 60));
 	    return http.build();
 	  }
     @Bean
