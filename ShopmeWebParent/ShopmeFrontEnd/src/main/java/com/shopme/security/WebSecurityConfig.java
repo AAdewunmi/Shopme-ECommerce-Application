@@ -12,8 +12,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import com.shopme.admin.security.ShopmeUserDetailsService;
-
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
