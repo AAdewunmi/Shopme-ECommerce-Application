@@ -36,15 +36,13 @@ public class WebSecurityConfig {
     @Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 	    http.authorizeHttpRequests(auth -> auth
-	    		.requestMatchers("/customer/**").authenticated()
+	    		.requestMatchers("/customer").authenticated()
 	    		.anyRequest().authenticated());
-	    http.formLogin(fL -> fL.loginPage("/login").usernameParameter("email").permitAll());
+	    http.formLogin(fL -> fL.loginPage("/login").usernameParameter("email")
+	    		.defaultSuccessUrl("/", true).permitAll());
+	    http.formLogin(formLogin -> formLogin.defaultSuccessUrl("/"));
 	    http.logout(lOut -> {
-	      lOut.invalidateHttpSession(true)
-	          .clearAuthentication(true)
-	          .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-	          .logoutSuccessUrl("/login?logout")
-	          .permitAll();
+	      lOut.permitAll();
 	    });
 	    http.rememberMe(rem -> rem
 	    		.key("AbcDefgHijKlmnOpqrs_1234567890")
