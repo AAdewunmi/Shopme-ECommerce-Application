@@ -26,7 +26,8 @@ public class WebSecurityConfig {
 		return new CustomerUserDetailsService();
 	}
     
-    @Bean DaoAuthenticationProvider authenticationProvider() {
+    @Bean 
+    DaoAuthenticationProvider authenticationProvider() {
 		 DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
 		 authProvider.setUserDetailsService(userDetailsService());
 		 authProvider.setPasswordEncoder(passwordEncoder()); 
@@ -36,11 +37,9 @@ public class WebSecurityConfig {
     @Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 	    http.authorizeHttpRequests(auth -> auth
-	    		.requestMatchers("/customer").authenticated()
 	    		.anyRequest().authenticated());
 	    http.formLogin(fL -> fL.loginPage("/login").usernameParameter("email")
 	    		.defaultSuccessUrl("/", true).permitAll());
-	    http.formLogin(formLogin -> formLogin.defaultSuccessUrl("/"));
 	    http.logout(lOut -> {
 	      lOut.permitAll();
 	    });
