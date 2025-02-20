@@ -23,7 +23,7 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 					<a class="nav-link" href="">Shipping &amp; Delivery</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="">Login</a>
+					<a class="nav-link" href="@{/login}">Login</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" th:href="@{/register}">Register</a>
@@ -39,6 +39,13 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
 <div th:fragment="search_nav" class="row">
 	<div class="col-md">
+		
+		<th:block sec:authorize="isAuthenticated()">	
+		<form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
+			<input type="submit" value="Logout" />
+		</form>
+		</th:block>
+		
 		<nav class="navbar navbar-expand-sm bg-light">
 			<div class="collapse navbar-collapse" id="searchNavbar">
 				<form class="form-inline" th:action="@{/search}" method="get">
@@ -47,6 +54,38 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 						placeholder="keyword" required />
 					<input type="submit" value="Search" class="btn btn-outline-success" />
 				</form>
+				<ul class="navbar-nav">						
+					<th:block sec:authorize="isAuthenticated()">
+					<li class="nav-item">
+						<b><a class="nav-link" th:href="@{/customer}" 
+								sec:authentication="principal.fullName"></a></b>
+					</li>
+					
+					<li class="nav-item">
+						<a class="nav-link" href="">Addresses</a>
+					</li>
+										
+					<li class="nav-item">
+						<a class="nav-link" href="">Questions</a>
+					</li>
+															
+					<li class="nav-item">
+						<a class="nav-link" href="">Reviews</a>
+					</li>
+																				
+					<li class="nav-item">
+						<a class="nav-link" href="">Orders</a>
+					</li>
+					
+					<li class="nav-item">
+						<a class="nav-link" href="">Cart</a>
+					</li>
+					
+					<li class="nav-item">
+						<a class="nav-link" href="javascript: document.logoutForm.submit()">Logout</a>
+					</li>					
+					</th:block>						
+				</ul>				
 			</div>
 		</nav>
 	</div>
