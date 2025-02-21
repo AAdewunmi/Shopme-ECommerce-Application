@@ -198,5 +198,14 @@ public class Customer {
 	public String getFullName() {
 		return firstName + " " + lastName;
 	}
+
+	public AuthenticationType getAuthenticationType() {
+		return authenticationType;
+	}
+
+	public void setAuthenticationType(AuthenticationType authenticationType) {
+		this.authenticationType = authenticationType;
+	}
+	
 	
 }
