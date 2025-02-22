@@ -37,6 +37,7 @@ public class WebSecurityConfig {
     @Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 	    http.authorizeHttpRequests(auth -> auth
+	    		.requestMatchers("/customer/**").permitAll()
 	    		.anyRequest().authenticated());
 	    http.formLogin(fL -> fL.loginPage("/login").usernameParameter("email")
 	    		.defaultSuccessUrl("/", true).permitAll());
@@ -51,7 +52,7 @@ public class WebSecurityConfig {
     
     @Bean
 	WebSecurityCustomizer configureWebSecurity() throws Exception { 
- 		return (web) -> web.ignoring().requestMatchers("/images/**","/js/**", "/webjars/**"); 
+ 		return (web) -> web.ignoring().requestMatchers("/images/**","/js/**", "/webjars/**","/site-logo/**"); 
  	}
 
 }
