@@ -10,6 +10,11 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6" />
 		<h2>Customer Login</h2>
 	</div>
 	
+	<div class="mt-3">
+		<a class="btn btn-lg btn-secondary fab fa-google" 
+		th:href="@{/oauth2/authorization/google}">&nbsp;&nbsp;Continue with Google</a>
+	</div>
+	&nbsp;&nbsp;
 	<form th:action="@{/login}" method="post" style="max-width: 350px; margin: 0 auto">
 		<div th:if="${param.error}">
 			<p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
