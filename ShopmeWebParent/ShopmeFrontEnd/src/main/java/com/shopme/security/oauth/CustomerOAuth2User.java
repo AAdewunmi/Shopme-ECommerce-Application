@@ -21,4 +21,9 @@ public class CustomerOAuth2User implements OAuth2User {
 	public Map<String, Object> getAttributes() {
 		return oauth2User.getAttributes();
 	}
+	
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return oauth2User.getAuthorities();
+	}
 }
