@@ -8,22 +8,17 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 
 public class CustomerOAuth2User implements OAuth2User {
 
+	private String clientName;
+	private String fullName;
+	private OAuth2User oauth2User;
+	
+	public CustomerOAuth2User(OAuth2User user, String clientName) {
+		this.oauth2User = user;
+		this.clientName = clientName;
+	}
+
 	@Override
 	public Map<String, Object> getAttributes() {
-		// TODO Auto-generated method stub
-		return null;
+		return oauth2User.getAttributes();
 	}
-
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
