@@ -24,6 +24,8 @@ public class WebSecurityConfig {
 	private CustomerOAuth2UserService customerOAuth2UserService;
 	@Autowired
 	private OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
+	@Autowired
+	DatabaseLoginSuccessHandler databaseLoginSuccessHandler;
 
     @Bean
     PasswordEncoder passwordEncoder() {
@@ -49,7 +51,9 @@ public class WebSecurityConfig {
 	    		.requestMatchers("/customer/**").permitAll()
 	    		.anyRequest().authenticated());
 	    http.formLogin(fL -> fL.loginPage("/login").usernameParameter("email")
-	    		.defaultSuccessUrl("/", true).permitAll());
+	    		.defaultSuccessUrl("/", true)
+	    		.successHandler(databaseLoginSuccessHandler)
+	    		.permitAll());
 	    http.logout(lOut -> {
 	      lOut.permitAll();
 	    try {
