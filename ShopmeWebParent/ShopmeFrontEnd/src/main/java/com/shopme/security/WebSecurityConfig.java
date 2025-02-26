@@ -1,5 +1,6 @@
 package com.shopme.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -10,11 +11,19 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+
+import com.shopme.security.oauth.CustomerOAuth2UserService;
+import com.shopme.security.oauth.OAuth2LoginSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
+	
+	@Autowired
+	private CustomerOAuth2UserService customerOAuth2UserService;
+	@Autowired
+	private OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
 
     @Bean
     PasswordEncoder passwordEncoder() {
@@ -43,6 +52,18 @@ public class WebSecurityConfig {
 	    		.defaultSuccessUrl("/", true).permitAll());
 	    http.logout(lOut -> {
 	      lOut.permitAll();
+	    try {
+	    	//http.oauth2Login(oauth2 -> oauth2
+                //.loginPage("/login") // Custom login page
+                //.userInfoEndpoint(userInfo -> userInfo
+                    //.userService(customerOAuth2UserService) // Custom OAuth2UserService
+	    			//.successHandler(oAuth2LoginSuccessHandler); 
+                //)
+            //);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	    });
 	    http.rememberMe(rem -> rem
 	    		.key("AbcDefgHijKlmnOpqrs_1234567890")

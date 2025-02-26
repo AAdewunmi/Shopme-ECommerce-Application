@@ -207,5 +207,4 @@ public class Customer {
 		this.authenticationType = authenticationType;
 	}
 	
-	
 }
