@@ -57,7 +57,7 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 				<ul class="navbar-nav">						
 					<th:block sec:authorize="isAuthenticated()">
 					<li class="nav-item">
-						<b><a class="nav-link" th:href="@{/customer}" 
+						<b><a class="nav-link" th:href="@{/account_details}" 
 								sec:authentication="principal.fullName"></a></b>
 					</li>
 					
