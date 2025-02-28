@@ -44,3 +44,7 @@ function showModalDialog(title, message) {
 	$("#modalBody").text(message);
 	$("#modalDialog").modal();
 }
+
+function showErrorModal(message) {
+	showModalDialog("Error", message);
+}
