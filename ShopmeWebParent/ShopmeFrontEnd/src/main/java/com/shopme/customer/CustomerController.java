@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.shopme.Utility;
 import com.shopme.common.entity.Country;
 import com.shopme.common.entity.Customer;
+import com.shopme.security.CustomerUserDetails;
 import com.shopme.security.oauth.CustomerOAuth2User;
 import com.shopme.setting.EmailSettingBag;
 import com.shopme.setting.SettingService;
@@ -130,5 +131,23 @@ public class CustomerController {
 		updateNameForAuthenticatedCustomer(customer, request);
 		
 		return "redirect:/account_details";
+	}
+	
+	private void updateNameForAuthenticatedCustomer(Customer customer, HttpServletRequest request) {
+		Object principal = request.getUserPrincipal();
+		
+		if (principal instanceof UsernamePasswordAuthenticationToken 
+				|| principal instanceof RememberMeAuthenticationToken) {
+			CustomerUserDetails userDetails = getCustomerUserDetailsObject(principal);
+			Customer authenticatedCustomer = userDetails.getCustomer();
+			authenticatedCustomer.setFirstName(customer.getFirstName());
+			authenticatedCustomer.setLastName(customer.getLastName());
+			
+		} else if (principal instanceof OAuth2AuthenticationToken) {
+			OAuth2AuthenticationToken oauth2Token = (OAuth2AuthenticationToken) principal;
+			CustomerOAuth2User oauth2User = (CustomerOAuth2User) oauth2Token.getPrincipal();
+			String fullName = customer.getFirstName() + " " + customer.getLastName();
+			oauth2User.setFullName(fullName);
+		}		
 	}
 }
