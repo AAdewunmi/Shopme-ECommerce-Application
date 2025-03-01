@@ -48,3 +48,7 @@ function showModalDialog(title, message) {
 function showErrorModal(message) {
 	showModalDialog("Error", message);
 }
+
+function showWarningModal(message) {
+	showModalDialog("Warning", message);
+}
