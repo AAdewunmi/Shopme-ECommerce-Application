@@ -150,4 +150,17 @@ public class CustomerController {
 			oauth2User.setFullName(fullName);
 		}		
 	}
+	
+	private CustomerUserDetails getCustomerUserDetailsObject(Object principal) {
+		CustomerUserDetails userDetails = null;
+		if (principal instanceof UsernamePasswordAuthenticationToken) {
+			UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) principal;
+			userDetails = (CustomerUserDetails) token.getPrincipal();
+		} else if (principal instanceof RememberMeAuthenticationToken) {
+			RememberMeAuthenticationToken token = (RememberMeAuthenticationToken) principal;
+			userDetails = (CustomerUserDetails) token.getPrincipal();
+		}
+		
+		return userDetails;
+	}
 }
