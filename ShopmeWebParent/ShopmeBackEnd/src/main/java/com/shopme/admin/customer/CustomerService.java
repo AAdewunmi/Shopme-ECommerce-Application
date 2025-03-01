@@ -76,7 +76,7 @@ public static final int CUSTOMERS_PER_PAGE = 10;
 		customerInForm.setEnabled(customerInDB.isEnabled());
 		customerInForm.setCreatedTime(customerInDB.getCreatedTime());
 		customerInForm.setVerificationCode(customerInDB.getVerificationCode());
-		
+		customerInForm.setResetPasswordToken(customerInDB.getResetPasswordToken());
 		customerRepo.save(customerInForm);
 	}
 	
