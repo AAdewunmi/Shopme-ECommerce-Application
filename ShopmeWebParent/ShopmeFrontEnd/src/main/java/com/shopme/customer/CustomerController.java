@@ -121,4 +121,14 @@ public class CustomerController {
 		return customerEmail;
 	}
 	
+	@PostMapping("/update_account_details")
+	public String updateAccountDetails(Model model, Customer customer, RedirectAttributes ra,
+			HttpServletRequest request) {
+		customerService.update(customer);
+		ra.addFlashAttribute("message", "Your account details have been updated.");
+		
+		updateNameForAuthenticatedCustomer(customer, request);
+		
+		return "redirect:/account_details";
+	}
 }
