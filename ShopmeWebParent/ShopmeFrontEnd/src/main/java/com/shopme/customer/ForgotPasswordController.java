@@ -3,6 +3,8 @@ package com.shopme.customer;
 import java.io.UnsupportedEncodingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,9 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.shopme.Utility;
 import com.shopme.common.exception.CustomerNotFoundException;
+import com.shopme.setting.EmailSettingBag;
 import com.shopme.setting.SettingService;
 
 import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
@@ -45,5 +49,32 @@ public class ForgotPasswordController {
 		}
 		
 		return "customer/forgot_password_form";
+	}
+	
+	private void sendEmail(String link, String email) 
+			throws UnsupportedEncodingException, MessagingException {
+		EmailSettingBag emailSettings = settingService.getEmailSettings();
+		JavaMailSenderImpl mailSender = Utility.prepareMailSender(emailSettings);
+		
+		String toAddress = email;
+		String subject = "Here's the link to reset your password";
+		
+		String content = "<p>Hello,</p>"
+				+ "<p>You have requested to reset your password.</p>"
+				+ "Click the link below to change your password:</p>"
+				+ "<p><a href=\"" + link + "\">Change my password</a></p>"
+				+ "<br>"
+				+ "<p>Ignore this email if you do remember your password, "
+				+ "or you have not made the request.</p>";
+		
+		MimeMessage message = mailSender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(message);
+		
+		helper.setFrom(emailSettings.getFromAddress(), emailSettings.getSenderName());
+		helper.setTo(toAddress);
+		helper.setSubject(subject);		
+		
+		helper.setText(content, true);
+		mailSender.send(message);
 	}
 }
