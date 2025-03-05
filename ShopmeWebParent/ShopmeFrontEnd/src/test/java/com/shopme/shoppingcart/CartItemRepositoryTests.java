@@ -89,5 +89,18 @@ public class CartItemRepositoryTests {
 		
 		System.out.println(item);
 	}
+	
+	@Test
+	public void testUpdateQuantity() {
+		Integer customerId = 1;
+		Integer productId = 1;
+		Integer quantity = 4;
+		
+		repo.updateQuantity(quantity, customerId, productId);
+		
+		CartItem item = repo.findByCustomerAndProduct(new Customer(customerId), new Product(productId));
+		
+		assertThat(item.getQuantity()).isEqualTo(4);
+	}
 
 }
