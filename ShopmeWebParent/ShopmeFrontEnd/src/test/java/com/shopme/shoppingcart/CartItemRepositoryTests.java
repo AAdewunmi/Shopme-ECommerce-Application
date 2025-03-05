@@ -102,5 +102,17 @@ public class CartItemRepositoryTests {
 		
 		assertThat(item.getQuantity()).isEqualTo(4);
 	}
+	
+	@Test
+	public void testDeleteByCustomerAndProduct() {
+		Integer customerId = 10;
+		Integer productId = 10;
+		
+		repo.deleteByCustomerAndProduct(customerId, productId);
+		
+		CartItem item = repo.findByCustomerAndProduct(new Customer(customerId), new Product(productId));
+		
+		assertThat(item).isNull();
+	}
 
 }
