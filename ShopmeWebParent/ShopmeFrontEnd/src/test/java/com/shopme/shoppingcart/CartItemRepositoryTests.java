@@ -77,5 +77,17 @@ public class CartItemRepositoryTests {
 		
 		assertThat(listItems.size()).isEqualTo(2);
 	}
+	
+	@Test
+	public void testFindByCustomerAndProduct() {
+		Integer customerId = 1;
+		Integer productId = 1;
+		
+		CartItem item = repo.findByCustomerAndProduct(new Customer(customerId), new Product(productId));
+		
+		assertThat(item).isNotNull();
+		
+		System.out.println(item);
+	}
 
 }
