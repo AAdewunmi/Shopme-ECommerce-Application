@@ -78,6 +78,13 @@ public class Product {
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL,  orphanRemoval = true)
 	public List<ProductDetail> details = new ArrayList<>();
 
+	public Product(int id) {
+		this.id = id;
+	}
+
+	public Product() {
+	}
+
 	public Integer getId() {
 		return id;
 	}
