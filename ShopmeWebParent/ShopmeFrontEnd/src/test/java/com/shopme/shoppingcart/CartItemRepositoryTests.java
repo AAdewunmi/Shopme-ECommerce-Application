@@ -68,6 +68,14 @@ public class CartItemRepositoryTests {
 		assertThat(iterable).size().isGreaterThan(0);
 	}
 	
-	
+	@Test
+	public void testFindByCustomer() {
+		Integer customerId = 10;
+		List<CartItem> listItems = repo.findByCustomer(new Customer(customerId));
+		
+		listItems.forEach(System.out::println);
+		
+		assertThat(listItems.size()).isEqualTo(2);
+	}
 
 }
