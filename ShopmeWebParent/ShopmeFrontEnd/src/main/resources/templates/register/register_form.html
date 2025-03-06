@@ -194,22 +194,8 @@
 		
 		return false;
 	}
-	
-	function showModalDialog(title, message) {
-		$("#modalTitle").text(title);
-		$("#modalBody").text(message);
-		$("#modalDialog").modal();
-	}
-
-	function showErrorModal(message) {
-		showModalDialog("Error", message);
-	}
-
-	function showWarningModal(message) {
-		showModalDialog("Warning", message);
-	}	
-	
-	
 </script>
+<script type="text/javascript" th:src="@{/js/common_modal.js}"></script>
+<script type="text/javascript" th:src="@{/js/common_customer_form.js}"></script>
 </body>
 </html>
