@@ -11,7 +11,9 @@ import com.shopme.common.entity.Product;
 
 @Service
 public class ShoppingCartService {
-@Autowired private CartItemRepository cartRepo;
+	
+	@Autowired 
+	private CartItemRepository cartRepo;
 	
 	public Integer addProduct(Integer productId, Integer quantity, Customer customer) 
 			throws ShoppingCartException {
@@ -39,5 +41,9 @@ public class ShoppingCartService {
 		cartRepo.save(cartItem);
 		
 		return updatedQuantity;
+	}
+	
+	public List<CartItem> listCartItems(Customer customer) {
+		return cartRepo.findByCustomer(customer);
 	}
 }
