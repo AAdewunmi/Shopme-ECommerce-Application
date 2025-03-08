@@ -88,6 +88,12 @@
 	<div th:replace="navigation :: footer_menu"></div>
 </div>	
 <script type="text/javascript">
+
+	contextPath = "[[@{/}]]";
+	productId = "[[${product.id}]]";
+	var csrfHeaderName = "[[${_csrf.headerName}]]";
+	var csrfValue = "[[${_csrf.token}]]";	
+
 	$(document).ready(function() {
 		bigImage = $("#bigImage");
 		
@@ -108,5 +114,6 @@
 </script>
 <script type="text/javascript" th:src="@{/js/common_modal.js}"></script>
 <script type="text/javascript" th:src="@{/js/quantity_control.js}"></script>
+<script type="text/javascript" th:src="@{/js/add_to_cart.js}"></script>
 </body>
 </html>
