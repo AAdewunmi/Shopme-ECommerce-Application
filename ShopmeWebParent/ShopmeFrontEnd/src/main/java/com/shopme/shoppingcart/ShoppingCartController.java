@@ -41,4 +41,9 @@ public class ShoppingCartController {
 		
 		return "cart/shopping_cart";
 	}
+	
+	private Customer getAuthenticatedCustomer(HttpServletRequest request) {
+		String email = Utility.getEmailOfAuthenticatedCustomer(request);				
+		return customerService.getCustomerByEmail(email);
+	}	
 }
