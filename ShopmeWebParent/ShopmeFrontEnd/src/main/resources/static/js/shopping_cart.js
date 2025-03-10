@@ -123,3 +123,8 @@ function updateCountNumbers() {
 function formatCurrency(amount) {
 	return $.number(amount, decimalDigits, decimalSeparator, thousandsSeparator);
 }
+
+function clearCurrencyFormat(numberString) {
+	result = numberString.replaceAll(thousandsSeparator, "");
+	return result.replaceAll(decimalSeparator, ".");
+}
