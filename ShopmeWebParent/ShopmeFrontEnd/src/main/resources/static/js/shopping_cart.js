@@ -64,3 +64,20 @@ function updateQuantity(productId, quantity) {
 function updateSubtotal(updatedSubtotal, productId) {
 	$("#subtotal" + productId).text(formatCurrency(updatedSubtotal));
 }
+
+function updateTotal() {
+	total = 0.0;
+	productCount = 0;
+	
+	$(".subtotal").each(function(index, element) {
+		productCount++;
+		total += parseFloat(clearCurrencyFormat(element.innerHTML));
+	});
+	
+	if (productCount < 1) {
+		showEmptyShoppingCart();
+	} else {
+		$("#total").text(formatCurrency(total));		
+	}
+	
+}
