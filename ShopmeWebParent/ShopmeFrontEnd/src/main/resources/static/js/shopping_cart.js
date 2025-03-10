@@ -30,3 +30,16 @@ function decreaseQuantity(link) {
 		showWarningModal('Minimum quantity is 1');
 	}	
 }
+
+function increaseQuantity(link) {
+		productId = link.attr("pid");
+		quantityInput = $("#quantity" + productId);
+		newQuantity = parseInt(quantityInput.val()) + 1;
+		
+		if (newQuantity <= 5) {
+			quantityInput.val(newQuantity);
+			updateQuantity(productId, newQuantity);
+		} else {
+			showWarningModal('Maximum quantity is 5');
+		}	
+}
