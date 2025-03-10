@@ -81,3 +81,8 @@ function updateTotal() {
 	}
 	
 }
+
+function showEmptyShoppingCart() {
+	$("#sectionTotal").hide();
+	$("#sectionEmptyCartMessage").removeClass("d-none");
+}
