@@ -108,3 +108,8 @@ function removeProduct(link) {
 		showErrorModal("Error while removing product.");
 	});				
 }
+
+function removeProductHTML(rowNumber) {
+	$("#row" + rowNumber).remove();
+	$("#blankLine" + rowNumber).remove();
+}
