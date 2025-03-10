@@ -17,3 +17,16 @@ $(document).ready(function() {
 		removeProduct($(this));
 	});		
 });
+
+function decreaseQuantity(link) {
+	productId = link.attr("pid");
+	quantityInput = $("#quantity" + productId);
+	newQuantity = parseInt(quantityInput.val()) - 1;
+	
+	if (newQuantity > 0) {
+		quantityInput.val(newQuantity);
+		updateQuantity(productId, newQuantity);
+	} else {
+		showWarningModal('Minimum quantity is 1');
+	}	
+}
