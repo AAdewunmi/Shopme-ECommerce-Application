@@ -86,3 +86,25 @@ function showEmptyShoppingCart() {
 	$("#sectionTotal").hide();
 	$("#sectionEmptyCartMessage").removeClass("d-none");
 }
+
+function removeProduct(link) {
+	url = link.attr("href");
+
+	$.ajax({
+		type: "DELETE",
+		url: url,
+		beforeSend: function(xhr) {
+			xhr.setRequestHeader(csrfHeaderName, csrfValue);
+		}
+	}).done(function(response) {
+		rowNumber = link.attr("rowNumber");
+		removeProductHTML(rowNumber);
+		updateTotal();
+		updateCountNumbers();
+		
+		showModalDialog("Shopping Cart", response);
+		
+	}).fail(function() {
+		showErrorModal("Error while removing product.");
+	});				
+}
