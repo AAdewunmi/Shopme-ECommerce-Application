@@ -43,3 +43,20 @@ function increaseQuantity(link) {
 			showWarningModal('Maximum quantity is 5');
 		}	
 }
+
+function updateQuantity(productId, quantity) {
+	url = contextPath + "cart/update/" + productId + "/" + quantity;
+	
+	$.ajax({
+		type: "POST",
+		url: url,
+		beforeSend: function(xhr) {
+			xhr.setRequestHeader(csrfHeaderName, csrfValue);
+		}
+	}).done(function(updatedSubtotal) {
+		updateSubtotal(updatedSubtotal, productId);
+		updateTotal();
+	}).fail(function() {
+		showErrorModal("Error while updating product quantity.");
+	});	
+}
