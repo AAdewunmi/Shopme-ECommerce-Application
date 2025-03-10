@@ -60,3 +60,7 @@ function updateQuantity(productId, quantity) {
 		showErrorModal("Error while updating product quantity.");
 	});	
 }
+
+function updateSubtotal(updatedSubtotal, productId) {
+	$("#subtotal" + productId).text(formatCurrency(updatedSubtotal));
+}
