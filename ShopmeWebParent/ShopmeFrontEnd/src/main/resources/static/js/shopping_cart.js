@@ -119,3 +119,7 @@ function updateCountNumbers() {
 		element.innerHTML = "" + (index + 1);
 	}); 
 }
+
+function formatCurrency(amount) {
+	return $.number(amount, decimalDigits, decimalSeparator, thousandsSeparator);
+}
