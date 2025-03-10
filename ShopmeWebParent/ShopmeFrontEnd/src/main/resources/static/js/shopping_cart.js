@@ -113,3 +113,9 @@ function removeProductHTML(rowNumber) {
 	$("#row" + rowNumber).remove();
 	$("#blankLine" + rowNumber).remove();
 }
+
+function updateCountNumbers() {
+	$(".divCount").each(function(index, element) {
+		element.innerHTML = "" + (index + 1);
+	}); 
+}
