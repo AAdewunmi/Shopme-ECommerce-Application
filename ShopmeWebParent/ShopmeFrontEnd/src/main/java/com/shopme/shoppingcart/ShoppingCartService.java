@@ -10,7 +10,10 @@ import com.shopme.common.entity.Customer;
 import com.shopme.common.entity.Product;
 import com.shopme.product.ProductRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
+@Transactional
 public class ShoppingCartService {
 	
 	@Autowired 
