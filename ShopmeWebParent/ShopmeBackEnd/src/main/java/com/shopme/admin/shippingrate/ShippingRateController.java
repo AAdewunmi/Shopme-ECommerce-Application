@@ -86,4 +86,16 @@ private String defaultRedirectURL = "redirect:/shipping_rates/page/1?sortField=c
 		}
 		return defaultRedirectURL;
 	}
+	
+	@GetMapping("/shipping_rates/delete/{id}")
+	public String deleteRate(@PathVariable(name = "id") Integer id,
+			Model model, RedirectAttributes ra) {
+		try {
+			service.delete(id);
+			ra.addFlashAttribute("message", "The shipping rate ID " + id + " has been deleted.");
+		} catch (ShippingRateNotFoundException ex) {
+			ra.addFlashAttribute("message", ex.getMessage());
+		}
+		return defaultRedirectURL;
+	}	
 }
