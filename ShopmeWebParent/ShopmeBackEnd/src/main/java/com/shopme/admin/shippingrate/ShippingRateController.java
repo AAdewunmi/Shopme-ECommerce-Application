@@ -73,4 +73,17 @@ private String defaultRedirectURL = "redirect:/shipping_rates/page/1?sortField=c
 			return defaultRedirectURL;
 		}
 	}
+	
+	@GetMapping("/shipping_rates/cod/{id}/enabled/{supported}")
+	public String updateCODSupport(@PathVariable(name = "id") Integer id,
+			@PathVariable(name = "supported") Boolean supported,
+			Model model, RedirectAttributes ra) {
+		try {
+			service.updateCODSupport(id, supported);
+			ra.addFlashAttribute("message", "COD support for shipping rate ID " + id + " has been updated.");
+		} catch (ShippingRateNotFoundException ex) {
+			ra.addFlashAttribute("message", ex.getMessage());
+		}
+		return defaultRedirectURL;
+	}
 }
