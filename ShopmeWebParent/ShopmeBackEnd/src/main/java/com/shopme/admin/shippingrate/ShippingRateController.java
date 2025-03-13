@@ -25,4 +25,12 @@ private String defaultRedirectURL = "redirect:/shipping_rates/page/1?sortField=c
 	public String listFirstPage() {
 		return defaultRedirectURL;
 	}
+	
+	@GetMapping("/shipping_rates/page/{pageNum}")
+	public String listByPage(@PagingAndSortingParam(listName = "shippingRates", 
+						moduleURL = "/shipping_rates") PagingAndSortingHelper helper,
+						@PathVariable(name = "pageNum") int pageNum) {
+		service.listByPage(pageNum, helper);
+		return "shipping_rates/shipping_rates";
+	}	
 }
