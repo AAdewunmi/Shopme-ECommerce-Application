@@ -32,5 +32,16 @@ private String defaultRedirectURL = "redirect:/shipping_rates/page/1?sortField=c
 						@PathVariable(name = "pageNum") int pageNum) {
 		service.listByPage(pageNum, helper);
 		return "shipping_rates/shipping_rates";
-	}	
+	}
+	
+	@GetMapping("/shipping_rates/new")
+	public String newRate(Model model) {
+		List<Country> listCountries = service.listAllCountries();
+		
+		model.addAttribute("rate", new ShippingRate());
+		model.addAttribute("listCountries", listCountries);
+		model.addAttribute("pageTitle", "New Rate");
+		
+		return "shipping_rates/shipping_rate_form";		
+	}
 }
