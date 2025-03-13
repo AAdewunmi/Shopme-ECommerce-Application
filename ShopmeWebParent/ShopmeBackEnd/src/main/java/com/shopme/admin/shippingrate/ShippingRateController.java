@@ -55,4 +55,22 @@ private String defaultRedirectURL = "redirect:/shipping_rates/page/1?sortField=c
 		}
 		return defaultRedirectURL;
 	}
+	
+	@GetMapping("/shipping_rates/edit/{id}")
+	public String editRate(@PathVariable(name = "id") Integer id,
+			Model model, RedirectAttributes ra) {
+		try {
+			ShippingRate rate = service.get(id);
+			List<Country> listCountries = service.listAllCountries();
+			
+			model.addAttribute("listCountries", listCountries);			
+			model.addAttribute("rate", rate);
+			model.addAttribute("pageTitle", "Edit Rate (ID: " + id + ")");
+			
+			return "shipping_rates/shipping_rate_form";
+		} catch (ShippingRateNotFoundException ex) {
+			ra.addFlashAttribute("message", ex.getMessage());
+			return defaultRedirectURL;
+		}
+	}
 }
