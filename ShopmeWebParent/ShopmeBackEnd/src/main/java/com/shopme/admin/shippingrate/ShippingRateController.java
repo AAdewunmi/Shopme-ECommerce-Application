@@ -44,4 +44,15 @@ private String defaultRedirectURL = "redirect:/shipping_rates/page/1?sortField=c
 		
 		return "shipping_rates/shipping_rate_form";		
 	}
+	
+	@PostMapping("/shipping_rates/save")
+	public String saveRate(ShippingRate rate, RedirectAttributes ra) {
+		try {
+			service.save(rate);
+			ra.addFlashAttribute("message", "The shipping rate has been saved successfully.");
+		} catch (ShippingRateAlreadyExistsException ex) {
+			ra.addFlashAttribute("message", ex.getMessage());
+		}
+		return defaultRedirectURL;
+	}
 }
