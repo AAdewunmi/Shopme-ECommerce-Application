@@ -19,5 +19,7 @@ public interface ShippingRateRepository extends SearchRepository<ShippingRate, I
 	
 	@Query("SELECT sr FROM ShippingRate sr WHERE sr.country.name LIKE %?1% OR sr.state LIKE %?1%")
 	public Page<ShippingRate> findAll(String keyword, Pageable pageable);
+	
+	public Long countById(Integer id);
 
 }
