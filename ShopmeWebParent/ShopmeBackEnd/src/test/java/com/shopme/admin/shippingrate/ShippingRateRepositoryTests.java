@@ -38,4 +38,16 @@ public class ShippingRateRepositoryTests {
 		assertThat(savedRate.getId()).isGreaterThan(0);
 	}
 	
+	@Test
+	public void testUpdate() {
+		Integer rateId = 1;
+		ShippingRate rate = entityManager.find(ShippingRate.class, rateId);
+		rate.setRate(9.15f);
+		rate.setDays(2);
+		ShippingRate updatedRate = repo.save(rate);
+		
+		assertThat(updatedRate.getRate()).isEqualTo(9.15f);
+		assertThat(updatedRate.getDays()).isEqualTo(2);
+	}
+	
 }
