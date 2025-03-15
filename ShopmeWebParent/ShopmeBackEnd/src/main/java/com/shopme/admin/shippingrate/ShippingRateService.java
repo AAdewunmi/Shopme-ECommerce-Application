@@ -46,4 +46,12 @@ public class ShippingRateService {
 		shipRepo.save(rateInForm);
 	}
 	
+	public ShippingRate get(Integer id) throws ShippingRateNotFoundException {
+		try {
+			return shipRepo.findById(id).get();
+		} catch (NoSuchElementException ex) {
+			throw new ShippingRateNotFoundException("Could not find shipping rate with ID " + id);
+		}
+	}
+	
 }
