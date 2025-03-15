@@ -29,4 +29,8 @@ public class ShippingRateService {
 		helper.listEntities(pageNum, RATES_PER_PAGE, shipRepo);
 	}
 	
+	public List<Country> listAllCountries() {
+		return countryRepo.findAllByOrderByNameAsc();
+	}	
+	
 }
