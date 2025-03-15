@@ -50,4 +50,12 @@ public class ShippingRateRepositoryTests {
 		assertThat(updatedRate.getDays()).isEqualTo(2);
 	}
 	
+	@Test
+	public void testFindAll() {
+		List<ShippingRate> rates = (List<ShippingRate>) repo.findAll();
+		assertThat(rates.size()).isGreaterThan(0);
+		
+		rates.forEach(System.out::println);
+	}
+	
 }
