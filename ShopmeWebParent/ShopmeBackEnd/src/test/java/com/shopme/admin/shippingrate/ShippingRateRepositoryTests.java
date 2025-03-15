@@ -58,4 +58,14 @@ public class ShippingRateRepositoryTests {
 		rates.forEach(System.out::println);
 	}
 	
+	@Test
+	public void testFindByCountryAndState() {
+		Integer countryId = 106;
+		String state = "Maharashtra";
+		ShippingRate rate = repo.findByCountryAndState(countryId, state);
+		
+		assertThat(rate).isNotNull();
+		System.out.println(rate);
+	}
+	
 }
