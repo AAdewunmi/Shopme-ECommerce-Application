@@ -68,4 +68,13 @@ public class ShippingRateRepositoryTests {
 		System.out.println(rate);
 	}
 	
+	@Test
+	public void testUpdateCODSupport() {
+		Integer rateId = 1;
+		repo.updateCODSupport(rateId, false);
+		
+		ShippingRate rate = entityManager.find(ShippingRate.class, rateId);
+		assertThat(rate.isCodSupported()).isFalse();
+	}
+	
 }
