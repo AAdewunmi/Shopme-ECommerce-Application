@@ -77,4 +77,13 @@ public class ShippingRateRepositoryTests {
 		assertThat(rate.isCodSupported()).isFalse();
 	}
 	
+	@Test
+	public void testDelete() {
+		Integer rateId = 2;
+		repo.deleteById(rateId);
+		
+		ShippingRate rate = entityManager.find(ShippingRate.class, rateId);
+		assertThat(rate).isNull();
+	}
+	
 }
