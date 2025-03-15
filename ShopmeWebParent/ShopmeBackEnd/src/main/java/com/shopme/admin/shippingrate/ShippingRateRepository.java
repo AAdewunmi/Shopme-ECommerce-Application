@@ -4,11 +4,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 
 import com.shopme.admin.paging.SearchRepository;
 import com.shopme.common.entity.ShippingRate;
 
-public interface ShippingRateRepository extends SearchRepository<ShippingRate, Integer> {
+public interface ShippingRateRepository extends SearchRepository<ShippingRate, Integer>,
+CrudRepository<ShippingRate, Integer>{
 	
 	@Query("SELECT sr FROM ShippingRate sr WHERE sr.country.id = ?1 AND sr.state = ?2")
 	public ShippingRate findByCountryAndState(Integer countryId, String state);
