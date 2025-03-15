@@ -63,4 +63,13 @@ public class ShippingRateService {
 		shipRepo.updateCODSupport(id, codSupported);
 	}
 	
+	public void delete(Integer id) throws ShippingRateNotFoundException {
+		Long count = shipRepo.countById(id);
+		if (count == null || count == 0) {
+			throw new ShippingRateNotFoundException("Could not find shipping rate with ID " + id);
+			
+		}
+		shipRepo.deleteById(id);
+	}	
+	
 }
