@@ -45,4 +45,13 @@ public class AddressRepositoryTests {
 		assertThat(savedAddress).isNotNull();
 		assertThat(savedAddress.getId()).isGreaterThan(0);
 	}
+	
+	@Test
+	public void testFindByCustomer() {
+		Integer customerId = 5;
+		List<Address> listAddresses = repo.findByCustomer(new Customer(customerId));
+		assertThat(listAddresses.size()).isGreaterThan(0);
+		
+		listAddresses.forEach(System.out::println);
+	}
 }
