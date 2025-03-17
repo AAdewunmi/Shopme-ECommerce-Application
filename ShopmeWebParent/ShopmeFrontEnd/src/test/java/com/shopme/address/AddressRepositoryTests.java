@@ -77,4 +77,15 @@ public class AddressRepositoryTests {
 		Address updatedAddress = repo.save(address);
 		assertThat(updatedAddress.getPhoneNumber()).isEqualTo(phoneNumber);
 	}
+	
+	@Test
+	public void testDeleteByIdAndCustomer() {
+		Integer addressId = 2;
+		Integer customerId = 5;
+		
+		repo.deleteByIdAndCustomer(addressId, customerId);
+		
+		Address address = repo.findByIdAndCustomer(addressId, customerId);
+		assertThat(address).isNull();
+	}	
 }
