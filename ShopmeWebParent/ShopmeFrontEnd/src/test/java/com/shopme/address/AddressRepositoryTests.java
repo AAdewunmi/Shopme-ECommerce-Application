@@ -65,4 +65,16 @@ public class AddressRepositoryTests {
 		assertThat(address).isNotNull();
 		System.out.println(address);
 	}
+	
+	@Test
+	public void testUpdate() {
+		Integer addressId = 1;
+		String phoneNumber = "646-232-3932";
+		
+		Address address = repo.findById(addressId).get();
+		address.setPhoneNumber(phoneNumber);
+
+		Address updatedAddress = repo.save(address);
+		assertThat(updatedAddress.getPhoneNumber()).isEqualTo(phoneNumber);
+	}
 }
