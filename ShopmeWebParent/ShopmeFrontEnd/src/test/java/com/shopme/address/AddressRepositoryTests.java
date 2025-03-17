@@ -54,4 +54,15 @@ public class AddressRepositoryTests {
 		
 		listAddresses.forEach(System.out::println);
 	}
+	
+	@Test
+	public void testFindByIdAndCustomer() {
+		Integer addressId = 1;
+		Integer customerId = 5;
+		
+		Address address = repo.findByIdAndCustomer(addressId, customerId);
+		
+		assertThat(address).isNotNull();
+		System.out.println(address);
+	}
 }
