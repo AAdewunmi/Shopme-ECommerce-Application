@@ -67,4 +67,16 @@ public class AddressController {
 		return "address_book/address_form";
 	}
 	
+	@PostMapping("/address_book/save")
+	public String saveAddress(Address address, HttpServletRequest request, RedirectAttributes ra) {
+		Customer customer = getAuthenticatedCustomer(request);
+		
+		address.setCustomer(customer);
+		addressService.save(address);
+		
+		ra.addFlashAttribute("message", "The address has been saved successfully.");
+		
+		return "redirect:/address_book";
+	}
+	
 }
