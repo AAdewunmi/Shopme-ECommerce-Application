@@ -97,4 +97,11 @@ public class AddressRepositoryTests {
 		Address address = repo.findById(addressId).get();
 		assertThat(address.isDefaultForShipping()).isTrue();
 	}
+	
+	@Test
+	public void testSetNonDefaultAddresses() {
+		Integer addressId = 8;
+		Integer customerId = 5;
+		repo.setNonDefaultForOthers(addressId, customerId);			
+	}
 }
