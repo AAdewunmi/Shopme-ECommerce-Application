@@ -21,4 +21,8 @@ public class AddressService {
 		return repo.findByCustomer(customer);
 	}
 	
+	public void save(Address address) {
+		repo.save(address);
+	}
+	
 }
