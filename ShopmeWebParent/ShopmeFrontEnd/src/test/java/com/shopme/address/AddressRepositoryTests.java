@@ -80,12 +80,21 @@ public class AddressRepositoryTests {
 	
 	@Test
 	public void testDeleteByIdAndCustomer() {
-		Integer addressId = 2;
+		Integer addressId = 3;
 		Integer customerId = 5;
 		
 		repo.deleteByIdAndCustomer(addressId, customerId);
 		
 		Address address = repo.findByIdAndCustomer(addressId, customerId);
 		assertThat(address).isNull();
-	}	
+	}
+	
+	@Test
+	public void testSetDefault() {
+		Integer addressId = 8;
+		repo.setDefaultAddress(addressId);
+		
+		Address address = repo.findById(addressId).get();
+		assertThat(address.isDefaultForShipping()).isTrue();
+	}
 }
