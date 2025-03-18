@@ -25,4 +25,8 @@ public class AddressService {
 		repo.save(address);
 	}
 	
+	public Address get(Integer addressId, Integer customerId) {
+		return repo.findByIdAndCustomer(addressId, customerId);
+	}
+	
 }
