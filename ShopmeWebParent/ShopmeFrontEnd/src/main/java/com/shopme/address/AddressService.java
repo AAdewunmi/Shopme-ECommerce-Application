@@ -29,4 +29,8 @@ public class AddressService {
 		return repo.findByIdAndCustomer(addressId, customerId);
 	}
 	
+	public void delete(Integer addressId, Integer customerId) {
+		repo.deleteByIdAndCustomer(addressId, customerId);
+	}
+	
 }
