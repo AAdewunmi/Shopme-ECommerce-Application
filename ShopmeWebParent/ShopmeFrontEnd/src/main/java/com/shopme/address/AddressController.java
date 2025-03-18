@@ -79,4 +79,19 @@ public class AddressController {
 		return "redirect:/address_book";
 	}
 	
+	@GetMapping("/address_book/edit/{id}")
+	public String editAddress(@PathVariable("id") Integer addressId, Model model,
+			HttpServletRequest request) {
+		Customer customer = getAuthenticatedCustomer(request);
+		List<Country> listCountries = customerService.listAllCountries();
+		
+		Address address = addressService.get(addressId, customer.getId());
+
+		model.addAttribute("address", address);
+		model.addAttribute("listCountries", listCountries);
+		model.addAttribute("pageTitle", "Edit Address (ID: " + addressId + ")");
+		
+		return "address_book/address_form";
+	}
+	
 }
