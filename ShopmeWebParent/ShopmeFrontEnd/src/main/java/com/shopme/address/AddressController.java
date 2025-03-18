@@ -54,6 +54,17 @@ public class AddressController {
 	private Customer getAuthenticatedCustomer(HttpServletRequest request) {
 		String email = Utility.getEmailOfAuthenticatedCustomer(request);				
 		return customerService.getCustomerByEmail(email);
-	}	
+	}
+	
+	@GetMapping("/address_book/new")
+	public String newAddress(Model model) {
+		List<Country> listCountries = customerService.listAllCountries();
+		
+		model.addAttribute("listCountries", listCountries);
+		model.addAttribute("address", new Address());
+		model.addAttribute("pageTitle", "Add New Address");
+		
+		return "address_book/address_form";
+	}
 	
 }
