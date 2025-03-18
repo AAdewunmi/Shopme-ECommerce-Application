@@ -24,10 +24,12 @@ import jakarta.servlet.http.HttpServletRequest;
 public class AddressController {
 	
 	@Autowired 
-	private AddressService addressService;
+	private 
+	AddressService addressService;
 	
 	@Autowired 
-	private CustomerService customerService;	
+	private 
+	CustomerService customerService;	
 	
 	@GetMapping("/address_book")
 	public String showAddressBook(Model model, HttpServletRequest request) {
@@ -48,5 +50,10 @@ public class AddressController {
 		
 		return "address_book/addresses";
 	}
+	
+	private Customer getAuthenticatedCustomer(HttpServletRequest request) {
+		String email = Utility.getEmailOfAuthenticatedCustomer(request);				
+		return customerService.getCustomerByEmail(email);
+	}	
 	
 }
