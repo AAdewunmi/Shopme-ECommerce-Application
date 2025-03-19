@@ -51,7 +51,8 @@ public class WebSecurityConfig {
 	    http.authorizeHttpRequests(auth -> auth
 	    		.requestMatchers("/account_details/**", 
 	    				"/update_account_details/**",
-	    				"/cart"
+	    				"/cart",
+	    				"/address_book/**"
 	    			    ).permitAll()
 	    		.anyRequest().authenticated());
 	    http.formLogin(fL -> fL.loginPage("/login").usernameParameter("email")
