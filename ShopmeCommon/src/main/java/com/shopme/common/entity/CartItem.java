@@ -1,5 +1,7 @@
 package com.shopme.common.entity;
 
+import com.shopme.common.entity.product.Product;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

@@ -19,8 +19,7 @@ import jakarta.persistence.Transient;
 import com.shopme.common.entity.Brand;
 import com.shopme.common.entity.Category;
 import com.shopme.common.entity.IdBasedEntity;
-import com.shopme.common.entity.ProductDetail;
-import com.shopme.common.entity.ProductImage;
+
 
 @Entity
 @Table(name = "products")

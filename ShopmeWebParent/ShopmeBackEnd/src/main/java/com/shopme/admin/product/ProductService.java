@@ -12,7 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.shopme.admin.paging.PagingAndSortingHelper;
-import com.shopme.common.entity.Product;
+import com.shopme.common.entity.product.*;
 import com.shopme.common.exception.ProductNotFoundException;
 
 import jakarta.transaction.Transactional;
