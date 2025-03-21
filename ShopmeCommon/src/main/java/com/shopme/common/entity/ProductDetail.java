@@ -76,6 +76,5 @@ public class ProductDetail {
 		this.product = product;
 	}
 	
-	
 
 }
