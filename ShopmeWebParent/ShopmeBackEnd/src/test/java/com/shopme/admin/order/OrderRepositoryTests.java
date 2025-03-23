@@ -63,4 +63,52 @@ public class OrderRepositoryTests {
 		
 		assertThat(savedOrder.getId()).isGreaterThan(0);		
 	}
+	
+	@Test
+	public void testCreateNewOrderWithMultipleProducts() {
+		Customer customer = entityManager.find(Customer.class, 10);
+		Product product1 = entityManager.find(Product.class, 20);
+		Product product2 = entityManager.find(Product.class, 40);
+		
+		Order mainOrder = new Order();
+		mainOrder.setOrderTime(new Date());
+		mainOrder.setCustomer(customer);
+		mainOrder.copyAddressFromCustomer();
+		
+		OrderDetail orderDetail1 = new OrderDetail();
+		orderDetail1.setProduct(product1);
+		orderDetail1.setOrder(mainOrder);
+		orderDetail1.setProductCost(product1.getCost());
+		orderDetail1.setShippingCost(10);
+		orderDetail1.setQuantity(1);
+		orderDetail1.setSubtotal(product1.getPrice());
+		orderDetail1.setUnitPrice(product1.getPrice());
+		
+		OrderDetail orderDetail2 = new OrderDetail();
+		orderDetail2.setProduct(product2);
+		orderDetail2.setOrder(mainOrder);
+		orderDetail2.setProductCost(product2.getCost());
+		orderDetail2.setShippingCost(20);
+		orderDetail2.setQuantity(2);
+		orderDetail2.setSubtotal(product2.getPrice() * 2);
+		orderDetail2.setUnitPrice(product2.getPrice());
+		
+		mainOrder.getOrderDetails().add(orderDetail1);
+		mainOrder.getOrderDetails().add(orderDetail2);
+		
+		mainOrder.setShippingCost(30);
+		mainOrder.setProductCost(product1.getCost() + product2.getCost());
+		mainOrder.setTax(0);
+		float subtotal = product1.getPrice() + product2.getPrice() * 2;
+		mainOrder.setSubtotal(subtotal);
+		mainOrder.setTotal(subtotal + 30);
+		
+		mainOrder.setPaymentMethod(PaymentMethod.CREDIT_CARD);
+		mainOrder.setStatus(OrderStatus.PACKAGED);
+		mainOrder.setDeliverDate(new Date());
+		mainOrder.setDeliverDays(3);
+		
+		Order savedOrder = repo.save(mainOrder);		
+		assertThat(savedOrder.getId()).isGreaterThan(0);		
+	}
 }
