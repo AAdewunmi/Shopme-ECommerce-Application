@@ -3,11 +3,13 @@ package com.shopme.admin.order;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 
 import com.shopme.admin.paging.SearchRepository;
 import com.shopme.common.entity.order.Order;
 
-public interface OrderRepository extends SearchRepository<Order, Integer> {
+public interface OrderRepository extends SearchRepository<Order, Integer>,
+CrudRepository<Order, Integer>{
 	
 	@Query("SELECT o FROM Order o WHERE o.firstName LIKE %?1% OR"
 			+ " o.lastName LIKE %?1% OR o.phoneNumber LIKE %?1% OR"
