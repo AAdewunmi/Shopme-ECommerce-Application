@@ -120,4 +120,19 @@ public class OrderRepositoryTests {
 		
 		orders.forEach(System.out::println);
 	}
+	
+	@Test
+	public void testUpdateOrder() {
+		Integer orderId = 2;
+		Order order = repo.findById(orderId).get();
+		
+		order.setStatus(OrderStatus.SHIPPING);
+		order.setPaymentMethod(PaymentMethod.COD);
+		order.setOrderTime(new Date());
+		order.setDeliverDays(2);
+		
+		Order updatedOrder = repo.save(order);
+		
+		assertThat(updatedOrder.getStatus()).isEqualTo(OrderStatus.SHIPPING);
+	}
 }
