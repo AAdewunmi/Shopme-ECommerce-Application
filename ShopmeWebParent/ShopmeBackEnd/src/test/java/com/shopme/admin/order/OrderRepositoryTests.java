@@ -111,4 +111,13 @@ public class OrderRepositoryTests {
 		Order savedOrder = repo.save(mainOrder);		
 		assertThat(savedOrder.getId()).isGreaterThan(0);		
 	}
+	
+	@Test
+	public void testListOrders() {
+		Iterable<Order> orders = repo.findAll();
+		
+		assertThat(orders).hasSizeGreaterThan(0);
+		
+		orders.forEach(System.out::println);
+	}
 }
