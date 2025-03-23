@@ -135,4 +135,13 @@ public class OrderRepositoryTests {
 		
 		assertThat(updatedOrder.getStatus()).isEqualTo(OrderStatus.SHIPPING);
 	}
+	
+	@Test
+	public void testGetOrder() {
+		Integer orderId = 2;
+		Order order = repo.findById(orderId).get();
+		
+		assertThat(order).isNotNull();
+		System.out.println(order);
+	}
 }
