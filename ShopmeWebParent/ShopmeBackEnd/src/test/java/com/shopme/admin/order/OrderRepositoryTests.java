@@ -144,4 +144,13 @@ public class OrderRepositoryTests {
 		assertThat(order).isNotNull();
 		System.out.println(order);
 	}
+	
+	@Test
+	public void testDeleteOrder() {
+		Integer orderId = 3;
+		repo.deleteById(orderId);
+		
+		Optional<Order> result = repo.findById(orderId);
+		assertThat(result).isNotPresent();
+	}
 }
