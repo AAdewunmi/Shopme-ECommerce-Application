@@ -45,4 +45,12 @@ private String defaultRedirectURL = "redirect:/orders/page/1?sortField=orderTime
 		return "orders/orders";
 	}
 	
+	private void loadCurrencySetting(HttpServletRequest request) {
+		List<Setting> currencySettings = settingService.getCurrencySettings();
+		
+		for (Setting setting : currencySettings) {
+			request.setAttribute(setting.getKey(), setting.getValue());
+		}	
+	}
+	
 }
