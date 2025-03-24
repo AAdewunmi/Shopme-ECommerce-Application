@@ -1,5 +1,7 @@
 package com.shopme.admin.order;
 
+import java.util.NoSuchElementException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -43,5 +45,13 @@ public class OrderService {
 		}
 		
 		helper.updateModelAttributes(pageNum, page);		
+	}
+	
+	public Order get(Integer id) throws OrderNotFoundException {
+		try {
+			return repo.findById(id).get();
+		} catch (NoSuchElementException ex) {
+			throw new OrderNotFoundException("Could not find any orders with ID " + id);
+		}
 	}
 }
