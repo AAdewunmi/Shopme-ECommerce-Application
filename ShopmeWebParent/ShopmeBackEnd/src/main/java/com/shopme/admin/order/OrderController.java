@@ -33,4 +33,16 @@ private String defaultRedirectURL = "redirect:/orders/page/1?sortField=orderTime
 		return defaultRedirectURL;
 	}
 	
+	@GetMapping("/orders/page/{pageNum}")
+	public String listByPage(
+			@PagingAndSortingParam(listName = "listOrders", moduleURL = "/orders") PagingAndSortingHelper helper,
+			@PathVariable(name = "pageNum") int pageNum,
+			HttpServletRequest request) {
+
+		orderService.listByPage(pageNum, helper);
+		loadCurrencySetting(request);
+		
+		return "orders/orders";
+	}
+	
 }
