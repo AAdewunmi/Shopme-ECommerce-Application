@@ -46,7 +46,7 @@ public class WebSecurityConfig {
 	            .requestMatchers("/products", "/products/", "/products/detail/**",
 	            		"/products/page/**").hasAnyAuthority("Admin", "Editor", "Salesperson", "Shipper")
 	            .requestMatchers("/products/**").hasAnyAuthority("Admin", "Editor")
-	            
+	            .requestMatchers("/customers/**", "/orders/**").hasAnyAuthority("Admin", "Salesperson")
 	            .anyRequest().authenticated());
 	    http.formLogin(fL -> fL.loginPage("/login").usernameParameter("email").permitAll());
 	    http.logout(lOut -> {
