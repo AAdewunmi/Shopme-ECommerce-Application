@@ -53,4 +53,20 @@ private String defaultRedirectURL = "redirect:/orders/page/1?sortField=orderTime
 		}	
 	}
 	
+	@GetMapping("/orders/detail/{id}")
+	public String viewOrderDetails(@PathVariable("id") Integer id, Model model, 
+			RedirectAttributes ra, HttpServletRequest request) {
+		try {
+			Order order = orderService.get(id);
+			loadCurrencySetting(request);			
+			model.addAttribute("order", order);
+			
+			return "orders/order_details_modal";
+		} catch (OrderNotFoundException ex) {
+			ra.addFlashAttribute("message", ex.getMessage());
+			return defaultRedirectURL;
+		}
+		
+	}
+	
 }
