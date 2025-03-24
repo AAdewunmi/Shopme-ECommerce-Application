@@ -69,4 +69,16 @@ private String defaultRedirectURL = "redirect:/orders/page/1?sortField=orderTime
 		
 	}
 	
+	@GetMapping("/orders/delete/{id}")
+	public String deleteOrder(@PathVariable("id") Integer id, Model model, RedirectAttributes ra) {
+		try {
+			orderService.delete(id);;
+			ra.addFlashAttribute("message", "The order ID " + id + " has been deleted.");
+		} catch (OrderNotFoundException ex) {
+			ra.addFlashAttribute("message", ex.getMessage());
+		}
+		
+		return defaultRedirectURL;
+	}
+	
 }
