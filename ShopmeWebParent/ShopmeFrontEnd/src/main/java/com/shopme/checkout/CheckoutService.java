@@ -32,4 +32,21 @@ public class CheckoutService {
 		return checkoutInfo;
 	}
 	
+	private float calculateShippingCost(List<CartItem> cartItems, ShippingRate shippingRate) {
+		float shippingCostTotal = 0.0f;
+		
+		for (CartItem item : cartItems) {
+			Product product = item.getProduct();
+			float dimWeight = (product.getLength() * product.getWidth() * product.getHeight()) / DIM_DIVISOR;
+			float finalWeight = product.getWeight() > dimWeight ? product.getWeight() : dimWeight;
+			float shippingCost = finalWeight * item.getQuantity() * shippingRate.getRate();
+			
+			item.setShippingCost(shippingCost);
+			
+			shippingCostTotal += shippingCost;
+		}
+		
+		return shippingCostTotal;
+	}
+	
 }
