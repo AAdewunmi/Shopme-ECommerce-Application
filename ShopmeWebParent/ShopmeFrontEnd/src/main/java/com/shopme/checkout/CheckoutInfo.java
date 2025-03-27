@@ -68,5 +68,10 @@ public class CheckoutInfo {
 	public void setCodSupported(boolean codSupported) {
 		this.codSupported = codSupported;
 	}
+	
+	public String getPaymentTotal4PayPal() {
+		DecimalFormat formatter = new DecimalFormat("###,###.##");
+		return formatter.format(paymentTotal);
+	}
 
 }
