@@ -40,4 +40,23 @@ public class PayPalService {
 		
 		return response.getBody();
 	}
+	
+	private ResponseEntity<PayPalOrderResponse> makeRequest(String orderId) {
+		PaymentSettingBag paymentSettings = settingService.getPaymentSettings();
+		String baseURL = paymentSettings.getURL();
+		String requestURL = baseURL + GET_ORDER_API + orderId;
+		String clientId = paymentSettings.getClientID();
+		String clientSecret = paymentSettings.getClientSecret();
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+		headers.add("Accept-Language", "en_US");
+		headers.setBasicAuth(clientId, clientSecret);
+		
+		HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(headers);
+		RestTemplate restTemplate = new RestTemplate();
+		
+		return restTemplate.exchange(
+				requestURL, HttpMethod.GET, request, PayPalOrderResponse.class);
+	}
 }
