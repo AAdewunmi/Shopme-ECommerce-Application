@@ -59,4 +59,24 @@ public class PayPalService {
 		return restTemplate.exchange(
 				requestURL, HttpMethod.GET, request, PayPalOrderResponse.class);
 	}
+	
+	private void throwExceptionForNonOKResponse(HttpStatus statusCode) throws PayPalApiException {
+		String message = null;
+		
+		switch (statusCode) {
+		case NOT_FOUND: 
+			message = "Order ID not found";
+			
+		case BAD_REQUEST:
+			message = "Bad Request to PayPal Checkout API";
+			
+		case INTERNAL_SERVER_ERROR:
+			message = "PayPal server error";
+			
+		default:
+			message = "PayPal returned non-OK status code";
+		}
+		
+		throw new PayPalApiException(message);
+	}
 }
