@@ -49,4 +49,14 @@ public class CheckoutService {
 		return shippingCostTotal;
 	}
 	
+	private float calculateProductTotal(List<CartItem> cartItems) {
+		float total = 0.0f;
+		
+		for (CartItem item : cartItems) {
+			total += item.getSubtotal();
+		}
+		
+		return total;
+	}
+	
 }
