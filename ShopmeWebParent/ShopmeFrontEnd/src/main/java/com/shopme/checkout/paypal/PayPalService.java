@@ -28,4 +28,16 @@ public class PayPalService {
 		
 		return orderResponse.validate(orderId);
 	}
+	
+	private PayPalOrderResponse getOrderDetails(String orderId) throws PayPalApiException {
+		ResponseEntity<PayPalOrderResponse> response = makeRequest(orderId);
+		
+		HttpStatus statusCode = response.getStatusCode();
+		
+		if (!statusCode.equals(HttpStatus.OK)) {
+			throwExceptionForNonOKResponse(statusCode);
+		}
+		
+		return response.getBody();
+	}
 }
