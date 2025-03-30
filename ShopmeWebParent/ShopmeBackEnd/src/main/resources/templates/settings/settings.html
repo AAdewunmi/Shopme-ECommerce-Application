@@ -31,19 +31,19 @@
 		    <a class="nav-link" data-toggle="tab" href="#mailServer" role="tab">Mail Server</a>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link" data-toggle="tab" href="#mailTemplate" role="tab">Mail Templates</a>
+		    <a class="nav-link" data-toggle="tab" href="#mailTemplates" role="tab">Mail Templates</a>
 		  </li>
 		  <li class="nav-item">
 		    <a class="nav-link" data-toggle="tab" href="#payment" role="tab">Payment</a>
-		  </li>			  
+		  </li>		  		  
 		</ul>
 		
 		<div class="tab-content">
 		  <div class="tab-pane active p-3" id="general" role="tabpanel">
-		  	<div th:replace="settings/general :: content" />
+		  	<div th:replace="settings/general :: content"></div>
 		  </div>
 		  <div class="tab-pane p-3" id="countries" role="tabpanel">
-			<div th:replace="settings/countries :: content" />
+			<div th:replace="settings/countries :: content"></div>
 		  </div>
 		  <div class="tab-pane p-3" id="states" role="tabpanel">
 			<div th:replace="settings/states :: content"></div>
@@ -52,14 +52,14 @@
 			<div th:replace="settings/mail_server :: content"></div>
 		  </div>
 		  <div class="tab-pane p-3" id="mailTemplates" role="tabpanel">
-			<h2>Mail Templates</h2>
+			<div th:replace="settings/mail_templates/mail_templates :: content"></div>
 		  </div>
 		  <div class="tab-pane p-3" id="payment" role="tabpanel">
-			<h2>Payment</h2>
-		  </div>	
+			<div th:replace="settings/payment :: content"></div>
+		  </div>		  	
 		 </div>
 	</div>
-	
+
 	<div class="toast justify-content-center d-flex" role="alert" aria-live="polite" aria-atomic="true" data-delay="3000">
 	  <div role="alert" aria-live="assertive" aria-atomic="true">
 	  	<div class="toast-body">
@@ -79,6 +79,7 @@
 	
 	$(document).ready(function() {
 		$("#customerVerificationContent").richText();
+		$("#orderConfirmationContent").richText({height: 400});
 	});
 	
 </script>
