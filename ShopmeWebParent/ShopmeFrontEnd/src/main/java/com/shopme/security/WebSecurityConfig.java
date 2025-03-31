@@ -52,7 +52,9 @@ public class WebSecurityConfig {
 	    		.requestMatchers("/account_details/**", 
 	    				"/update_account_details/**",
 	    				"/cart",
-	    				"/address_book/**"
+	    				"/address_book/**",
+	    				"/checkout",
+	    				"/placeorder/**"
 	    			    ).permitAll()
 	    		.anyRequest().authenticated());
 	    http.formLogin(fL -> fL.loginPage("/login").usernameParameter("email")
