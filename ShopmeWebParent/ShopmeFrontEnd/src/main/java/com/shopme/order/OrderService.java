@@ -19,7 +19,9 @@ import com.shopme.common.entity.product.Product;
 
 @Service
 public class OrderService {
-@Autowired private OrderRepository repo;
+	
+	@Autowired 
+	private OrderRepository repo;
 	
 	public Order createOrder(Customer customer, Address address, List<CartItem> cartItems,
 			PaymentMethod paymentMethod, CheckoutInfo checkoutInfo) {
