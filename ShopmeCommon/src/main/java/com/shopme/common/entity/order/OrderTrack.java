@@ -18,7 +18,7 @@ import com.shopme.common.entity.IdBasedEntity;
 
 @Entity
 @Table(name = "order_track")
-public class OrderTrack {
+public class OrderTrack extends IdBasedEntity{
 	
 	@Column(length = 256)
 	private String notes;
