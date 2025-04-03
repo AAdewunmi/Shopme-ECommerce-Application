@@ -71,4 +71,14 @@ public class OrderTrack {
 		return dateFormatter.format(this.updatedTime);
 	}
 	
+	public void setUpdatedTimeOnForm(String dateString) {
+		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss");
+		
+		try {
+			this.updatedTime = dateFormatter.parse(dateString);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+	}
+	
 }
