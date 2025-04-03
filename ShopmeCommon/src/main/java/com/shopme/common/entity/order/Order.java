@@ -1,7 +1,9 @@
 package com.shopme.common.entity.order;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import com.shopme.common.entity.AbstractAddress;
@@ -16,6 +18,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OrderBy;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 
@@ -49,6 +52,10 @@ public class Order extends AbstractAddress {
 	
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
 	private Set<OrderDetail> orderDetails = new HashSet<>();
+	
+	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OrderBy("updatedTime ASC")
+	private List<OrderTrack> orderTracks = new ArrayList<>();
 
 	public String getCountry() {
 		return country;
@@ -213,6 +220,10 @@ public class Order extends AbstractAddress {
 		if (!phoneNumber.isEmpty()) address += ". Phone Number: " + phoneNumber;
 		
 		return address;
-	}	
+	}
+	
+	public List<OrderTrack> getOrderTracks() {
+		return orderTracks;
+	}
 	
 }
