@@ -226,4 +226,8 @@ public class Order extends AbstractAddress {
 		return orderTracks;
 	}
 	
+	public void setOrderTracks(List<OrderTrack> orderTracks) {
+		this.orderTracks = orderTracks;
+	}
+	
 }
