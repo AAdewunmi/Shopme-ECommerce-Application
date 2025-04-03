@@ -65,6 +65,10 @@ public class OrderTrack {
 		this.order = order;
 	}
 	
-	
+	@Transient
+	public String getUpdatedTimeOnForm() {
+		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss");
+		return dateFormatter.format(this.updatedTime);
+	}
 	
 }
