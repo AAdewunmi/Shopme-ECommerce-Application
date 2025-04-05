@@ -101,3 +101,21 @@ function updateSubtotalWhenQuantityChanged(input) {
 	
 	setAndFormatNumberForField("subtotal" + rowNumber, newSubtotal);
 }
+
+function formatProductAmounts() {
+	$(".cost-input").each(function(e) {
+		formatNumberForField($(this));
+	});
+
+	$(".price-input").each(function(e) {
+		formatNumberForField($(this));
+	});	
+	
+	$(".subtotal-output").each(function(e) {
+		formatNumberForField($(this));
+	});	
+	
+	$(".ship-input").each(function(e) {
+		formatNumberForField($(this));
+	});	
+}
