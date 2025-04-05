@@ -81,3 +81,14 @@ function getNumberValueRemovedThousandSeparator(fieldRef) {
 	fieldValue = fieldRef.val().replace(",", "");
 	return parseFloat(fieldValue);
 } 
+
+function updateSubtotalWhenPriceChanged(input) {
+	priceValue = getNumberValueRemovedThousandSeparator(input);
+	rowNumber = input.attr("rowNumber");
+	
+	quantityField = $("#quantity" + rowNumber);
+	quantityValue = quantityField.val();
+	newSubtotal = parseFloat(quantityValue) * priceValue;
+	
+	setAndFormatNumberForField("subtotal" + rowNumber, newSubtotal);	
+}
