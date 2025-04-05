@@ -71,3 +71,8 @@ function updateOrderAmounts() {
 	orderTotal = orderSubtotal + tax + shippingCost;
 	setAndFormatNumberForField("total", orderTotal);
 }
+
+function setAndFormatNumberForField(fieldId, fieldValue) {
+	formattedValue = $.number(fieldValue, 2);
+	$("#" + fieldId).val(formattedValue);
+}
