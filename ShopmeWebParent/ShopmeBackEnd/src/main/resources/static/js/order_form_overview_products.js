@@ -119,3 +119,11 @@ function formatProductAmounts() {
 		formatNumberForField($(this));
 	});	
 }
+
+function formatOrderAmounts() {
+	formatNumberForField(fieldProductCost);
+	formatNumberForField(fieldSubtotal);
+	formatNumberForField(fieldShippingCost);
+	formatNumberForField(fieldTax);
+	formatNumberForField(fieldTotal);	
+}
