@@ -127,3 +127,7 @@ function formatOrderAmounts() {
 	formatNumberForField(fieldTax);
 	formatNumberForField(fieldTotal);	
 }
+
+function formatNumberForField(fieldRef) {
+	fieldRef.val($.number(fieldRef.val(), 2));
+}
