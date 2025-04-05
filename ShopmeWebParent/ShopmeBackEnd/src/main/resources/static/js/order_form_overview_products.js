@@ -76,3 +76,8 @@ function setAndFormatNumberForField(fieldId, fieldValue) {
 	formattedValue = $.number(fieldValue, 2);
 	$("#" + fieldId).val(formattedValue);
 }
+
+function getNumberValueRemovedThousandSeparator(fieldRef) {
+	fieldValue = fieldRef.val().replace(",", "");
+	return parseFloat(fieldValue);
+} 
