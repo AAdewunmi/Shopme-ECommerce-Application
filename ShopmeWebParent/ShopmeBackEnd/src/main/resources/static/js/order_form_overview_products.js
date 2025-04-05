@@ -163,3 +163,9 @@ function processFormBeforeSubmit() {
 function removeThousandSeparatorForField(fieldRef) {
 	fieldRef.val(fieldRef.val().replace(",", ""));
 }
+
+function setCountryName() {
+	selectedCountry = $("#country option:selected");
+	countryName = selectedCountry.text();
+	$("#countryName").val(countryName);
+}
