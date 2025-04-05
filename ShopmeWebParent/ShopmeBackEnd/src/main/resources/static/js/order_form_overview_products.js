@@ -33,3 +33,41 @@ $(document).ready(function() {
 		updateOrderAmounts();
 	});			
 });
+
+function updateOrderAmounts() {
+	totalCost = 0.0;
+	
+	$(".cost-input").each(function(e) {
+		costInputField = $(this);
+		rowNumber = costInputField.attr("rowNumber");
+		quantityValue = $("#quantity" + rowNumber).val();
+		
+		
+		productCost = getNumberValueRemovedThousandSeparator(costInputField); 
+		totalCost += productCost * parseInt(quantityValue); 
+	});
+	
+	setAndFormatNumberForField("productCost", totalCost);
+	
+	orderSubtotal = 0.0;
+	
+	$(".subtotal-output").each(function(e) {
+		productSubtotal = getNumberValueRemovedThousandSeparator($(this));
+		orderSubtotal += productSubtotal;
+	});
+	
+	setAndFormatNumberForField("subtotal", orderSubtotal);
+	
+	shippingCost = 0.0;
+	
+	$(".ship-input").each(function(e) {
+		productShip = getNumberValueRemovedThousandSeparator($(this));
+		shippingCost += productShip;
+	});
+	
+	setAndFormatNumberForField("shippingCost", shippingCost);
+	
+	tax = getNumberValueRemovedThousandSeparator(fieldTax);
+	orderTotal = orderSubtotal + tax + shippingCost;
+	setAndFormatNumberForField("total", orderTotal);
+}
