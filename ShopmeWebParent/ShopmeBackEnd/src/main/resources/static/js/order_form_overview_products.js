@@ -92,3 +92,12 @@ function updateSubtotalWhenPriceChanged(input) {
 	
 	setAndFormatNumberForField("subtotal" + rowNumber, newSubtotal);	
 }
+
+function updateSubtotalWhenQuantityChanged(input) {
+	quantityValue = input.val();
+	rowNumber = input.attr("rowNumber");
+	priceValue = getNumberValueRemovedThousandSeparator($("#price" + rowNumber));
+	newSubtotal = parseFloat(quantityValue) * priceValue;
+	
+	setAndFormatNumberForField("subtotal" + rowNumber, newSubtotal);
+}
