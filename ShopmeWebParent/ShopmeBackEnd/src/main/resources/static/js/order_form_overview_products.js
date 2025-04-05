@@ -159,3 +159,7 @@ function processFormBeforeSubmit() {
 	
 	return true;
 }
+
+function removeThousandSeparatorForField(fieldRef) {
+	fieldRef.val(fieldRef.val().replace(",", ""));
+}
