@@ -49,3 +49,22 @@ function getShippingCost(productId) {
 		$("#addProductModal").modal("hide");
 	});		
 }
+
+function getProductInfo(productId, shippingCost) {
+	requestURL = contextPath + "products/get/" + productId;
+	$.get(requestURL, function(productJson) {
+		console.log(productJson);
+		productName = productJson.name;
+		mainImagePath = contextPath.substring(0, contextPath.length - 1) + productJson.imagePath;
+		productCost = $.number(productJson.cost, 2);
+		productPrice = $.number(productJson.price, 2);
+		
+		htmlCode = generateProductCode(productId, productName, mainImagePath, productCost, productPrice, shippingCost);
+		$("#productList").append(htmlCode);
+		
+		updateOrderAmounts();
+		
+	}).fail(function(err) {
+		showWarningModal(err.responseJSON.message);
+	});	
+}
