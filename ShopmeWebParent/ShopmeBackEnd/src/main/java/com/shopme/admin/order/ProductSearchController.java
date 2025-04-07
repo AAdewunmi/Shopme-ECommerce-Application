@@ -26,4 +26,12 @@ public class ProductSearchController {
 		return "redirect:/orders/search_product/page/1?sortField=name&sortDir=asc&keyword=" + keyword;
 	}
 	
+	@GetMapping("/orders/search_product/page/{pageNum}")
+	public String searchProductsByPage(@PagingAndSortingParam(listName = "listProducts", 
+			moduleURL = "/orders/search_product") PagingAndSortingHelper helper,
+			@PathVariable(name = "pageNum") int pageNum) {
+		service.searchProducts(pageNum, helper);
+		return "orders/search_product";
+	}
+	
 }
