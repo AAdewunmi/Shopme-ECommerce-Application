@@ -153,3 +153,18 @@ function generateProductCode(productId, productName, mainImagePath, productCost,
 	
 	return htmlCode;
 }
+
+function isProductAlreadyAdded(productId) {
+	productExists = false;
+	
+	$(".hiddenProductId").each(function(e) {
+		aProductId = $(this).val();
+		
+		if (aProductId == productId) {
+			productExists = true;
+			return;
+		}
+	});
+	
+	return productExists;
+}
