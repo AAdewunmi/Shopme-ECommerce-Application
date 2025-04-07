@@ -30,27 +30,6 @@ public class ProductService {
 	}
 	
 	
-	/*
-	 * public Page<Product> listByPage(int pageNum, String sortField, String
-	 * sortDir, String keyword, Integer categoryId) { Sort sort =
-	 * Sort.by(sortField);
-	 * 
-	 * sort = sortDir.equals("asc") ? sort.ascending() : sort.descending();
-	 * 
-	 * Pageable pageable = PageRequest.of(pageNum - 1, PRODUCTS_PER_PAGE, sort);
-	 * 
-	 * if (keyword != null && !keyword.isEmpty()) { if (categoryId != null &&
-	 * categoryId > 0) { String categoryIdMatch = "-" + String.valueOf(categoryId) +
-	 * "-"; return repo.searchInCategory(categoryId, categoryIdMatch, keyword,
-	 * pageable); } return repo.findAll(keyword, pageable); }
-	 * 
-	 * if (categoryId != null && categoryId > 0) { String categoryIdMatch = "-" +
-	 * String.valueOf(categoryId) + "-"; return repo.findAllInCategory(categoryId,
-	 * categoryIdMatch, pageable); }
-	 * 
-	 * return repo.findAll(pageable); }
-	 */
-	
 	public void listByPage(int pageNum, PagingAndSortingHelper helper, Integer categoryId) {
 		Pageable pageable = helper.createPageable(PRODUCTS_PER_PAGE, pageNum);
 		String keyword = helper.getKeyword();
@@ -73,7 +52,14 @@ public class ProductService {
 		}
 		
 		helper.updateModelAttributes(pageNum, page);
-	}	
+	}
+	
+	public void searchProducts(int pageNum, PagingAndSortingHelper helper) {
+		Pageable pageable = helper.createPageable(PRODUCTS_PER_PAGE, pageNum);
+		String keyword = helper.getKeyword();		
+		Page<Product> page = repo.searchProductsByName(keyword, pageable);		
+		helper.updateModelAttributes(pageNum, page);
+	}
 	
 	public Product save(Product product) {
 		if (product.getId() == null) {
