@@ -20,3 +20,8 @@ function removeProduct(link) {
 		element.innerHTML = "" + (index + 1);
 	});
 }
+
+function doesOrderHaveOnlyOneProduct() {
+	productCount = $(".hiddenProductId").length;
+	return productCount == 1;
+}
