@@ -10,3 +10,13 @@ $(document).ready(function() {
 		}
 	});
 });
+
+function removeProduct(link) {
+	rowNumber = link.attr("rowNumber");
+	$("#row" + rowNumber).remove();
+	$("#blankLine" + rowNumber).remove();
+	
+	$(".divCount").each(function(index, element) {
+		element.innerHTML = "" + (index + 1);
+	});
+}
