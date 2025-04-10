@@ -35,3 +35,8 @@ function updateTrackCountNumbers() {
 		element.innerHTML = "" + (index + 1);
 	});
 }
+
+function addNewTrackRecord() {	
+	htmlCode = generateTrackCode();	
+	$("#trackList").append(htmlCode);
+}
