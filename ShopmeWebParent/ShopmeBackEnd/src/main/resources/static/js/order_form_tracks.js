@@ -29,3 +29,9 @@ function deleteTrack(link) {
 	$("#rowTrack" + rowNumber).remove();
 	$("#emptyLine" + rowNumber).remove();	
 }
+
+function updateTrackCountNumbers() {
+	$(".divCountTrack").each(function (index, element) {
+		element.innerHTML = "" + (index + 1);
+	});
+}
