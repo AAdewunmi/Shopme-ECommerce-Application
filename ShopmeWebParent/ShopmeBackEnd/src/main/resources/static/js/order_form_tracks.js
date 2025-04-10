@@ -23,3 +23,9 @@ $(document).ready(function() {
 		$("#trackNote" + rowNumber).text(defaultNote);
 	});	
 });
+
+function deleteTrack(link) {
+	rowNumber = link.attr('rowNumber');
+	$("#rowTrack" + rowNumber).remove();
+	$("#emptyLine" + rowNumber).remove();	
+}
