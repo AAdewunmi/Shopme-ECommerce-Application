@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.shopme.admin.paging.PagingAndSortingHelper;
@@ -101,6 +102,21 @@ private String defaultRedirectURL = "redirect:/orders/page/1?sortField=orderTime
 			return defaultRedirectURL;
 		}
 		
-	}	
+	}
+	
+	@PostMapping("/order/save")
+	public String saveOrder(Order order, HttpServletRequest request, RedirectAttributes ra) {
+		String countryName = request.getParameter("countryName");
+		order.setCountry(countryName);
+		
+		updateProductDetails(order, request);
+		updateOrderTracks(order, request);
+
+		orderService.save(order);		
+		
+		ra.addFlashAttribute("message", "The order ID " + order.getId() + " has been updated successfully");
+		
+		return defaultRedirectURL;
+	}
 	
 }
