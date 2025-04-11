@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import com.shopme.common.entity.AbstractAddress;
@@ -236,6 +237,16 @@ public class Order extends AbstractAddress {
 	public String getDeliverDateOnForm() {
 		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 		return dateFormatter.format(this.deliverDate);
-	}	
+	}
+	
+	public void setDeliverDateOnForm(String dateString) {
+		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+ 		
+		try {
+			this.deliverDate = dateFormatter.parse(dateString);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		} 		
+	}
 	
 }
