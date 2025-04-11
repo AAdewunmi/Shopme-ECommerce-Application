@@ -119,4 +119,35 @@ private String defaultRedirectURL = "redirect:/orders/page/1?sortField=orderTime
 		return defaultRedirectURL;
 	}
 	
+	private void updateOrderTracks(Order order, HttpServletRequest request) {
+		String[] trackIds = request.getParameterValues("trackId");
+		String[] trackStatuses = request.getParameterValues("trackStatus");
+		String[] trackDates = request.getParameterValues("trackDate");
+		String[] trackNotes = request.getParameterValues("trackNotes");
+		
+		List<OrderTrack> orderTracks = order.getOrderTracks();
+		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss");
+		
+		for (int i = 0; i < trackIds.length; i++) {
+			OrderTrack trackRecord = new OrderTrack();
+			
+			Integer trackId = Integer.parseInt(trackIds[i]);
+			if (trackId > 0) {
+				trackRecord.setId(trackId);
+			}
+			
+			trackRecord.setOrder(order);
+			trackRecord.setStatus(OrderStatus.valueOf(trackStatuses[i]));
+			trackRecord.setNotes(trackNotes[i]);
+			
+			try {
+				trackRecord.setUpdatedTime(dateFormatter.parse(trackDates[i]));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			
+			orderTracks.add(trackRecord);
+		}
+	}
+	
 }
