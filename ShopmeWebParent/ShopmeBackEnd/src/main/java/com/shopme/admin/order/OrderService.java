@@ -21,7 +21,7 @@ public class OrderService {
 	private static final int ORDERS_PER_PAGE = 10;
 	
 	@Autowired 
-	private OrderRepository repo;
+	private OrderRepository orderRepo;
 	
 	@Autowired 
 	private CountryRepository countryRepo;
@@ -45,9 +45,9 @@ public class OrderService {
 		Page<Order> page = null;
 		
 		if (keyword != null) {
-			page = repo.findAll(keyword, pageable);
+			page = orderRepo.findAll(keyword, pageable);
 		} else {
-			page = repo.findAll(pageable);
+			page = orderRepo.findAll(pageable);
 		}
 		
 		helper.updateModelAttributes(pageNum, page);		
@@ -55,22 +55,30 @@ public class OrderService {
 	
 	public Order get(Integer id) throws OrderNotFoundException {
 		try {
-			return repo.findById(id).get();
+			return orderRepo.findById(id).get();
 		} catch (NoSuchElementException ex) {
 			throw new OrderNotFoundException("Could not find any orders with ID " + id);
 		}
 	}
 	
 	public void delete(Integer id) throws OrderNotFoundException {
-		Long count = repo.countById(id);
+		Long count = orderRepo.countById(id);
 		if (count == null || count == 0) {
 			throw new OrderNotFoundException("Could not find any orders with ID " + id); 
 		}
 		
-		repo.deleteById(id);
+		orderRepo.deleteById(id);
 	}
 	
 	public List<Country> listAllCountries() {
 		return countryRepo.findAllByOrderByNameAsc();
 	}
+	
+	public void save(Order orderInForm) {
+		Order orderInDB = orderRepo.findById(orderInForm.getId()).get();
+		orderInForm.setOrderTime(orderInDB.getOrderTime());
+		orderInForm.setCustomer(orderInDB.getCustomer());
+		
+		orderRepo.save(orderInForm);
+	}	
 }
