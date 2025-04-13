@@ -256,4 +256,21 @@ public class Order extends AbstractAddress {
 		return name;
 	}
 	
+	@Transient
+	public String getRecipientAddress() {
+		String address = addressLine1;
+		
+		if (addressLine2 != null && !addressLine2.isEmpty()) address += ", " + addressLine2;
+		
+		if (!city.isEmpty()) address += ", " + city;
+		
+		if (state != null && !state.isEmpty()) address += ", " + state;
+		
+		address += ", " + country;
+		
+		if (!postalCode.isEmpty()) address += ". " + postalCode;
+		
+		return address;
+	}	
+	
 }
