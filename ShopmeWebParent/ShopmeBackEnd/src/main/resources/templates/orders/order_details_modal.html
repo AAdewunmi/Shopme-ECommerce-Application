@@ -1,4 +1,4 @@
-<<div class="modal-header">
+<div class="modal-header">
 	<h4 class="modal-title">Order Details</h4>
 	<button type="button" class="close" data-dismiss="modal">&times;</button>
 </div>
@@ -27,6 +27,8 @@
 			      <input type="text" readonly class="form-control" th:value="${order.id}">
 			    </div>
 			  </div>
+			  
+			  <th:block th:if="${isVisibleForAdminOrSalesperson}">
 			  <div class="form-group row">
 			    <label class="col-sm-2 col-form-label">Customer:</label>
 			    <div class="col-sm-10">
@@ -57,18 +59,24 @@
 			      <div th:replace="fragments :: currency_input(${order.tax})">Tax</div>
 			    </div>
 			  </div>			  
+			  </th:block>
+			  
 			  <div class="form-group row">
 			    <label class="col-sm-2 col-form-label">Total:</label>
 			    <div class="col-sm-10">
 			      <div th:replace="fragments :: currency_input(${order.total})">Total</div>
 			    </div>
 			  </div>
+			  
+			  <th:block th:if="${isVisibleForAdminOrSalesperson}">
 			  <div class="form-group row">
 			    <label class="col-sm-2 col-form-label"></label>
 			    <div class="col-sm-10">
 			      TOTAL = Subtotal + Shipping Cost + Tax
 			    </div>
-			  </div>			  
+			  </div>		
+			  </th:block>
+			  	  
 			  <div class="form-group row">
 			    <label class="col-sm-2 col-form-label">Payment Method:</label>
 			    <div class="col-sm-10">
@@ -100,6 +108,8 @@
 					<div class="text-wrap">
 						<b>[[${product.name}]]</b>
 					</div>
+					
+					<th:block th:if="${isVisibleForAdminOrSalesperson}">
 					<div>
 						Product Cost: <div th:replace="fragments :: format_currency(${detail.productCost})" />
 					</div>
@@ -112,6 +122,7 @@
 					<div>
 						Shipping Cost: <div th:replace="fragments :: format_currency(${detail.shippingCost})" />
 					</div>					
+					</th:block>
 				</div>
 			</div>
 			</th:block>
