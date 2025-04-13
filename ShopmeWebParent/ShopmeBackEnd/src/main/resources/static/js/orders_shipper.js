@@ -69,3 +69,9 @@ function showUpdateConfirmModal(link) {
 					 
 	confirmModalDialog.modal();
 }
+
+function showMessageModal(message) {
+	noButton.text("Close");
+	yesButton.hide();
+	confirmText.text(message);
+}
