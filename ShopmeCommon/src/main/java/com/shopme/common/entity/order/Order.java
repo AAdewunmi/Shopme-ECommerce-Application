@@ -249,4 +249,11 @@ public class Order extends AbstractAddress {
 		} 		
 	}
 	
+	@Transient
+	public String getRecipientName() {
+		String name = firstName;
+		if (lastName != null && !lastName.isEmpty()) name += " " + lastName;
+		return name;
+	}
+	
 }
