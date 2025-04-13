@@ -24,3 +24,10 @@ $(document).ready(function() {
 	
 	addEventHandlerForYesButton();
 });
+
+function addEventHandlerForYesButton() {
+	yesButton.click(function(e) {
+		e.preventDefault();
+		sendRequestToUpdateOrderStatus($(this));
+	});
+}
