@@ -72,10 +72,19 @@ private String defaultRedirectURL = "redirect:/orders/page/1?sortField=orderTime
 	
 	@GetMapping("/orders/detail/{id}")
 	public String viewOrderDetails(@PathVariable("id") Integer id, Model model, 
-			RedirectAttributes ra, HttpServletRequest request) {
+			RedirectAttributes ra, HttpServletRequest request,
+			@AuthenticationPrincipal ShopmeUserDetails loggedUser) {
 		try {
 			Order order = orderService.get(id);
 			loadCurrencySetting(request);			
+			
+			boolean isVisibleForAdminOrSalesperson = false;
+			
+			if (loggedUser.hasRole("Admin") || loggedUser.hasRole("Salesperson")) {
+				isVisibleForAdminOrSalesperson = true;
+			}
+			
+			model.addAttribute("isVisibleForAdminOrSalesperson", isVisibleForAdminOrSalesperson);
 			model.addAttribute("order", order);
 			
 			return "orders/order_details_modal";
