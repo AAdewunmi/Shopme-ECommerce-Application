@@ -55,3 +55,17 @@ function updateStatusIconColor(orderId, status) {
 	link = $("#link" + status + orderId);
 	link.replaceWith("<i class='fas " + iconNames[status] + " fa-2x icon-green'></i>");
 }
+
+function showUpdateConfirmModal(link) {
+	noButton.text("NO");
+	yesButton.show();
+		
+	orderId = link.attr("orderId");
+	status = link.attr("status");
+	yesButton.attr("href", link.attr("href"));
+	
+	confirmText.text("Are you sure you want to update status of the order ID #" + orderId
+					 + " to " + status + "?");
+					 
+	confirmModalDialog.modal();
+}
