@@ -14,5 +14,8 @@ public interface OrderRepository extends JpaRepository<Order, Integer>{
 			+ "WHERE o.customer.id = ?2 "
 			+ "AND (p.name LIKE %?1% OR o.status LIKE %?1%)")
 	public Page<Order> findAll(String keyword, Integer customerId, Pageable pageable);
+	
+	@Query("SELECT o FROM Order o WHERE o.customer.id = ?1")
+	public Page<Order> findAll(Integer customerId, Pageable pageable);
 
 }
