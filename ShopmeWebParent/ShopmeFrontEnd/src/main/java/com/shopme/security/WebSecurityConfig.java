@@ -50,6 +50,7 @@ public class WebSecurityConfig {
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 	    http.authorizeHttpRequests(auth -> auth
 	    		.requestMatchers("/account_details/**", 
+	    				"/orders/**",
 	    				"/update_account_details/**",
 	    				"/cart",
 	    				"/address_book/**",
