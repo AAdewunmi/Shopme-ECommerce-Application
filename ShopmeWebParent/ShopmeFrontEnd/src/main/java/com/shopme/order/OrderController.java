@@ -71,6 +71,11 @@ public class OrderController {
 		model.addAttribute("order", order);
 		
 		return "orders/order_details_modal";
+	}
+	
+	private Customer getAuthenticatedCustomer(HttpServletRequest request) {
+		String email = Utility.getEmailOfAuthenticatedCustomer(request);				
+		return customerService.getCustomerByEmail(email);
 	}	
 
 }
