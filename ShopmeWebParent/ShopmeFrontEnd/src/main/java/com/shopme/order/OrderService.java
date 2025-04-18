@@ -18,6 +18,7 @@ import com.shopme.common.entity.Customer;
 import com.shopme.common.entity.order.Order;
 import com.shopme.common.entity.order.OrderDetail;
 import com.shopme.common.entity.order.OrderStatus;
+import com.shopme.common.entity.order.OrderTrack;
 import com.shopme.common.entity.order.PaymentMethod;
 import com.shopme.common.entity.product.Product;
 
@@ -92,5 +93,32 @@ public class OrderService {
 	
 	public Order getOrder(Integer id, Customer customer) {
 		return repo.findByIdAndCustomer(id, customer);
-	}	
+	}
+	
+	public void setOrderReturnRequested(OrderReturnRequest request, Customer customer) 
+			throws OrderNotFoundException {
+		Order order = repo.findByIdAndCustomer(request.getOrderId(), customer);
+		if (order == null) {
+			throw new OrderNotFoundException("Order ID " + request.getOrderId() + " not found");
+		}
+		
+		if (order.isReturnRequested()) return;
+		
+		OrderTrack track = new OrderTrack();
+		track.setOrder(order);
+		track.setUpdatedTime(new Date());
+		track.setStatus(OrderStatus.RETURN_REQUESTED);
+		
+		String notes = "Reason: " + request.getReason();
+		if (!"".equals(request.getNote())) {
+			notes += ". " + request.getNote();
+		}
+		
+		track.setNotes(notes);
+		
+		order.getOrderTracks().add(track);
+		order.setStatus(OrderStatus.RETURN_REQUESTED);
+		
+		repo.save(order);
+	}
 }
