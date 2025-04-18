@@ -39,5 +39,24 @@ public class OrderRestControllerTests {
 				.andExpect(status().isNotFound())
 				.andDo(print());
 	}
+	
+	@Test
+	@WithUserDetails("lehoanganhvn@gmail.com")
+	public void testSendOrderReturnRequestSuccessful() throws Exception {
+		Integer orderId = 1;
+		String reason = "I bought the wrong items";
+		String note = "Please return my money";
+		
+		OrderReturnRequest returnRequest = new OrderReturnRequest(orderId, reason, note);
+		
+		String requestURL = "/orders/return";
+		
+		mockMvc.perform(post(requestURL)
+						.with(csrf())
+						.contentType("application/json")
+						.content(objectMapper.writeValueAsString(returnRequest)))
+				.andExpect(status().isOk())
+				.andDo(print());
+	}	
 
 }
