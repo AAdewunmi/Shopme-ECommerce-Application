@@ -48,4 +48,14 @@ public class OrderRestController {
 		
 		return new ResponseEntity<>(new OrderReturnResponse(returnRequest.getOrderId()), HttpStatus.OK);
 	}
+	
+	private Customer getAuthenticatedCustomer(HttpServletRequest request) 
+			throws CustomerNotFoundException {
+		String email = Utility.getEmailOfAuthenticatedCustomer(request);
+		if (email == null) {
+			throw new CustomerNotFoundException("No authenticated customer");
+		}
+				
+		return customerService.getCustomerByEmail(email);
+	}	
 }
