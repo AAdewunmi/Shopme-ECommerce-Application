@@ -47,4 +47,11 @@ function handleReturnOrderLink() {
 	});	
 }
 
-
+function submitReturnOrderForm() {
+	reason = $("input[name='returnReason']:checked").val();
+	note = fieldNote.val();
+	
+	sendReturnOrderRequest(reason, note);
+	
+	return false;
+}
