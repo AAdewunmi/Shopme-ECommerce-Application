@@ -18,3 +18,15 @@ $(document).ready(function() {
 	
 	handleReturnOrderLink();
 });
+
+function showReturnModalDialog(link) {
+	divMessage.hide();
+	divReason.show();
+	firstButton.show();	
+	secondButton.text("Cancel");
+	fieldNote.val("");
+	
+	orderId = link.attr("orderId");
+	modalTitle.text("Return Order ID #" + orderId);	
+	returnModal.modal("show");
+}
