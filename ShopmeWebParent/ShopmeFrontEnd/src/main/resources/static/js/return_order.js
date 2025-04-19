@@ -55,3 +55,27 @@ function submitReturnOrderForm() {
 	
 	return false;
 }
+
+function sendReturnOrderRequest(reason, note) {
+	requestURL = contextPath + "orders/return";
+	requestBody = {orderId: orderId, reason: reason, note: note};
+	
+	$.ajax({
+		type: "POST",
+		url: requestURL,
+		beforeSend: function(xhr) {
+			xhr.setRequestHeader(csrfHeaderName, csrfValue);
+		},
+		data: JSON.stringify(requestBody),
+		contentType: 'application/json'
+		
+	}).done(function(returnResponse) {
+		console.log(returnResponse);
+		showMessageModal("Return request has been sent");
+		updateStatusTextAndHideReturnButton(returnResponse.orderId);
+	}).fail(function(err) {
+		console.log(err);
+		showMessageModal(err.responseText);
+	});		
+		
+}
