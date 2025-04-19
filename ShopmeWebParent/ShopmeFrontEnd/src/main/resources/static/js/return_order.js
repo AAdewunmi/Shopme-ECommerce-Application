@@ -40,3 +40,11 @@ function showMessageModal(message) {
 	divMessage.show();
 }
 
+function handleReturnOrderLink() {
+	$(".linkReturnOrder").on("click", function(e) {
+		e.preventDefault();
+		showReturnModalDialog($(this));
+	});	
+}
+
+
