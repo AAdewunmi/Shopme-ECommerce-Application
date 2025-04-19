@@ -30,3 +30,13 @@ function showReturnModalDialog(link) {
 	modalTitle.text("Return Order ID #" + orderId);	
 	returnModal.modal("show");
 }
+
+function showMessageModal(message) {
+	divReason.hide();
+	firstButton.hide();
+	secondButton.text("Close");
+	divMessage.text(message);
+	
+	divMessage.show();
+}
+
