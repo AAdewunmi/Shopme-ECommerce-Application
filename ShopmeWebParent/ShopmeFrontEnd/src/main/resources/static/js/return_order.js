@@ -79,3 +79,13 @@ function sendReturnOrderRequest(reason, note) {
 	});		
 		
 }
+
+function updateStatusTextAndHideReturnButton(orderId) {
+	$(".textOrderStatus" + orderId).each(function(index) {
+		$(this).text("RETURN_REQUESTED");
+	})
+	
+	$(".linkReturn" + orderId).each(function(index) {
+		$(this).hide();
+	})	
+}
