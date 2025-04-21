@@ -58,5 +58,13 @@ public class AmazonS3Util {
 			LOGGER.error("Could not upload file to Amazon S3", ex);
 		}
 	}
+	
+	public static void deleteFile(String fileName) {
+		S3Client client = S3Client.builder().build();
+		
+		DeleteObjectRequest request = DeleteObjectRequest.builder().bucket(BUCKET_NAME)
+				.key(fileName).build();
+		client.deleteObject(request);
+	}
 	 
 }
