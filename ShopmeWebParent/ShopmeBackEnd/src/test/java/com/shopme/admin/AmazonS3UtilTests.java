@@ -26,5 +26,11 @@ public class AmazonS3UtilTests {
 		
 		//AmazonS3Util.uploadFile(folderName, fileName, inputStream);
 	}
+	
+	@Test
+	public void testDeleteFile() {
+		String fileName = "test-upload/JAX-WS-Tomcat.zip";
+		//AmazonS3Util.deleteFile(fileName);
+	}
 
 }
