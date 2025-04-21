@@ -45,5 +45,18 @@ public class AmazonS3Util {
 	 * 
 	 * return listKeys; }
 	 */
+	
+	public static void uploadFile(String folderName, String fileName, InputStream inputStream) {
+		S3Client client = S3Client.builder().build();
+		
+		PutObjectRequest request = PutObjectRequest.builder().bucket(BUCKET_NAME)
+				.key(folderName + "/" + fileName).acl("public-read").build();
+		try (inputStream) {
+			int contentLength = inputStream.available();
+			client.putObject(request, RequestBody.fromInputStream(inputStream, contentLength));
+		} catch (IOException ex) {
+			LOGGER.error("Could not upload file to Amazon S3", ex);
+		}
+	}
 	 
 }
