@@ -41,6 +41,8 @@ public class SettingFilter implements Filter{
 			System.out.println(setting.getKey() + " == > " + setting.getValue());
 		});
 		
+		// request.setAttribute(S3_BASE_URI, response);
+		
 		chain.doFilter(request, response);
 
 	}
