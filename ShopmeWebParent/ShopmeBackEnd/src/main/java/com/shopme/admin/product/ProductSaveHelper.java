@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.shopme.admin.AmazonS3Util;
 import com.shopme.admin.FileUploadUtil;
 import com.shopme.common.entity.product.Product;
 import com.shopme.common.entity.product.ProductImage;
@@ -41,6 +42,21 @@ private static final Logger LOGGER = LoggerFactory.getLogger(ProductSaveHelper.c
 			});
 		} catch (IOException ex) {
 			LOGGER.error("Could not list directory: " + dirPath);
+		}
+	}
+	
+	static void deleteExtraImagesWeredRemovedOnForm(Product product) {
+		String extraImageDir = "product-images/" + product.getId() + "/extras";
+		List<String> listObjectKeys = AmazonS3Util.listFolder(extraImageDir);
+		
+		for (String objectKey : listObjectKeys) {
+			int lastIndexOfSlash = objectKey.lastIndexOf("/");
+			String fileName = objectKey.substring(lastIndexOfSlash + 1, objectKey.length());
+			
+			if (!product.containsImageName(fileName)) {
+				AmazonS3Util.deleteFile(objectKey);
+				System.out.println("Deleted extra image: " + objectKey);
+			}
 		}
 	}
 
@@ -85,7 +101,9 @@ private static final Logger LOGGER = LoggerFactory.getLogger(ProductSaveHelper.c
 			String uploadDir = "../product-images/" + savedProduct.getId();
 			
 			FileUploadUtil.cleanDir(uploadDir);
-			FileUploadUtil.saveFile(uploadDir, fileName, mainImageMultipart);		
+			FileUploadUtil.saveFile(uploadDir, fileName, mainImageMultipart);
+			//AmazonS3Util.removeFolder(uploadDir);
+			//AmazonS3Util.uploadFile(uploadDir, fileName, multipartFile.getInputStream());
 		}
 		
 		if (extraImageMultiparts.length > 0) {
@@ -95,6 +113,7 @@ private static final Logger LOGGER = LoggerFactory.getLogger(ProductSaveHelper.c
 				if (multipartFile.isEmpty()) continue;
 				
 				String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+				//AmazonS3Util.uploadFile(uploadDir, fileName, multipartFile.getInputStream());
 				FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
 			}
 		}
