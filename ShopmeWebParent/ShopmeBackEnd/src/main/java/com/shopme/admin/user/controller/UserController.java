@@ -101,6 +101,8 @@ public class UserController {
 			String uploadDir = "user-photos/" + savedUser.getId();
 			FileUploadUtil.cleanDir(uploadDir);
 			FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+			//AmazonS3Util.removeFolder(uploadDir);
+			//AmazonS3Util.uploadFile(uploadDir, fileName, multipartFile.getInputStream());
 		} else {
 			if (user.getPhotos().isEmpty()) user.setPhotos(null);
 			service.save(user);
@@ -135,6 +137,8 @@ public class UserController {
 			RedirectAttributes redirectAttributes) throws UserNotFoundException {
 		try {
 			service.delete(id);
+			//String userPhotosDir = "user-photos/" + id;
+			//AmazonS3Util.removeFolder(userPhotosDir);
 			redirectAttributes.addFlashAttribute("message", 
 					"The user ID " + id + " has been successfully deleted!");
 		} catch (UserNotFoundException e) {
