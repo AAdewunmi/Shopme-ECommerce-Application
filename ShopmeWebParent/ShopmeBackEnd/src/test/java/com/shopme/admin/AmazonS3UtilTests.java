@@ -15,5 +15,16 @@ public class AmazonS3UtilTests {
 		// List<String> listKeys = AmazonS3Util.listFolder(folderName);
 		//listKeys.forEach(System.out::println);
 	}
+	
+	@Test
+	public void testUploadFile() throws FileNotFoundException {
+		String folderName = "test-upload";
+		String fileName = "JAX-WS-Tomcat.zip";
+		String filePath = "E:\\Test\\" + fileName;
+		
+		InputStream inputStream = new FileInputStream(filePath);
+		
+		//AmazonS3Util.uploadFile(folderName, fileName, inputStream);
+	}
 
 }
