@@ -25,10 +25,9 @@ import com.shopme.common.exception.OrderNotFoundException;
 
 @Service
 public class OrderService {
-	public static final int ORDERS_PER_PAGE = 5;
+public static final int ORDERS_PER_PAGE = 5;
 	
-	@Autowired 
-	private OrderRepository repo;
+	@Autowired private OrderRepository repo;
 	
 	public Order createOrder(Customer customer, Address address, List<CartItem> cartItems,
 			PaymentMethod paymentMethod, CheckoutInfo checkoutInfo) {
@@ -101,7 +100,7 @@ public class OrderService {
 	
 	public Order getOrder(Integer id, Customer customer) {
 		return repo.findByIdAndCustomer(id, customer);
-	}
+	}	
 	
 	public void setOrderReturnRequested(OrderReturnRequest request, Customer customer) 
 			throws OrderNotFoundException {
