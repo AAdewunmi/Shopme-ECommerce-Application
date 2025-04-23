@@ -31,5 +31,23 @@ public class MasterOrderReportService extends AbstractReportService{
 		
 		return listReportItems;
 	}
+	
+	private void calculateSalesForReportData(List<Order> listOrders, List<ReportItem> listReportItems) {
+		for (Order order : listOrders) {
+			String orderDateString = dateFormatter.format(order.getOrderTime());
+			
+			ReportItem reportItem = new ReportItem(orderDateString);
+			
+			int itemIndex = listReportItems.indexOf(reportItem);
+			
+			if (itemIndex >= 0) {
+				reportItem = listReportItems.get(itemIndex);
+				
+				reportItem.addGrossSales(order.getTotal());
+				reportItem.addNetSales(order.getSubtotal() - order.getProductCost());
+				reportItem.increaseOrdersCount();
+			}
+		}
+	}
 
 }
