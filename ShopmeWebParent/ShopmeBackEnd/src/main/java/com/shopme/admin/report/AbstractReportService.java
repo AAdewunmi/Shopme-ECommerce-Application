@@ -54,5 +54,8 @@ protected DateFormat dateFormatter;
 		return getReportDataByDateRangeInternal(startTime, endTime, reportType);
 	}
 	
-	
+	public List<ReportItem> getReportDataByDateRange(Date startTime, Date endTime, ReportType reportType) {
+		dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+		return getReportDataByDateRangeInternal(startTime, endTime, reportType);
+	}
 }
