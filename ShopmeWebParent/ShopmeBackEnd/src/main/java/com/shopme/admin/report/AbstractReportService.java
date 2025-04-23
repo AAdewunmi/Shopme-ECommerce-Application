@@ -36,5 +36,9 @@ protected DateFormat dateFormatter;
 		return getReportDataLastXMonths(6, reportType);
 	}
 	
+	public List<ReportItem> getReportDataLastYear(ReportType reportType) {
+		return getReportDataLastXMonths(12, reportType);
+	}
+	
 	
 }
