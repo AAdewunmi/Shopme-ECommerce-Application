@@ -49,5 +49,13 @@ public class MasterOrderReportService extends AbstractReportService{
 			}
 		}
 	}
+	
+	private void printReportData(List<ReportItem> listReportItems) {
+		listReportItems.forEach(item -> {
+			System.out.printf("%s, %10.2f, %10.2f, %d \n", item.getIdentifier(), item.getGrossSales(),
+					item.getNetSales(), item.getOrdersCount());
+		});
+		
+	}
 
 }
