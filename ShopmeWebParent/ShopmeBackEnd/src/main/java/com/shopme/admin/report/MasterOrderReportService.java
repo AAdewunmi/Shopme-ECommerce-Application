@@ -88,5 +88,12 @@ public class MasterOrderReportService extends AbstractReportService{
 		
 		return listReportItems;		
 	}
+	
+	private void printRawData(List<Order> listOrders) {
+		listOrders.forEach(order -> {
+			System.out.printf("%-3d | %s | %10.2f | %10.2f \n",
+					order.getId(), order.getOrderTime(), order.getTotal(), order.getProductCost());
+		});
+	}
 
 }

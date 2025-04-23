@@ -59,7 +59,7 @@ protected DateFormat dateFormatter;
 		return getReportDataByDateRangeInternal(startTime, endTime, reportType);
 	}
 	
-	protected abstract List<ReportItem> getReportDataByDateRangeInternal(
+	protected List<ReportItem> getReportDataByDateRangeInternal(
 			Date startDate, Date endDate, ReportType reportType) {
 		return null;
 	}
