@@ -32,5 +32,9 @@ protected DateFormat dateFormatter;
 		return getReportDataByDateRangeInternal(startTime, endTime, reportType);
 	}
 	
+	public List<ReportItem> getReportDataLast6Months(ReportType reportType) {
+		return getReportDataLastXMonths(6, reportType);
+	}
+	
 	
 }
