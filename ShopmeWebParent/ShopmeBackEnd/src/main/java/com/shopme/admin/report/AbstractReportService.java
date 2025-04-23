@@ -6,7 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class AbstractReportService {
+public abstract class AbstractReportService {
 
 protected DateFormat dateFormatter;
 	
@@ -57,5 +57,10 @@ protected DateFormat dateFormatter;
 	public List<ReportItem> getReportDataByDateRange(Date startTime, Date endTime, ReportType reportType) {
 		dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 		return getReportDataByDateRangeInternal(startTime, endTime, reportType);
+	}
+	
+	protected abstract List<ReportItem> getReportDataByDateRangeInternal(
+			Date startDate, Date endDate, ReportType reportType) {
+		return null;
 	}
 }
