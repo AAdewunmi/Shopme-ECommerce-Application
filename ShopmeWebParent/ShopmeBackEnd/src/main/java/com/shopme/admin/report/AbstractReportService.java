@@ -14,5 +14,7 @@ protected DateFormat dateFormatter;
 		return getReportDataLastXDays(7, reportType);
 	}
 	
-	
+	public List<ReportItem> getReportDataLast28Days(ReportType reportType) {
+		return getReportDataLastXDays(28, reportType);
+	}
 }
