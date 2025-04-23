@@ -40,5 +40,19 @@ protected DateFormat dateFormatter;
 		return getReportDataLastXMonths(12, reportType);
 	}
 	
+	protected List<ReportItem> getReportDataLastXMonths(int months, ReportType reportType) {
+		Date endTime = new Date();
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.MONTH, -(months - 1));
+		Date startTime = cal.getTime();
+		
+		System.out.println("Start time: " + startTime);
+		System.out.println("End time: " + endTime);
+		
+		dateFormatter = new SimpleDateFormat("yyyy-MM");
+		
+		return getReportDataByDateRangeInternal(startTime, endTime, reportType);
+	}
+	
 	
 }
