@@ -30,7 +30,7 @@ public static final int ORDERS_PER_PAGE = 5;
 	@Autowired private OrderRepository repo;
 	
 	public Order createOrder(Customer customer, Address address, List<CartItem> cartItems,
-			PaymentMethod paymentMethod, CheckoutInfo checkoutInfo) {
+		PaymentMethod paymentMethod, CheckoutInfo checkoutInfo) {
 		Order newOrder = new Order();
 		newOrder.setOrderTime(new Date());
 		
