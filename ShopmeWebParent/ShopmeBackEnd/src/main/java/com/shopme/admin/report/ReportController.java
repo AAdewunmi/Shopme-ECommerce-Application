@@ -21,5 +21,13 @@ public class ReportController {
 		loadCurrencySetting(request);
 		return "reports/reports";
 	}
+	
+	private void loadCurrencySetting(HttpServletRequest request) {
+		List<Setting> currencySettings = settingService.getCurrencySettings();
+		
+		for (Setting setting : currencySettings) {
+			request.setAttribute(setting.getKey(), setting.getValue());
+		}	
+	}	
 
 }
