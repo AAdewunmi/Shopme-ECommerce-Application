@@ -67,5 +67,13 @@ public class OrderDetailReportService extends AbstractReportService {
 					item.getIdentifier(), item.getGrossSales(), item.getNetSales(), item.getProductsCount());
 		}
 	}
+	
+	private void printRawData(List<OrderDetail> listOrderDetails) {
+		for (OrderDetail detail : listOrderDetails) {
+			System.out.printf("%d, %-20s, %10.2f, %10.2f, %10.2f \n",
+					detail.getQuantity(), detail.getProduct().getShortName().substring(0, 20),
+					detail.getSubtotal(), detail.getProductCost(), detail.getShippingCost());
+		}
+	}
 
 }
