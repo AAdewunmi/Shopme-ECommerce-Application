@@ -48,4 +48,16 @@ public class ReportRestController {
 		
 		return masterOrderReportService.getReportDataByDateRange(startTime, endTime, ReportType.DAY);
 	}
+	
+	@GetMapping("/reports/{groupBy}/{startDate}/{endDate}")
+	public List<ReportItem> getReportDataByCategoryOrProductDateRange(@PathVariable("groupBy") String groupBy,
+			@PathVariable("startDate") String startDate,
+			@PathVariable("endDate") String endDate) throws ParseException {
+		ReportType reportType = ReportType.valueOf(groupBy.toUpperCase());
+		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+		Date startTime = dateFormatter.parse(startDate);
+		Date endTime = dateFormatter.parse(endDate);
+		
+		return orderDetailReportService.getReportDataByDateRange(startTime, endTime, reportType);
+	}
 }
