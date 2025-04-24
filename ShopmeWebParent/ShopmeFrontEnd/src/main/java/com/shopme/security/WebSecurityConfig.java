@@ -55,7 +55,7 @@ public class WebSecurityConfig {
 	    				"/cart",
 	    				"/address_book/**",
 	    				"/checkout",
-	    				"/placeorder/**",
+	    				"/place_order/**",
 	    				"/process_paypal_order/**"
 	    			    ).permitAll()
 	    		.anyRequest().authenticated());
