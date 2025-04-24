@@ -60,5 +60,12 @@ public class OrderDetailReportService extends AbstractReportService {
 		
 		return listReportItems;
 	}
+	
+	private void printReportData(List<ReportItem> listReportItems) {
+		for (ReportItem item : listReportItems) {
+			System.out.printf("%-20s, %10.2f, %10.2f, %d \n",
+					item.getIdentifier(), item.getGrossSales(), item.getNetSales(), item.getProductsCount());
+		}
+	}
 
 }
