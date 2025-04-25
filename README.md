@@ -41,19 +41,19 @@ This application features deployment on Heroku cloud platform, with user's uploa
 
 ## 3. Customer Login (Screenshot)
 
-![Image](https://github.com/user-attachments/assets/019ab1e9-75c6-41cc-8497-4324c0dcac50)
+![Image](app_images/customer_login.png)
 
 ## 4. Customer Landing Page (Screenshot)
 
-![Image](https://github.com/user-attachments/assets/7da9d47f-9152-488d-8d33-c2ae160284ea)
+![Image](app_images/customer_landing_page.png)
 
 ## 5. Administrator Login (Screenshot)
 
-![Image](https://github.com/user-attachments/assets/e89427a5-84e5-468c-b14a-5fc69654f287)
+![Image](app_images/admin_login.png)
 
 ## 6. Administrator Landing Page (Screenshot)
 
-![Image](https://github.com/user-attachments/assets/24f5382c-a059-44df-8c0e-66a24c399de6)
+![Image](app_images/admin_landing_page.png)
 
 
 ## 7. Adapted from: 
