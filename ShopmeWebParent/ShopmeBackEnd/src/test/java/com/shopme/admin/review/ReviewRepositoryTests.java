@@ -55,5 +55,15 @@ public class ReviewRepositoryTests {
 		
 		listReviews.forEach(System.out::println);
 	}
+	
+	@Test
+	public void testGetReview() {
+		Integer id = 3;
+		Review review = repo.findById(id).get();
+		
+		assertThat(review).isNotNull();
+		
+		System.out.println(review);
+	}
 
 }
