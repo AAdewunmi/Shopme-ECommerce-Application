@@ -24,5 +24,13 @@ public class ReviewService {
 	public void listByPage(int pageNum, PagingAndSortingHelper helper) {
 		helper.listEntities(pageNum, REVIEWS_PER_PAGE, reviewRepo);
 	}
+	
+	public Review get(Integer id) throws ReviewNotFoundException {
+		try {
+			return reviewRepo.findById(id).get();
+		} catch (NoSuchElementException ex) {
+			throw new ReviewNotFoundException("Could not find any reviews with ID " + id);
+		}
+	}
 
 }
