@@ -32,5 +32,14 @@ public class ReviewService {
 			throw new ReviewNotFoundException("Could not find any reviews with ID " + id);
 		}
 	}
+	
+	public void save(Review reviewInForm) {
+		Review reviewInDB = reviewRepo.findById(reviewInForm.getId()).get();
+		reviewInDB.setHeadline(reviewInForm.getHeadline());
+		reviewInDB.setComment(reviewInForm.getComment());
+		
+		reviewRepo.save(reviewInDB);
+		productRepo.updateReviewCountAndAverageRating(reviewInDB.getProduct().getId());
+	}
 
 }
