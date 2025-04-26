@@ -65,5 +65,21 @@ public class ReviewRepositoryTests {
 		
 		System.out.println(review);
 	}
+	
+	@Test
+	public void testUpdateReview() {
+		Integer id = 3;
+		String headline = "An awesome camera at an awesome price";
+		String comment = "Overall great camera and is highly capable...";
+		
+		Review review = repo.findById(id).get();
+		review.setHeadline(headline);
+		review.setComment(comment);
+		
+		Review updatedReview = repo.save(review);
+		
+		assertThat(updatedReview.getHeadline()).isEqualTo(headline);
+		assertThat(updatedReview.getComment()).isEqualTo(comment);
+	}
 
 }
