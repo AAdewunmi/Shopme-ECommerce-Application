@@ -76,6 +76,10 @@ public class Product extends IdBasedEntity{
 	
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<ProductDetail> details = new ArrayList<>();
+	
+	private int reviewCount;
+	
+	private float averageRating;
 
 	
 	public Product(Integer id) {
@@ -301,4 +305,21 @@ public class Product extends IdBasedEntity{
 		}
 		return this.price;
 	}
+
+	public int getReviewCount() {
+		return reviewCount;
+	}
+
+	public void setReviewCount(int reviewCount) {
+		this.reviewCount = reviewCount;
+	}
+
+	public float getAverageRating() {
+		return averageRating;
+	}
+
+	public void setAverageRating(float averageRating) {
+		this.averageRating = averageRating;
+	}
+	
 }
