@@ -81,5 +81,15 @@ public class ReviewRepositoryTests {
 		assertThat(updatedReview.getHeadline()).isEqualTo(headline);
 		assertThat(updatedReview.getComment()).isEqualTo(comment);
 	}
+	
+	@Test
+	public void testDeleteReview() {
+		Integer id = 3;
+		repo.deleteById(id);
+		
+		Optional<Review> findById = repo.findById(id);
+		
+		assertThat(findById).isNotPresent();
+	}
 
 }
