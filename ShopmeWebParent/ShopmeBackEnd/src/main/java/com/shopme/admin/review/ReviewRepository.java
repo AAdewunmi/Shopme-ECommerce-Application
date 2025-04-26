@@ -14,4 +14,7 @@ public interface ReviewRepository extends SearchRepository<Review, Integer> {
 			+ "r.comment LIKE %?1% OR r.product.name LIKE %?1% OR "
 			+ "CONCAT(r.customer.firstName, ' ', r.customer.lastName) LIKE %?1%")
 	public Page<Review> findAll(String keyword, Pageable pageable);
+	
+	public List<Review> findAll();
+
 }
