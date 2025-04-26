@@ -41,5 +41,13 @@ public class ReviewService {
 		reviewRepo.save(reviewInDB);
 		productRepo.updateReviewCountAndAverageRating(reviewInDB.getProduct().getId());
 	}
+	
+	public void delete(Integer id) throws ReviewNotFoundException {
+		if (!reviewRepo.existsById(id)) {
+			throw new ReviewNotFoundException("Could not find any reviews with ID " + id);
+		}
+		
+		reviewRepo.deleteById(id);
+	}
 
 }
