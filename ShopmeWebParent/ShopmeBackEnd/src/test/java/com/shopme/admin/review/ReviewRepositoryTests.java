@@ -46,5 +46,14 @@ public class ReviewRepositoryTests {
 		assertThat(savedReview).isNotNull();
 		assertThat(savedReview.getId()).isGreaterThan(0);		
 	}
+	
+	@Test
+	public void testListReviews() {
+		List<Review> listReviews = repo.findAll();
+		
+		assertThat(listReviews.size()).isGreaterThan(0);
+		
+		listReviews.forEach(System.out::println);
+	}
 
 }
