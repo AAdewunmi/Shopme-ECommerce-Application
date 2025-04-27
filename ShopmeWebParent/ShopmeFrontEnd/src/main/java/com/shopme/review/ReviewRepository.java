@@ -16,5 +16,8 @@ public interface ReviewRepository extends JpaRepository<Review, Integer>{
 			+ "r.headline LIKE %?2% OR r.comment LIKE %?2% OR "
 			+ "r.product.name LIKE %?2%)")
 	public Page<Review> findByCustomer(Integer customerId, String keyword, Pageable pageable);
+	
+	@Query("SELECT r FROM Review r WHERE r.customer.id = ?1 AND r.id = ?2")
+	public Review findByCustomerAndId(Integer customerId, Integer reviewId);
 
 }
