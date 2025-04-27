@@ -32,5 +32,17 @@ public class ReviewRepositoryTests {
 		
 		assertThat(totalElements).isGreaterThan(1);		
 	}
+	
+	@Test
+	public void testFindByCustomerWithKeyword() {
+		Integer customerId = 5;
+		String keyword = "charger";
+		Pageable pageable = PageRequest.of(1, 5);
+		
+		Page<Review> page = repo.findByCustomer(customerId, keyword, pageable);
+		long totalElements = page.getTotalElements();
+		
+		assertThat(totalElements).isGreaterThan(0);		
+	}
 
 }
