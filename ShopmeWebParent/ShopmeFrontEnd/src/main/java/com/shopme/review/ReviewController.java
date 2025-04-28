@@ -35,5 +35,37 @@ public class ReviewController {
 	public String listFirstPage(Model model) {
 		return defaultRedirectURL;
 	}
+	
+	@GetMapping("/reviews/page/{pageNum}") 
+	public String listReviewsByCustomerByPage(Model model, HttpServletRequest request,
+							@PathVariable(name = "pageNum") int pageNum,
+							String keyword, String sortField, String sortDir) {
+		Customer customer = controllerHelper.getAuthenticatedCustomer(request);
+		Page<Review> page = reviewService.listByCustomerByPage(customer, keyword, pageNum, sortField, sortDir);		
+		List<Review> listReviews = page.getContent();
+		
+		model.addAttribute("totalPages", page.getTotalPages());
+		model.addAttribute("totalItems", page.getTotalElements());
+		model.addAttribute("currentPage", pageNum);
+		model.addAttribute("sortField", sortField);
+		model.addAttribute("sortDir", sortDir);
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+		model.addAttribute("moduleURL", "/reviews");
+		
+		model.addAttribute("listReviews", listReviews);
+
+		long startCount = (pageNum - 1) * ReviewService.REVIEWS_PER_PAGE + 1;
+		model.addAttribute("startCount", startCount);
+		
+		long endCount = startCount + ReviewService.REVIEWS_PER_PAGE - 1;
+		if (endCount > page.getTotalElements()) {
+			endCount = page.getTotalElements();
+		}
+		
+		model.addAttribute("endCount", endCount);
+		
+		return "reviews/reviews_customer";
+	}
 
 }
