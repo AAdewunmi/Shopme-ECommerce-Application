@@ -67,5 +67,20 @@ public class ReviewController {
 		
 		return "reviews/reviews_customer";
 	}
+	
+	@GetMapping("/reviews/detail/{id}")
+	public String viewReview(@PathVariable("id") Integer id, Model model, 
+			RedirectAttributes ra, HttpServletRequest request) {
+		Customer customer = controllerHelper.getAuthenticatedCustomer(request);
+		try {
+			Review review = reviewService.getByCustomerAndId(customer, id);
+			model.addAttribute("review", review);
+			
+			return "reviews/review_detail_modal";
+		} catch (ReviewNotFoundException ex) {
+			ra.addFlashAttribute("message", ex.getMessage());
+			return defaultRedirectURL;		
+		}
+	}
 
 }
