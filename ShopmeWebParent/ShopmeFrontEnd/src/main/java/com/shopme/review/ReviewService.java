@@ -22,5 +22,25 @@ import com.shopme.product.ProductRepository;
 @Service
 @Transactional
 public class ReviewService {
+	
+public static final int REVIEWS_PER_PAGE = 5;
+	
+	@Autowired private ReviewRepository reviewRepo;
+	@Autowired private OrderDetailRepository orderDetailRepo;
+	@Autowired private ProductRepository productRepo;
+
+	public Page<Review> listByCustomerByPage(Customer customer, String keyword, int pageNum, 
+			String sortField, String sortDir) {
+		Sort sort = Sort.by(sortField);
+		sort = sortDir.equals("asc") ? sort.ascending() : sort.descending();
+		
+		Pageable pageable = PageRequest.of(pageNum - 1, REVIEWS_PER_PAGE, sort);
+		
+		if (keyword != null) {
+			return reviewRepo.findByCustomer(customer.getId(), keyword, pageable);
+		}
+		
+		return reviewRepo.findByCustomer(customer.getId(), pageable);
+	}
 
 }
