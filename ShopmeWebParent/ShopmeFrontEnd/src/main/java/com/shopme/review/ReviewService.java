@@ -42,5 +42,13 @@ public static final int REVIEWS_PER_PAGE = 5;
 		
 		return reviewRepo.findByCustomer(customer.getId(), pageable);
 	}
+	
+	public Review getByCustomerAndId(Customer customer, Integer reviewId) throws ReviewNotFoundException {
+		Review review = reviewRepo.findByCustomerAndId(customer.getId(), reviewId);
+		if (review == null) 
+			throw new ReviewNotFoundException("Customer doesn not have any reviews with ID " + reviewId);
+		
+		return review;
+	}
 
 }
