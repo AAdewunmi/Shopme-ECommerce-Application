@@ -44,5 +44,14 @@ public class ReviewRepositoryTests {
 		
 		assertThat(totalElements).isGreaterThan(0);		
 	}
+	
+	@Test
+	public void testFindByCustomerAndId() {
+		Integer customerId = 5;
+		Integer reviewId = 4;
+		
+		Review review = repo.findByCustomerAndId(customerId, reviewId);
+		assertThat(review).isNotNull();
+	}
 
 }
