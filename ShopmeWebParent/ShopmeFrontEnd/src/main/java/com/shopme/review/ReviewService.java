@@ -75,5 +75,15 @@ public static final int REVIEWS_PER_PAGE = 5;
 		Long count = orderDetailRepo.countByProductAndCustomerAndOrderStatus(productId, customer.getId(), OrderStatus.DELIVERED);
 		return count > 0;
 	}
+	
+	public Review save(Review review) {
+		review.setReviewTime(new Date());
+		Review savedReview = reviewRepo.save(review);
+		
+		Integer productId = savedReview.getProduct().getId();		
+		productRepo.updateReviewCountAndAverageRating(productId);
+		
+		return savedReview;
+	}
 
 }
