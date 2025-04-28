@@ -122,4 +122,10 @@ public class ProductRepositoryTests {
 		Product savedProduct = repo.save(product);
 		assertThat(savedProduct.getImages().size()).isEqualTo(6);
 	}
+	
+	@Test
+	public void testUpdateReviewCountAndAverageRating() {
+		Integer productId = 4;
+		repo.updateReviewCountAndAverageRating(productId);
+	}
 }
