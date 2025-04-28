@@ -65,5 +65,14 @@ public class ReviewRepositoryTests {
 		List<Review> content = page.getContent();
 		content.forEach(System.out::println);
 	}
+	
+	@Test
+	public void testCountByCustomerAndProduct() {
+		Integer customerId = 5;
+		Integer productId = 1;
+		Long count = repo.countByCustomerAndProduct(customerId, productId);
+		
+		assertThat(count).isEqualTo(1);
+	}
 
 }
