@@ -50,5 +50,12 @@ public static final int REVIEWS_PER_PAGE = 5;
 		
 		return review;
 	}
+	
+	public Page<Review> list3MostRecentReviewsByProduct(Product product) {
+		Sort sort = Sort.by("reviewTime").descending();
+		Pageable pageable = PageRequest.of(0, 3, sort);
+		
+		return reviewRepo.findByProduct(product, pageable);		
+	}
 
 }
