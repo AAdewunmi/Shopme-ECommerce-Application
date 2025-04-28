@@ -53,5 +53,17 @@ public class ReviewRepositoryTests {
 		Review review = repo.findByCustomerAndId(customerId, reviewId);
 		assertThat(review).isNotNull();
 	}
+	
+	@Test
+	public void testFindByProduct() {
+		Product product = new Product(23);
+		Pageable pageable = PageRequest.of(0, 3);
+		Page<Review> page = repo.findByProduct(product, pageable);
+		
+		assertThat(page.getTotalElements()).isGreaterThan(1);
+		
+		List<Review> content = page.getContent();
+		content.forEach(System.out::println);
+	}
 
 }
