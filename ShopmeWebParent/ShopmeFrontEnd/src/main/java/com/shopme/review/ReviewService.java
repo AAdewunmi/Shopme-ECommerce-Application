@@ -65,5 +65,10 @@ public static final int REVIEWS_PER_PAGE = 5;
 		
 		return reviewRepo.findByProduct(product, pageable);
 	}
+	
+	public boolean didCustomerReviewProduct(Customer customer, Integer productId) {
+		Long count = reviewRepo.countByCustomerAndProduct(customer.getId(), productId);
+		return count > 0;
+	}
 
 }
