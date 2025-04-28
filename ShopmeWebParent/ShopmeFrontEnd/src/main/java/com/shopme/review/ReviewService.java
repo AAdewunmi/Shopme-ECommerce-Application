@@ -70,5 +70,10 @@ public static final int REVIEWS_PER_PAGE = 5;
 		Long count = reviewRepo.countByCustomerAndProduct(customer.getId(), productId);
 		return count > 0;
 	}
+	
+	public boolean canCustomerReviewProduct(Customer customer, Integer productId) {
+		Long count = orderDetailRepo.countByProductAndCustomerAndOrderStatus(productId, customer.getId(), OrderStatus.DELIVERED);
+		return count > 0;
+	}
 
 }
