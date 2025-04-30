@@ -24,8 +24,8 @@ public class ReviewVoteRepositoryTests {
 	
 	@Test
 	public void testSaveVote() {
-		Integer customerId = 3;
-		Integer reviewId = 5;
+		Integer customerId = 1;
+		Integer reviewId = 2;
 		
 		ReviewVote vote = new ReviewVote();
 		vote.setCustomer(new Customer(customerId));
@@ -38,13 +38,24 @@ public class ReviewVoteRepositoryTests {
 	
 	@Test
 	public void testFindByReviewAndCustomer() {
-		Integer customerId = 1;
-		Integer reviewId = 4;	
+		Integer customerId = 3;
+		Integer reviewId = 5;	
 		
 		ReviewVote vote = repo.findByReviewAndCustomer(reviewId, customerId);
 		assertThat(vote).isNotNull();
 		
 		System.out.println(vote);
+	}
+	
+	@Test
+	public void testFindByProductAndCustomer() {
+		Integer customerId = 1;
+		Integer productId = 1;
+		
+		List<ReviewVote> listVotes = repo.findByProductAndCustomer(productId, customerId);
+		assertThat(listVotes.size()).isGreaterThan(0);
+		
+		listVotes.forEach(System.out::println);
 	}
 
 }
