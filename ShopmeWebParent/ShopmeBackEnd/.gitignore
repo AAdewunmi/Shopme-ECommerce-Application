@@ -11,7 +11,7 @@ local.properties
 .recommenders
 .properties
 /user-photos/
-
+/src/main/resources/application.properties
 
 # External tool builders
 .externalToolBuilders/
