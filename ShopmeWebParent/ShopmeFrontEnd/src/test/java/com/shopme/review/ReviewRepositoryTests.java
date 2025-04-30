@@ -56,7 +56,7 @@ public class ReviewRepositoryTests {
 	
 	@Test
 	public void testFindByProduct() {
-		Product product = new Product(23);
+		Product product = new Product(26);
 		Pageable pageable = PageRequest.of(0, 3);
 		Page<Review> page = repo.findByProduct(product, pageable);
 		
