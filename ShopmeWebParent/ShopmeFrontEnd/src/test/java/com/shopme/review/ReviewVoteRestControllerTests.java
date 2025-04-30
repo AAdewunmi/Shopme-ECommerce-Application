@@ -47,7 +47,7 @@ public class ReviewVoteRestControllerTests {
 	}
 	
 	@Test
-	@WithMockUser(username = "tina.jamerson.2021@gmail.com", password = "tina2020")
+	@WithMockUser(username = "muhammad.evran13@gmail.com", password = "muhammad2020")
 	public void testVoteNonExistReview() throws Exception {
 		String requestURL = "/vote_review/123/up";
 		
