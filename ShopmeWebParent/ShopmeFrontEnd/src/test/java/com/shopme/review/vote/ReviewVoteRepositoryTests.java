@@ -35,5 +35,16 @@ public class ReviewVoteRepositoryTests {
 		ReviewVote savedVote = repo.save(vote);
 		assertThat(savedVote.getId()).isGreaterThan(0);		
 	}
+	
+	@Test
+	public void testFindByReviewAndCustomer() {
+		Integer customerId = 1;
+		Integer reviewId = 4;	
+		
+		ReviewVote vote = repo.findByReviewAndCustomer(reviewId, customerId);
+		assertThat(vote).isNotNull();
+		
+		System.out.println(vote);
+	}
 
 }
