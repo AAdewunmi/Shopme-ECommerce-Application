@@ -29,3 +29,23 @@ function voteReview(currentLink) {
 		showErrorModal("Error voting review.");
 	});	
 }
+
+function updateVoteCountAndIcons(currentLink, voteResult) {
+	reviewId = currentLink.attr("reviewId");
+	voteUpLink = $("#linkVoteUp-" + reviewId);
+	voteDownLink = $("#linkVoteDown-" + reviewId);
+	
+	$("#voteCount-" + reviewId).text(voteResult.voteCount + " Votes");
+	
+	message = voteResult.message;
+	
+	if (message.includes("successfully voted up")) {
+		highlightVoteUpIcon(currentLink, voteDownLink);
+	} else if (message.includes("successfully voted down")) {
+		highlightVoteDownIcon(currentLink, voteUpLink);
+	} else if (message.includes("unvoted down")) {
+		unhighlightVoteDownIcon(voteDownLink);
+	} else if (message.includes("unvoted up")) {
+		unhighlightVoteDownIcon(voteUpLink);
+	}
+}
