@@ -49,3 +49,25 @@ function updateVoteCountAndIcons(currentLink, voteResult) {
 		unhighlightVoteDownIcon(voteUpLink);
 	}
 }
+
+function highlightVoteUpIcon(voteUpLink, voteDownLink) {
+	voteUpLink.removeClass("far").addClass("fas");
+	voteUpLink.attr("title", "Undo vote up this review");
+	voteDownLink.removeClass("fas").addClass("far");
+}
+
+function highlightVoteDownIcon(voteDownLink, voteUpLink) {
+	voteDownLink.removeClass("far").addClass("fas");
+	voteDownLink.attr("title", "Undo vote down this review");
+	voteUpLink.removeClass("fas").addClass("far");
+}
+
+function unhighlightVoteDownIcon(voteDownLink) {
+	voteDownLink.attr("title", "Vote down this review");
+	voteDownLink.removeClass("fas").addClass("far");	
+}
+
+function unhighlightVoteUpIcon(voteUpLink) {
+	voteUpLink.attr("title", "Vote up this review");
+	voteUpLink.removeClass("fas").addClass("far");	
+}
