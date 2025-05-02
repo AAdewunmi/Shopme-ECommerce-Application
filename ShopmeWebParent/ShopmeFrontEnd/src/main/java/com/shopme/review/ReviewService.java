@@ -51,8 +51,8 @@ public static final int REVIEWS_PER_PAGE = 5;
 		return review;
 	}
 	
-	public Page<Review> list3MostRecentReviewsByProduct(Product product) {
-		Sort sort = Sort.by("reviewTime").descending();
+	public Page<Review> list3MostVotedReviewsByProduct(Product product) {
+		Sort sort = Sort.by("votes").descending();
 		Pageable pageable = PageRequest.of(0, 3, sort);
 		
 		return reviewRepo.findByProduct(product, pageable);		
@@ -65,7 +65,7 @@ public static final int REVIEWS_PER_PAGE = 5;
 		
 		return reviewRepo.findByProduct(product, pageable);
 	}
-	
+
 	public boolean didCustomerReviewProduct(Customer customer, Integer productId) {
 		Long count = reviewRepo.countByCustomerAndProduct(customer.getId(), productId);
 		return count > 0;
