@@ -8,7 +8,6 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import com.shopme.common.entity.setting.Setting;
-
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -43,7 +42,7 @@ public class SettingFilter implements Filter{
 			System.out.println(setting.getKey() + " == > " + setting.getValue());
 		});
 		
-		// request.setAttribute(S3_BASE_URI, response);
+		//request.setAttribute("S3_BASE_URI", Constants.S3_BASE_URI);
 		
 		chain.doFilter(request, response);
 

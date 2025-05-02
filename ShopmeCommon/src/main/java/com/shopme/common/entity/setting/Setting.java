@@ -63,7 +63,10 @@ public class Setting {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(key);
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((key == null) ? 0 : key.hashCode());
+		return result;
 	}
 
 	@Override
@@ -75,13 +78,17 @@ public class Setting {
 		if (getClass() != obj.getClass())
 			return false;
 		Setting other = (Setting) obj;
-		return Objects.equals(key, other.key);
+		if (key == null) {
+			if (other.key != null)
+				return false;
+		} else if (!key.equals(other.key))
+			return false;
+		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Setting [key=" + key + ", value=" + value + ", category=" + category + "]";
+		return "Setting [key=" + key + ", value=" + value + "]";
 	}
-	
-	
+		
 }

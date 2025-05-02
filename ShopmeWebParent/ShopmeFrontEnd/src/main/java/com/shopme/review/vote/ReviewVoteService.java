@@ -26,7 +26,6 @@ public class ReviewVoteService {
 		Integer voteCount = reviewRepo.getVoteCount(reviewId);
 		
 		return VoteResult.success("You have unvoted " + voteType + " that review.", voteCount);
-		
 	}
 	
 	public VoteResult doVote(Integer reviewId, Customer customer, VoteType voteType) {
