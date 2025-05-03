@@ -1,60 +1,88 @@
-# $$\textcolor{red}{\text{UNDER CONSTRUCTION}}$$
-
 ## 1. Project Title:
 
-"Shopme" - An E Commerce Application: A full-stack development experience in programming a real-life shopping web application using the latest technologies such as Java, Spring Boot, Hibernate, Thymeleaf, Bootstrap, jQuery, HTML, RESTful Webservices.
+"Shopme" - An E Commerce Application
 
-Shopme application has two main users: Administrator and Customers.
+## 2. Project Overview: 
 
-Administrator User Modules include: Users, Categories, Brands, Products, Customers, Shipping, Orders, Sales Report, Reviews, Questions, Settings.
+**Shopme** is a full-stack e-commerce web application developed using modern Java and Spring technologies. It offers a comprehensive online shopping experience for customers and robust administrative tools for managing the store. The project is adapted from the Udemy course: [Java Spring Boot E-Commerce Ultimate Course](https://www.udemy.com/course/spring-boot-e-commerce-ultimate/) by Nam Ha Minh.
 
-Customer User Modules include: Categories listing, Product details, Search products, Shopping cart, Checkout, Manage orders, Tracking orders, Customer registration.
+## 3. User Roles & Features:
 
-This application features deployment on Heroku cloud platform, with user's uploaded files stored on Amazon S3 server.
+### Administrator:
 
-## 2. Tech Stack: 
+* **User Management:** Manage admin users.
+* **Product Management:** Add/edit/delete products, categories, and brands.
+* **Customer Management:** View and manage customer information.
+* **Order Management:** Process and track orders.
+* **Shipping & Payments:** Configure shipping options and payment methods.
+* **Sales Reports:** Generate and view sales analytics.
+* **Reviews & Questions:** Moderate product reviews and customer inquiries.
+* **Settings:** Configure application settings.
 
-- Spring framework development with Spring Boot
+### Customer:
 
-- Spring Data JPA and Hibernate framework
+* **Product Browsing:** View products by category and search functionality.
+* **Product Details:** View detailed information about products.
+* **Shopping Cart:** Add/remove products and view cart summary.
+* **Checkout:** Secure checkout process with PayPal integration.
+* **Order Tracking:** View order history and track current orders.
+* **Account Management:** Register, login (including social login), and manage profile.
 
-- Spring Security for authentication and authorization
+## 4. Tech Stack: 
 
-- Spring OAuth for social login with Facebook and Google
+* **Backend:**
 
-- Spring Mail for sending customer registration confirmation and order confirmation
+  * Java
+  * Spring Boot
+  * Spring Data JPA
+  * Hibernate
+  * Spring Security
+  * Spring OAuth2 (Google & Facebook login)
+  * Spring Mail
+  * RESTful Web Services
+  * JUnit, AssertJ, Mockito (Testing)
 
-- PayPal Checkout API for capturing payment from customer
+* **Frontend:**
 
-- Google Chart API for drawing charts of sales report
+  * Thymeleaf
+  * Bootstrap 4
+  * jQuery
+  * HTML5
 
-- JUnit, AssertJ and Mockito in unit testing
+* **Database & Cloud:**
 
-- Spring RESTful Webservices
+  * MySQL
+  * Amazon S3 (for file storage)
+  * Heroku (deployment)
 
-- Bootstrap 4, HTML5 and jQuery 3
+* **Payments & Reporting:**
 
-- Amazon S3 APIs
-
-- Deployment on Heroku (AWS)
+  * PayPal Checkout API
+  * Google Chart API (for sales reports)
   
+## 5. Installation: #TODO
 
-## 3. Customer Login (Screenshot)
+## 6. Deployment: #TODO
+
+## 7. Demo (UI Screenshots)
+
+### - Customer Login
 
 ![Image](app_images/customer_login.png)
 
-## 4. Customer Landing Page (Screenshot)
+### - Customer Landing Page 
 
 ![Image](app_images/customer_landing_page.png)
 
-## 5. Administrator Login (Screenshot)
+### - Administrator Login 
 
 ![Image](app_images/admin_login.png)
 
-## 6. Administrator Landing Page (Screenshot)
+### - Administrator Landing Page
 
 ![Image](app_images/admin_landing_page.png)
 
+## 8. Contribution: #TODO
 
 ## 7. Adapted from: 
 
