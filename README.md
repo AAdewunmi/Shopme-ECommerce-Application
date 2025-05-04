@@ -1,6 +1,6 @@
 ## 1. Project Title:
 
-"Shopme" - An E Commerce Application
+"Shopme" - An E Commerce Electronics Store
 
 ## 2. Project Overview: 
 
@@ -60,9 +60,25 @@
   * PayPal Checkout API
   * Google Chart API (for sales reports)
   
-## 5. Installation: #TODO
+## 5. Installation: 
 
-## 6. Deployment: #TODO
+i. Clone the git repo
+
+```
+https://github.com/AAdewunmi/Shopme-ECommerce-Application.git
+```
+
+ii. Open project folder
+
+iii. Explore
+
+😎
+
+
+## 6. How To Use: #TODO
+
+*** Database 
+*** Cloud, Payments & Reporting
 
 ## 7. Demo (UI Screenshots)
 
@@ -84,7 +100,9 @@
 
 ## 8. Contribution: #TODO
 
-## 7. Adapted from: 
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+## 9. Adapted from: 
 
 UDEMY: Java Spring Boot E-Commerce Ultimate Course
 
