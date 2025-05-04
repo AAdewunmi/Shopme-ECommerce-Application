@@ -1,12 +1,12 @@
-## 1. Project Title:
+## 1. Project Title
 
 "Shopme" - An E Commerce Electronics Store
 
-## 2. Project Overview: 
+## 2. Project Overview 
 
 **Shopme** is a full-stack e-commerce web application developed using modern Java and Spring technologies. It offers a comprehensive online shopping experience for customers and robust administrative tools for managing the store. The project is adapted from the Udemy course: [Java Spring Boot E-Commerce Ultimate Course](https://www.udemy.com/course/spring-boot-e-commerce-ultimate/) by Nam Ha Minh.
 
-## 3. User Roles & Features:
+## 3. User Roles & Features
 
 ### Administrator:
 
@@ -28,7 +28,7 @@
 * **Order Tracking:** View order history and track current orders.
 * **Account Management:** Register, login (including social login), and manage profile.
 
-## 4. Tech Stack: 
+## 4. Tech Stack 
 
 * **Backend:**
 
@@ -60,7 +60,7 @@
   * PayPal Checkout API
   * Google Chart API (for sales reports)
   
-## 5. Installation: 
+## 5. Installation 
 
 i. Clone the git repo
 
@@ -75,7 +75,7 @@ iii. Explore
 😎
 
 
-## 6. Getting Started:
+## 6. Getting Started
 
 i. **Configure Database**
 
@@ -94,7 +94,7 @@ i. **Configure Database**
    * Admin Panel: `http://localhost:8080/ShopmeAdmin`
    * Customer Storefront: `http://localhost:80`
 
-## Deployment
+## 7. Deployment
 
 This app is structured for deployment on:
 
@@ -103,7 +103,7 @@ This app is structured for deployment on:
 
 Be sure to configure environment variables for secure credentials.
 
-## 7. Demo (UI Screenshots)
+## 8. Demo (UI Screenshots)
 
 ### - Customer Login
 
@@ -121,11 +121,11 @@ Be sure to configure environment variables for secure credentials.
 
 ![Image](app_images/admin_landing_page.png)
 
-## 8. Contribution:
+## 9. Contribution
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-## 9. Adapted from: 
+## 10. Adapted from 
 
 UDEMY: Java Spring Boot E-Commerce Ultimate Course
 
