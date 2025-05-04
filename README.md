@@ -51,7 +51,7 @@
 
 * **Database & Cloud:**
 
-  * MySQL
+  * MySQL 8.0
   * Amazon S3 (for file storage)
   * Heroku (deployment)
 
@@ -75,10 +75,33 @@ iii. Explore
 😎
 
 
-## 6. How To Use: #TODO
+## 6. Getting Started:
 
-*** Database 
-*** Cloud, Payments & Reporting
+i. **Configure Database**
+
+   * Create a MySQL database.
+   * Update `application.properties` with your DB credentials.
+
+3. **Build & Run**
+
+   ```bash
+   mvn clean install
+   mvn spring-boot:run
+   ```
+
+4. **Access Application**
+
+   * Admin Panel: `http://localhost:8080/ShopmeAdmin`
+   * Customer Storefront: `http://localhost:80`
+
+## Deployment
+
+This app is structured for deployment on:
+
+* **Heroku** (Web)
+* **Amazon S3** (Static file storage)
+
+Be sure to configure environment variables for secure credentials.
 
 ## 7. Demo (UI Screenshots)
 
@@ -98,7 +121,7 @@ iii. Explore
 
 ![Image](app_images/admin_landing_page.png)
 
-## 8. Contribution: #TODO
+## 8. Contribution:
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
