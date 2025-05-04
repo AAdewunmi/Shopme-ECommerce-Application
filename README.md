@@ -113,6 +113,18 @@ Be sure to configure environment variables for secure credentials.
 
 ![Image](app_images/customer_landing_page.png)
 
+### - Customer Shopping Cart
+
+![Image](app_images/customer_shopping_cart.png)
+
+### - Customer Check Out
+
+![Image](app_images/customer_checkout.png)
+
+### - Customer Manage Orders
+
+![Image](app_images/customer_manage_orders.png)
+
 ### - Administrator Login 
 
 ![Image](app_images/admin_login.png)
@@ -120,6 +132,30 @@ Be sure to configure environment variables for secure credentials.
 ### - Administrator Landing Page
 
 ![Image](app_images/admin_landing_page.png)
+
+### - Administrator Manage Brands 
+
+![Image](app_images/admin_manage_brands.png)
+
+### - Administrator Manage Categories
+
+![Image](app_images/admin_manage_categories.png)
+
+### - Administrator Manage Customers
+
+![Image](app_images/customers.png)
+
+### - Administrator Manage Products
+
+![Image](app_images/admin_manage_products.png)
+
+### - Administrator Manage Users 
+
+![Image](app_images/amin_manage_users.png)
+
+### - Administrator Site Settings
+
+![Image](app_images/admin_site_settings.png)
 
 ## 9. Contribution
 
